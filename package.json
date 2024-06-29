@@ -1,0 +1,29 @@
+{
+  "name": "express-react-ssr",
+  "version": "1.0.0",
+  "description": "React Server Side Rendering by Express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ramoures/express-react-ssr.git"
+  },
+  "keywords": [
+    "React",
+    "SSR",
+    "Express",
+    "Vite",
+    "Router",
+    "Helmet",
+    "API",
+    "SEO"
+  ],
+  "author": "Ramin Moradi Espili",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ramoures/express-react-ssr/issues"
+  },
+  "homepage": "https://github.com/ramoures/express-react-ssr#readme"
+}
