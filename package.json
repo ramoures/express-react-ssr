@@ -1,29 +1,39 @@
 {
   "name": "express-react-ssr",
-  "version": "1.0.0",
-  "description": "React Server Side Rendering by Express",
-  "main": "server.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "config": {
+    "CLIENR_DIRECTORY": "dist/shop"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:client": "vite build --outDir $npm_package_config_CLIENR_DIRECTORY",
+    "build:server": "vite build --ssr src/Server.jsx --outDir $npm_package_config_CLIENR_DIRECTORY",
+    "build:copy": "cp -rf public/dist/* $npm_package_config_CLIENR_DIRECTORY",
+    "build": "npm run build:client && npm run build:server && npm run build:copy",
+    "dev": "node Develop.mjs",
+    "serve": "node App.mjs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/ramoures/express-react-ssr.git"
+  "dependencies": {
+    "auto-bind": "^5.0.1",
+    "axios": "^1.7.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
+    "express": "^4.19.2",
+    "html-entities": "^2.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
+    "react-router-dom": "^6.24.0",
+    "vite-plugin-minify": "^1.5.2"
   },
-  "keywords": [
-    "React",
-    "SSR",
-    "Express",
-    "Vite",
-    "Router",
-    "Helmet",
-    "API",
-    "SEO"
-  ],
-  "author": "Ramin Moradi Espili",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ramoures/express-react-ssr/issues"
-  },
-  "homepage": "https://github.com/ramoures/express-react-ssr#readme"
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.3.1",
+    "vite-plugin-environment": "^1.1.3",
+    "tailwindcss": "^3.4.3"
+  }
 }
