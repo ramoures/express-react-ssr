@@ -28,14 +28,6 @@ export const Bootstrap = async (url, apiURL, sendData, vite, ssr = true) => {
     const head = `<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <base href="${baseURL}${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}" />
-    <link rel="icon" type="image/svg+xml" href="assets/icons/t-icon-192.png" />
-    <link rel="apple-touch-icon" href="assets/icons/t-icon-180.png" />
-    <meta name="msapplication-TileColor" content="#333333" />
-    <meta name="theme-color" content="#333333" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="format-detection" content="telephone=no" />
     ${helmet?.title ? helmet?.title?.toString() : ''}
     ${helmet?.link ? helmet?.link?.toString() : ''}
     ${helmet?.meta ? helmet?.meta?.toString() : ''}`

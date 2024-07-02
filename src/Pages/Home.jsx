@@ -1,21 +1,43 @@
+import { Helmet } from "react-helmet";
+import Items from "../components/Items";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 const Home = (data) => {
     let serverData = data.data.data;
+    const [loading, isLoading] = useState(true);
+    const [homeData, setHomeData] = useState(serverData);
     data = {}
+    useEffect(() => {
+        (async () => {
+            if (typeof homeData?.length === 'undefined') {
+                await axios.get('https://fakestoreapi.com/products', {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    timeout: 60000,
+                })
+                    .then(async (res) => {
+                        const result = await res.data;
+                        setHomeData(result);
+                        isLoading(false)
+
+                    }).catch(() => {
+                        isLoading(false)
+                    })
+            }
+            else
+                isLoading(false)
+
+        })();
+    }, [])
     return (
         <>
-            <div key="main" className="flex flex-col gap-5">
-                {serverData?.length && serverData?.map((_v, _i) => {
-                    return (
-                        <a key={`p_${_i}`} className="flex gap-2 items-center">
-                            <img src={_v.image} height={45} width={45} />
-                            <h2>
-                                <span className="text-bold bg-slate-200 p-2"> {_v.category}:</span>
-                                {_v.title}
-                            </h2>
-                        </a>
-                    )
-                })}
-            </div>
+            <Helmet>
+                <title>Title</title>
+            </Helmet>
+            <Items data={homeData} loading={loading} />
+
         </>
     );
 };
