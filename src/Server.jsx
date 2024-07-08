@@ -1,12 +1,10 @@
-import ReactDOMServer from "react-dom/server";
+import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
 import { Router } from "./Router";
 import { addRemoveSlash } from "./core/Utils";
-
 const appDir = process.env.APP_DIRECTORY_NAME ?? "";
-
 export const render = (data, { path }) => {
-  return ReactDOMServer.renderToString(
+  return renderToString(
     <StaticRouter
       basename={`${addRemoveSlash(appDir, true)}`}
       location={`${addRemoveSlash(appDir, true) + path}`}

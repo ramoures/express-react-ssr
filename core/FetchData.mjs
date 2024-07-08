@@ -1,11 +1,13 @@
 import axios from "axios";
 import { getEnv, input, safeString } from "./Utils.mjs";
+import { decode } from "html-entities";
 
-export const FetchData = async (url, sendData = {}) => {
+export const FetchData = async (name, url, sendData = {}) => {
     try {
+        let result = {};
         if (!url || url === null)
             return {};
-        url = safeString(input(url));
+        // url = safeString(input(url));
         let str = "";
         if (sendData) for (let item in sendData) str += `${item}=${sendData[item]}&`;
         str = str.slice(0, -1);
@@ -18,7 +20,8 @@ export const FetchData = async (url, sendData = {}) => {
                 }
             )
         const data = await response.data;
-        return data;
+        result[decode(name)] = data;
+        return result;
     } catch (err) {
         if (getEnv('DEVELOP_MODE', 'boolean')) {
             const errors = err;

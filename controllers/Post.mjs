@@ -1,21 +1,16 @@
+import { decode } from "html-entities";
 import { addRemoveSlash, getEnv, logger } from "../core/Utils.mjs";
 import Base from "./Base.mjs";
-export default class Main extends Base {
-    async notFound(req, res) {
-        try {
-            const sendData = {};
-            const apiURL = "";
-            return await this.Creator(req, res, apiURL, sendData);
-        } catch (err) {
-            return logger(err, res);
-        }
-    }
+export default class Post extends Base {
+
     async home(req, res) {
         try {
             const abiBase = addRemoveSlash(getEnv('API_BASE_URL'), false, true);
             const sendData = {};
-            const apiURL = abiBase + "products";
-            const apiName = 'main';
+            const slug = req?.params?.slug;
+            const category = req?.params?.name;
+            const apiURL = abiBase + "products/" + slug;
+            const apiName = 'post' + '_' + decode(category) + '_' + slug;
             return await this.Creator(req, res, apiName, apiURL, sendData);
         } catch (err) {
             return logger(err, res);

@@ -1,17 +1,21 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { basketContext } from "../core/Basket";
 
-const Checkout = (data) => {
-    const { sum } = useContext(basketContext)
-    const summary = sum.reduce((a, b) => a + b, 0).toFixed(3)
+const Checkout = () => {
+    const { prices } = useContext(basketContext)
+    const summary = prices.reduce((a, b) => a + b, 0).toFixed(3);
+    useEffect(() => {
+        if (typeof window !== 'undefined')
+            window.scrollTo(0, 0);
+    }, [])
     return (
         <>
             <Helmet>
                 <title>Checkout</title>
             </Helmet>
-            <div key="main" className="flex flex-col gap-5 w-full h-full">
+            <div key="main" className="flex flex-col gap-5 w-full min-h-screen">
                 <div className="font-[sans-serif] lg:flex lg:items-center lg:justify-center my-8">
                     <div className="bg-slate-100 p-8 w-full mx-auto rounded-md">
                         <h2 className="text-3xl font-extrabold text-gray-800 text-center">Checkout</h2>

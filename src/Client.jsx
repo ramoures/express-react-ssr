@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom/client";
+import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Router";
 import { addRemoveSlash } from "./core/Utils";
@@ -7,7 +7,8 @@ let data;
 if (typeof window !== "undefined") {
   data = window.__data__;
 }
-ReactDOM.hydrateRoot(
+
+hydrateRoot(
   document.getElementById("app"),
   <BrowserRouter basename={`${addRemoveSlash(appDir, true)}`}>
     <Router data={data} />

@@ -2,7 +2,7 @@ import { addRemoveSlash, getEnv, logger } from "./Utils.mjs";
 import { Helmet } from 'react-helmet';
 import fs from 'fs';
 
-export const Bootstrap = async (url, apiURL, sendData, vite, ssr = true) => {
+export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true) => {
   try {
     let template, render, script;
     const baseURL = ssr ? addRemoveSlash(getEnv('SERVER_BASE_URL'), false, true) : addRemoveSlash(getEnv('DEVELOP_BASE_URL'), false, true)
@@ -15,7 +15,7 @@ export const Bootstrap = async (url, apiURL, sendData, vite, ssr = true) => {
       template = await vite.transformIndexHtml(url, template);
       var { FetchData } = await vite.ssrLoadModule('./core/FetchData.mjs');
     }
-    const data = await FetchData(apiURL, sendData);
+    const data = await FetchData(apiName, apiURL, sendData);
     script = `<script>window.__data__=${JSON.stringify(data)}</script>`;
 
     if (ssr)

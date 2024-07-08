@@ -5,12 +5,15 @@ import axios from "axios";
 
 const Home = (data) => {
     let serverData = data.data.data;
-    const [loading, isLoading] = useState(true);
-    const [homeData, setHomeData] = useState(serverData);
-    data = {}
+    const [loading, isLoading] = useState(false);
+    const [homeData, setHomeData] = useState(serverData?.main);
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.scrollTo(0, 0);
+        }
         (async () => {
-            if (typeof homeData?.length === 'undefined') {
+            if (typeof serverData?.main === 'undefined') {
+                isLoading(true)
                 await axios.get('https://fakestoreapi.com/products', {
                     headers: {
                         "Content-Type": "application/json"

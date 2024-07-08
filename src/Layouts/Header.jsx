@@ -3,20 +3,31 @@ import { basketContext } from "../core/Basket";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+
     let { basket, setBasket } = useContext(basketContext)
-    const { sum, setSum } = useContext(basketContext)
+    const { prices, setPrices } = useContext(basketContext)
     let summary = [];
     let reduce;
     function removeFunc(e) {
         const id = e.target.getAttribute('data-id')
         delete basket[id];
-        delete sum[id];
+        delete prices[id];
         let newArr = basket.filter(n => n)
-        let newSum = sum.filter(n => n)
+        let newPrices = prices.filter(n => n)
         setBasket([...newArr]);
-        setSum([...newSum])
+        setPrices([...newPrices]);
+        localStorage.setItem('myshop-basket', JSON.stringify({ items: [...newArr], prices: [...newPrices] }));
     }
-
+    useEffect(() => {
+        const storage = localStorage.getItem('myshop-basket');
+        const parsSotrage = JSON.parse(storage)
+        if (!basket.length && parsSotrage) {
+            const items = parsSotrage?.items
+            const itemPrices = parsSotrage?.prices
+            setBasket([...items])
+            setPrices([...itemPrices])
+        }
+    }, [])
     const showbasket = () => {
         document.getElementById('basketBox').classList.remove('hidden')
         document.getElementById('basketBox').classList.add('flex')
@@ -55,11 +66,11 @@ const Header = () => {
                                     reduce = summary.reduce((a, b) => a + b, 0).toFixed(3)
                                     return (
                                         <div key={_i} className="flex items-center justify-between gap-2 w-full select-none ">
-                                            <div className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
+                                            <Link to={`/category/${_v?.category}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
                                                 <img src={_v?.image} className="object-contain min-w-12 max-w-12 min-h-12 max-h-12 object-center" />
-                                            </div>
+                                            </Link>
                                             <div className="flex flex-col gap-1 flex-1">
-                                                {_v?.title}
+                                                <Link to={`/category/${_v?.category}/products/${_v?.id}`}>{_v?.title}</Link>
                                                 <div className="text-blue-600">{_v?.price}$</div>
                                             </div>
                                             <button data-id={_i} onClick={removeFunc} className="flex text-slate-600 hover:text-red-500">

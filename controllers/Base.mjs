@@ -8,7 +8,7 @@ export default class Base {
             throw new Error('Attention! Base Controller is abstract class')
         autoBind(this);
     }
-    async Creator(req, res, apiURL, dataForSend) {
+    async Creator(req, res, apiName, apiURL, dataForSend) {
         try {
             const vite = req?.app?.get('vite');
             const ssr = req?.app?.get('ssr');
@@ -16,7 +16,7 @@ export default class Base {
             url = url.split('?')[0];
             if (getEnv('APP_DIRECTORY_NAME'))
                 url = url.replace(addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true), '');
-            const html = await Bootstrap(url, apiURL, dataForSend, vite, ssr);
+            const html = await Bootstrap(url, apiName, apiURL, dataForSend, vite, ssr);
             return res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
         } catch (err) {
             return logger(err, res);
