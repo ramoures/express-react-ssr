@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import Rate from "../components/Rate";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
+import NotFound from "./NotFound";
 const Post = (data) => {
     const serverData = data.data.data;
 
@@ -31,8 +32,8 @@ const Post = (data) => {
 
     data = {}
 
-    //Internal arrow functions (Add to basket card, Set background colors, Get data from Api):
-    const addToCard = (_v) => {
+    //Internal arrow functions (Add to basket Cart, Set background colors, Get data from Api):
+    const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
         setPrices([...prices, _v?.price]);
         localStorage.setItem('myshop-basket', JSON.stringify({ items: [...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }], prices: [...prices, _v?.price] }));
@@ -109,9 +110,10 @@ const Post = (data) => {
                 isLoading(true);
                 getData(slug, category);
             })();
-    }, [bgColor, viaColor])
+    }, [bgColor, viaColor]);
 
-
+    if (!loading && (serverData?.['post' + '_' + category + '_' + slug]?.length === 0))
+        return <NotFound />;
     return (
         <>
             <Helmet>
@@ -130,39 +132,38 @@ const Post = (data) => {
                         </Link>
                     </div>
                     <div className={`w-full flex justify-center items-center rounded-2xl p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
-                        {postData?.length !== 0 &&
-                            (
-                                <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-center">
-                                    <div key={`post${postData.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
-                                        <img src={postData.image} className="object-contain w-40 h-40 object-center" />
-                                        <div className={`${bgColor} p-2`}>{postData.price}$</div>
-                                        <div className="flex items-center gap-2">
-                                            <button onClick={() => {
-                                                addToCard(postData)
-                                            }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
-                                        </div>
-                                    </div>
-                                    <div className="flex flex-col items-start gap-2 p-4">
-                                        <Link to={`/category/${postData?.category}`} className="text-sm text-neutral-500">
-                                            {Capitalize(postData?.category)}
-                                        </Link>
-                                        <h2 className="font-medium text-2xl">
-                                            {postData?.title}
-                                        </h2>
-                                        <h3 className="font-light text-xl">
-                                            {postData?.description}
-                                        </h3>
-                                        <h4 className="font-thin flex gap-2 leading-none items-center my-2">
-                                            <Rate n={postData?.rating?.rate} />
-                                            <div className="text-sm leading-none">({postData?.rating?.count} rate)</div>
-                                        </h4>
-                                    </div>
+
+                        <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-center">
+                            <div key={`post${postData.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
+                                <img src={postData.image} className="object-contain w-40 h-40 object-center" />
+                                <div className={`${bgColor} p-2`}>{postData.price}$</div>
+                                <div className="flex items-center gap-2">
+                                    <button onClick={() => {
+                                        addToCart(postData)
+                                    }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
                                 </div>
-                            )
-                        }
+                            </div>
+                            <div className="flex flex-col items-start gap-2 p-4">
+                                <Link to={`/category/${postData?.category}`} className="text-sm text-neutral-500">
+                                    {Capitalize(postData?.category)}
+                                </Link>
+                                <h2 className="font-medium text-2xl">
+                                    {postData?.title}
+                                </h2>
+                                <h3 className="font-light text-xl">
+                                    {postData?.description}
+                                </h3>
+                                <h4 className="font-thin flex gap-2 leading-none items-center my-2">
+                                    <Rate n={postData?.rating?.rate} />
+                                    <div className="text-sm leading-none">({postData?.rating?.count} rate)</div>
+                                </h4>
+                            </div>
+                        </div>
+
                     </div>
                 </div >
             }
+
         </>
     )
 }

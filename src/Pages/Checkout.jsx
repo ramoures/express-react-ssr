@@ -2,6 +2,8 @@ import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { basketContext } from "../core/Basket";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 const Checkout = () => {
     const { prices } = useContext(basketContext)
@@ -15,6 +17,8 @@ const Checkout = () => {
             <Helmet>
                 <title>Checkout</title>
             </Helmet>
+            <Login />
+            <Register />
             <div key="main" className="flex flex-col gap-5 w-full min-h-screen">
                 <div className="font-[sans-serif] lg:flex lg:items-center lg:justify-center my-8">
                     <div className="bg-slate-100 p-8 w-full mx-auto rounded-md">
@@ -70,7 +74,9 @@ const Checkout = () => {
                                             className="px-7 py-3.5 text-sm tracking-wide bg-white cursor-default opacity-35 text-gray-800 rounded-md">Pay later</button>
                                         <button type="button"
                                             className="px-7 py-3.5 text-sm tracking-wide bg-blue-600 text-white rounded-md  cursor-default opacity-35">Submit</button>
-                                        This is a demo!
+                                        <div className="text-slate-500 text-xs">
+                                            This is a demo!
+                                        </div>
                                     </div>
                                 </form>
                             </div>

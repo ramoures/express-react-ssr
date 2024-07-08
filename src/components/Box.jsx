@@ -7,7 +7,7 @@ import { Colors } from "../core/Colors";
 const Box = ({ color, name, data, loading }) => {
     const { setBasket, basket } = useContext(basketContext);
     const { prices, setPrices } = useContext(basketContext);
-    const addToCard = (_v) => {
+    const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
         setPrices([...prices, _v?.price]);
         localStorage.setItem('myshop-basket', JSON.stringify({ items: [...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }], prices: [...prices, _v?.price] }));
@@ -38,7 +38,7 @@ const Box = ({ color, name, data, loading }) => {
                                     <div className="flex items-center gap-2">
                                         <Link to={`/category/${name}/products/${_v.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
                                         <button onClick={() => {
-                                            addToCard(_v)
+                                            addToCart(_v)
                                         }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded active:animate-ping select-none">Add to basket</button>
                                     </div>
                                 </div>
