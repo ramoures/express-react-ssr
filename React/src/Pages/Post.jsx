@@ -9,8 +9,11 @@ import Rate from "../components/Rate";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
 import NotFound from "./NotFound";
+import Defined from "../core/Defined";
 const Post = (data) => {
     const serverData = data.data.data;
+    
+    const apiURL = Defined?.apiURL?.products;
 
     //Use Params
     const params = useParams();
@@ -69,7 +72,7 @@ const Post = (data) => {
     }
     const getData = async (slug, category) => {
         //If load or change url by react router dom
-        await axios.get('https://fakestoreapi.com/products/' + slug, {
+        await axios.get(apiURL + slug, {
             headers: {
                 "Content-Type": "application/json"
             },

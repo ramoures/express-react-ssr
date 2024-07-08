@@ -3,8 +3,8 @@ import cookieParser from 'cookie-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createServer } from 'vite';
-import { addRemoveSlash, getEnv } from './core/Utils.mjs';
-import Routes from './routes/Router.mjs';
+import { addRemoveSlash, getEnv } from './Express/core/Utils.mjs';
+import Routes from './Express/routes/Router.mjs';
 process.env.NODE_ENV === 'production'
 
 const app = express();

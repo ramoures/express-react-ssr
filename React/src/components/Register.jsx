@@ -19,7 +19,7 @@ const Register = () => {
         }
     }, []);
     return (
-        <div id="registerBox" className="hidden fixed w-full h-full bg-black/20 top-0 left-0 z-50 justify-center items-center">
+        <div id="registerBox" className="hidden fixed w-full h-full bg-black/30 top-0 left-0 z-50 justify-center items-center">
             <div className="bg-white rounded-xl border-[1px] border-neutral-400 w-10/12 sm:w-6/12 md:w-5/12 lg:w-4/12 xl:w-3/12 2xl:w-1/5 shadow-2xl flex flex-col justify-between">
                 <div className="border-b-[1px] border-neutral-300 p-2 text-xl font-bold">Register</div>
                 <form id="registerForm" method="POST" autoComplete="off" className="p-4 flex flex-col gap-2">

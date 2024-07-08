@@ -8,9 +8,12 @@ import { Helmet } from "react-helmet";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
 import NotFound from "./NotFound";
+import Defined from "../core/Defined";
 
 const Category = (data) => {
     let serverData = data.data.data;
+    const baseTitle = Defined?.title;
+    const apiURL = Defined?.apiURL?.category;
     const params = useParams();
     let name = params?.name;
     name = decode(name);
@@ -60,7 +63,7 @@ const Category = (data) => {
         (async () => {
             if (typeof serverData?.['category' + '_' + name] === 'undefined') {
                 isLoading(true)
-                await axios.get('https://fakestoreapi.com/products/category/' + name, {
+                await axios.get(apiURL + name, {
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -85,7 +88,7 @@ const Category = (data) => {
     return (
         <>
             <Helmet>
-                <title>{Capitalize(name)}</title>
+                <title>{Capitalize(name)} - {baseTitle}</title>
             </Helmet>
             {loading && <Loading n={4} />}
             {!loading && (categoryData?.length !== 0) &&

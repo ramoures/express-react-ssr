@@ -1,9 +1,10 @@
 import { Router } from "express";
 import { addRemoveSlash, getEnv } from "../core/Utils.mjs";
-import { indexXml } from "../src/sitemaps/index.mjs";
-import { pagesXml } from "../src/sitemaps/pages.mjs";
-import { categoriesXml } from "../src/sitemaps/categories.mjs";
-import { productsXml } from "../src/sitemaps/products.mjs";
+import { indexXml } from "../view/sitemaps/index.mjs";
+import { pagesXml } from "../view/sitemaps/pages.mjs";
+import { categoriesXml } from "../view/sitemaps/categories.mjs";
+import { productsXml } from "../view/sitemaps/products.mjs";
+
 
 const sitemap = Router();
 const sitemapNeeds = (ssr) => {

@@ -13,15 +13,15 @@ export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true
     } else {
       template = fs.readFileSync("./index.html", "utf-8");
       template = await vite.transformIndexHtml(url, template);
-      var { FetchData } = await vite.ssrLoadModule('./core/FetchData.mjs');
+      var { FetchData } = await vite.ssrLoadModule('./Express/core/FetchData.mjs');
     }
     const data = await FetchData(apiName, apiURL, sendData);
     script = `<script>window.__data__=${JSON.stringify(data)}</script>`;
 
     if (ssr)
-      render = (await import(`../dist/${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}Server.js`)).render(data, { path: url });
+      render = (await import(`../../dist/${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}Server.js`)).render(data, { path: url });
     else
-      render = (await vite.ssrLoadModule("./src/Server.jsx")).render(data, { path: url });
+      render = (await vite.ssrLoadModule("./React/src/Server.jsx")).render(data, { path: url });
 
     const appHtml = `${render} ${script}`;
     const helmet = Helmet.renderStatic()

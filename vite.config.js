@@ -5,7 +5,7 @@ import EnvironmentPlugin from 'vite-plugin-environment'
 export default defineConfig({
   plugins: [
     react(),
-    EnvironmentPlugin(['APP_DIRECTORY_NAME', 'ITEM_PER_PAGE_LIMIT', 'WEB_STATIC_TITLE', 'API_BASE_URL', 'SERVER_BASE_URL']),
+    EnvironmentPlugin(['APP_DIRECTORY_NAME', 'WEB_STATIC_TITLE', 'API_BASE_URL', 'SERVER_BASE_URL']),
   ],
   base: '',
   build: {

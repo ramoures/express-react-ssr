@@ -2,9 +2,14 @@ import { Helmet } from "react-helmet";
 import Items from "../components/Items";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Defined from "../core/Defined";
 
 const Home = (data) => {
     let serverData = data.data.data;
+
+    const baseTitle = Defined?.title;
+    const apiURL = Defined?.apiURL?.home;
+
     const [loading, isLoading] = useState(false);
     const [homeData, setHomeData] = useState(serverData?.main);
     useEffect(() => {
@@ -14,7 +19,7 @@ const Home = (data) => {
         (async () => {
             if (typeof serverData?.main === 'undefined') {
                 isLoading(true)
-                await axios.get('https://fakestoreapi.com/products', {
+                await axios.get(apiURL, {
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -37,7 +42,7 @@ const Home = (data) => {
     return (
         <>
             <Helmet>
-                <title>Title</title>
+                <title>{baseTitle}</title>
             </Helmet>
             <Items data={homeData} loading={loading} />
 
