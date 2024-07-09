@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { basketContext } from "../core/Basket";
+import { basketContext } from "../core/Context";
 import { Link } from "react-router-dom";
 import Defined from "../core/Defined";
 const Basket = () => {
@@ -51,7 +51,7 @@ const Basket = () => {
                                 return (
                                     <div key={_i} className="flex bg-white p-2 items-center justify-between gap-2 w-full select-none ">
                                         <Link to={`/category/${_v?.category}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
-                                            <img src={_v?.image} className="object-contain min-w-12 max-w-12 min-h-12 max-h-12 object-center" />
+                                            <img alt={_v?.title} src={_v?.image} className="object-contain min-w-12 max-w-12 min-h-12 max-h-12 object-center" />
                                         </Link>
                                         <div className="flex flex-col justify-start items-start gap-1 flex-1">
                                             <Link to={`/category/${_v?.category}/products/${_v?.id}`}>{_v?.title}</Link>

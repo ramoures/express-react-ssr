@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet";
-import Items from "../components/Items";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Defined from "../core/Defined";
+import Item from "../components/Item";
 
 const Home = (data) => {
     let serverData = data.data.data;
@@ -42,16 +42,25 @@ const Home = (data) => {
                 isLoading(false)
 
         })();
-    }, [error])
+    }, [error]);
+    const category1 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "jewelery").filter((itm, idx) => idx < 4) : [];
+    const category2 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "men's clothing").filter((itm, idx) => idx < 4) : [];
+    const category3 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "women's clothing").filter((itm, idx) => idx < 4) : [];
+    const category4 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "electronics").filter((itm, idx) => idx < 4) : [];
     return (
         <>
             <Helmet>
-                <title>{baseTitle}</title>
+                <title>Home - {baseTitle}</title>
                 <link rel="canonical" href={`${website}/`} />
                 <meta name="robots" content="index, follow" />
             </Helmet>
-            <Items data={homeData} loading={loading} error={error} />
-
+            <div key="main" className="flex flex-col gap-5 w-full justify-between py-3">
+                {!loading && error && <div className="w-full text-center text-orange-500">An error has occurred! Please try agian later.</div>}
+                <Item color={`neutral`} name={`men's clothing`} data={category2} loading={loading} error={error} />
+                <Item color={`sky`} name={`electronics`} data={category4} loading={loading} error={error} />
+                <Item color={`gold`} name={`jewelery`} data={category1} loading={loading} error={error} />
+                <Item color={`fuchsia`} name={`women's clothing`} data={category3} loading={loading} error={error} />
+            </div>
         </>
     );
 };

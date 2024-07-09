@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { basketContext } from "../core/Basket";
+import { basketContext } from "../core/Context";
 import Loading from "./Loading";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
-const Box = ({ color, name, data, loading, error }) => {
+const Item = ({ color, name, data, loading, error }) => {
     const { setBasket, basket } = useContext(basketContext);
     const { prices, setPrices } = useContext(basketContext);
     const addToCart = (_v) => {
@@ -33,10 +33,10 @@ const Box = ({ color, name, data, loading, error }) => {
                         {data?.map((_v, _i) => {
                             return (
                                 <div key={`p_${_i}`} className="flex flex-col gap-4 items-center p-4 border-2 bg-white hover:scale-95 transition-all duration-500 rounded-3xl">
-                                    <img src={_v.image} className="object-contain w-40 h-40 object-center" />
-                                    <div className={`${bgColor} p-2`}>{_v.price}$</div>
+                                    <img alt={_v?.title} src={_v?.image} className="object-contain w-40 h-40 object-center" />
+                                    <div className={`${bgColor} p-2`}>{_v?.price}$</div>
                                     <div className="flex items-center gap-2">
-                                        <Link to={`/category/${name}/products/${_v.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
+                                        <Link to={`/category/${name}/products/${_v?.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
                                         <button onClick={() => {
                                             addToCart(_v)
                                         }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded active:animate-ping select-none">Add to basket</button>
@@ -50,4 +50,4 @@ const Box = ({ color, name, data, loading, error }) => {
         </>
     )
 }
-export default Box;
+export default Item;

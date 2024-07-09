@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { basketContext } from './core/Basket';
+import { basketContext } from './core/Context';
 import NotFound from "./Pages/NotFound";
 import Layouts from "./Layouts/Layouts";
 import Home from "./Pages/Home";

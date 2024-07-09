@@ -25,8 +25,9 @@ export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true
 
     const appHtml = `${render} ${script}`;
     const helmet = Helmet.renderStatic()
+    // <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     const head = `<meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <base href="${baseURL}${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}" />
     ${helmet?.title ? helmet?.title?.toString() : ''}
     ${helmet?.link ? helmet?.link?.toString() : ''}

@@ -2,19 +2,21 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import axios from "axios";
-import { basketContext } from "../core/Basket";
+import { basketContext } from "../core/Context";
 import { decode } from "html-entities";
-import { Helmet } from "react-helmet";
 import Rate from "../components/Rate";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
 import NotFound from "./NotFound";
 import Defined from "../core/Defined";
+import Metatags from "../components/Metatags";
 const Post = (data) => {
     const serverData = data.data.data;
 
     const website = Defined?.website;
+    const baseTitle = Defined?.title;
     const apiURL = Defined?.apiURL?.products;
+    const twitterAccount = Defined?.twitter
 
     //Use Params
     const params = useParams();
@@ -122,11 +124,14 @@ const Post = (data) => {
         return <NotFound />;
     return (
         <>
-            <Helmet>
-                <title>Title</title>
-                <link rel="canonical" href={`${website}/category/${category}/products/${slug}`} />
-                <meta name="robots" content="index, follow" />
-            </Helmet>
+            <Metatags
+                url={`${website}/category/${category}/products/${slug}`}
+                title={`${postData?.title || `Product`} - ${baseTitle}`}
+                description={postData?.description}
+                keywords={postData?.keywords}
+                image={postData?.image}
+                twitterAccount={postData?.twitter || twitterAccount}
+            />
             {loading && <Loading n={0} />}
             {!loading && error && <div className="w-full text-center text-orange-500">An error has occurred! Please try agian later.</div>}
             {!loading && !error && (postData?.length !== 0) &&
@@ -143,9 +148,9 @@ const Post = (data) => {
                     <div className={`w-full flex justify-center items-center rounded-2xl p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
 
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-center">
-                            <div key={`post${postData.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
-                                <img src={postData.image} className="object-contain w-40 h-40 object-center" />
-                                <div className={`${bgColor} p-2`}>{postData.price}$</div>
+                            <div key={`post${postData?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
+                                <img alt={postData?.title} src={postData?.image} className="object-contain w-40 h-40 object-center" />
+                                <div className={`${bgColor} p-2`}>{postData?.price}$</div>
                                 <div className="flex items-center gap-2">
                                     <button onClick={() => {
                                         addToCart(postData)

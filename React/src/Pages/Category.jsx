@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 import axios from "axios";
-import { basketContext } from "../core/Basket";
+import { basketContext } from "../core/Context";
 import { decode } from "html-entities";
 import { Helmet } from "react-helmet";
 import { Capitalize } from "../core/Utils";
@@ -18,7 +18,7 @@ const Category = (data) => {
     const apiURL = Defined?.apiURL?.category;
 
     const params = useParams();
-    let name = params?.name;
+    let name = params?.name || 'Category';
     name = decode(name);
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
@@ -114,10 +114,10 @@ const Category = (data) => {
                         {(categoryData?.length !== 0) && categoryData?.map((_v, _i) => {
                             return (
                                 <div to={`/products/${_v.id}`} key={`p_${_i}`} className="flex flex-col gap-4 items-center p-4 border-2 bg-white hover:scale-95 transition-all duration-500 rounded-3xl">
-                                    <img src={_v.image} className="object-contain w-40 h-40 object-center" />
-                                    <div className={`${bgColor} p-2`}>{_v.price}$</div>
+                                    <img alt={_v?.title} src={_v?.image} className="object-contain w-40 h-40 object-center" />
+                                    <div className={`${bgColor} p-2`}>{_v?.price}$</div>
                                     <div className="flex items-center gap-2">
-                                        <Link to={`/category/${name}/products/${_v.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
+                                        <Link to={`/category/${name}/products/${_v?.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
                                         <button onClick={() => {
                                             addToCart(_v)
                                         }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded select-none">Add to basket</button>

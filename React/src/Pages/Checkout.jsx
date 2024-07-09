@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { basketContext } from "../core/Basket";
+import { basketContext } from "../core/Context";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import Defined from "../core/Defined";

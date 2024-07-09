@@ -11,10 +11,10 @@ const Footer = () => {
                         <span>Express React SSR 0.1 (SEO Friendly)</span>
                         .
                         <span>
-                            Under <a href="https://github.com/ramoures/express-react-ssr/LICENSE">MIT license</a>
+                            Under <a className="text-neutral-600 hover:opacity-75" href="https://github.com/ramoures/express-react-ssr/blob/main/LICENSE">MIT license</a>
                         </span>
                         .
-                        <a className="text-blue-700" href="https://github.com/ramoures/express-react-ssr">Github</a>
+                        <a className="text-blue-700 hover:opacity-75" href="https://github.com/ramoures/express-react-ssr">Github</a>
                     </div>
                     <a className="text-sm text-sky-700" href={`${website}/sitemap`}>XML Sitemap</a>
                 </div>
