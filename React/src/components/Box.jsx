@@ -4,7 +4,7 @@ import { basketContext } from "../core/Basket";
 import Loading from "./Loading";
 import { Capitalize } from "../core/Utils";
 import { Colors } from "../core/Colors";
-const Box = ({ color, name, data, loading }) => {
+const Box = ({ color, name, data, loading, error }) => {
     const { setBasket, basket } = useContext(basketContext);
     const { prices, setPrices } = useContext(basketContext);
     const addToCart = (_v) => {
@@ -26,7 +26,7 @@ const Box = ({ color, name, data, loading }) => {
     return (
         <>
             {loading && <Loading n={1} />}
-            {!loading && (data?.length !== 0) &&
+            {!loading && !error && (data?.length !== 0) &&
                 <div className="flex flex-col justify-end items-start">
                     <Link to={`/category/${name}`} className={`text-2xl w-auto hover:text-neutral-600 ${bgColor} p-4 rounded-t-lg`}>{Capitalize(name)}</Link>
                     <div className={`w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 justify-center items-center rounded-lg rounded-tl-none p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>

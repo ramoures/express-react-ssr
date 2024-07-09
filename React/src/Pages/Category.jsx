@@ -12,14 +12,18 @@ import Defined from "../core/Defined";
 
 const Category = (data) => {
     let serverData = data.data.data;
+
+    const website = Defined?.website;
     const baseTitle = Defined?.title;
     const apiURL = Defined?.apiURL?.category;
+
     const params = useParams();
     let name = params?.name;
     name = decode(name);
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
     const [loading, isLoading] = useState(false);
+    const [error, isError] = useState(false);
     const [categoryData, setCategoryData] = useState(serverData?.['category' + '_' + decode(name)] || []);
     data = {}
     const { setBasket, basket } = useContext(basketContext);
@@ -62,7 +66,7 @@ const Category = (data) => {
         }
         (async () => {
             if (typeof serverData?.['category' + '_' + name] === 'undefined') {
-                isLoading(true)
+                isLoading(true);
                 await axios.get(apiURL + name, {
                     headers: {
                         "Content-Type": "application/json"
@@ -75,7 +79,8 @@ const Category = (data) => {
                         isLoading(false)
 
                     }).catch(() => {
-                        isLoading(false)
+                        isLoading(false);
+                        isError(true);
                     })
             }
             else
@@ -89,9 +94,12 @@ const Category = (data) => {
         <>
             <Helmet>
                 <title>{Capitalize(name)} - {baseTitle}</title>
+                <link rel="canonical" href={`${website}/category/${name}`} />
+                <meta name="robots" content="index, follow" />
             </Helmet>
             {loading && <Loading n={4} />}
-            {!loading && (categoryData?.length !== 0) &&
+            {!loading && error && <div className="w-full text-center text-orange-500">An error has occurred! Please try agian later.</div>}
+            {!loading && !error && (categoryData?.length !== 0) &&
                 <div className="flex flex-col justify-start items-start py-3 min-h-screen">
                     <div className="flex w-full justify-between items-center">
                         <Link to={`/category/${name}`} className={`text-2xl w-auto hover:text-neutral-600 ${bgColor} p-4 rounded-t-lg`}>{Capitalize(name)}</Link>

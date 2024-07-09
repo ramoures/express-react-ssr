@@ -7,11 +7,14 @@ import Defined from "../core/Defined";
 const Home = (data) => {
     let serverData = data.data.data;
 
+    const website = Defined?.website;
     const baseTitle = Defined?.title;
     const apiURL = Defined?.apiURL?.home;
 
     const [loading, isLoading] = useState(false);
+    const [error, isError] = useState(false);
     const [homeData, setHomeData] = useState(serverData?.main);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.scrollTo(0, 0);
@@ -31,20 +34,23 @@ const Home = (data) => {
                         isLoading(false)
 
                     }).catch(() => {
-                        isLoading(false)
+                        isLoading(false);
+                        isError(true);
                     })
             }
             else
                 isLoading(false)
 
         })();
-    }, [])
+    }, [error])
     return (
         <>
             <Helmet>
                 <title>{baseTitle}</title>
+                <link rel="canonical" href={`${website}/`} />
+                <meta name="robots" content="index, follow" />
             </Helmet>
-            <Items data={homeData} loading={loading} />
+            <Items data={homeData} loading={loading} error={error} />
 
         </>
     );

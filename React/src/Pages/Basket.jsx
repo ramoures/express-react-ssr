@@ -2,7 +2,10 @@ import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { basketContext } from "../core/Basket";
 import { Link } from "react-router-dom";
+import Defined from "../core/Defined";
 const Basket = () => {
+    const baseTitle = Defined?.title;
+
     let { basket, setBasket } = useContext(basketContext)
     const { prices, setPrices } = useContext(basketContext)
     let summary = [];
@@ -33,7 +36,8 @@ const Basket = () => {
     return (
         <>
             <Helmet>
-                <title>Basket</title>
+                <title>Basket - {baseTitle}</title>
+                <meta name="robots" content="noindex,nofollow" />
             </Helmet>
             <div key="main" className="flex flex-col gap-5 w-full min-h-screen ">
                 <div className="font-[sans-serif] lg:flex lg:items-center lg:justify-center my-4">

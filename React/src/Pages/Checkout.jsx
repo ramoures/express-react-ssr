@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { basketContext } from "../core/Basket";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Defined from "../core/Defined";
 
 const Checkout = () => {
+    const baseTitle = Defined?.title;
+
     const { prices } = useContext(basketContext)
     const summary = prices.reduce((a, b) => a + b, 0).toFixed(3);
     useEffect(() => {
@@ -15,7 +18,8 @@ const Checkout = () => {
     return (
         <>
             <Helmet>
-                <title>Checkout</title>
+                <title>Checkout - {baseTitle}</title>
+                <meta name="robots" content="noindex,nofollow" />
             </Helmet>
             <Login />
             <Register />

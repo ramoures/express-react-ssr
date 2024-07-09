@@ -12,7 +12,8 @@ import NotFound from "./NotFound";
 import Defined from "../core/Defined";
 const Post = (data) => {
     const serverData = data.data.data;
-    
+
+    const website = Defined?.website;
     const apiURL = Defined?.apiURL?.products;
 
     //Use Params
@@ -27,6 +28,7 @@ const Post = (data) => {
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
     const [loading, isLoading] = useState(false);
+    const [error, isError] = useState(false);
     const [postData, setPostData] = useState(serverData?.['post' + '_' + category + '_' + slug] || []);
 
     //Use context
@@ -84,6 +86,7 @@ const Post = (data) => {
             setUri(category + slug);
         }).catch(() => {
             isLoading(false);
+            isError(true);
         });
     }
 
@@ -121,9 +124,12 @@ const Post = (data) => {
         <>
             <Helmet>
                 <title>Title</title>
+                <link rel="canonical" href={`${website}/category/${category}/products/${slug}`} />
+                <meta name="robots" content="index, follow" />
             </Helmet>
             {loading && <Loading n={0} />}
-            {!loading && (postData?.length !== 0) &&
+            {!loading && error && <div className="w-full text-center text-orange-500">An error has occurred! Please try agian later.</div>}
+            {!loading && !error && (postData?.length !== 0) &&
                 <div className="flex flex-col justify-start items-start py-0 min-h-screen">
                     <div className="flex w-full justify-between items-center">
                         <div></div>
