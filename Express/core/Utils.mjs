@@ -2,7 +2,6 @@ import { encode } from "html-entities";
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
 import process from 'process';
-import fs from 'fs';
 export const getEnv = (key, type = 'string') => {
     try {
         const env = dotenv.config();
@@ -31,14 +30,6 @@ export const logger = (err, res) => {
             else console.log('500 Internal Server Error!');
     } catch (err) {
         console.log('500 Internal Server Error!')
-    }
-}
-export const existFile = async (path) => {
-    try {
-        return fs.existsSync(path);
-    } catch (err) {
-        logger(err)
-        return false;
     }
 }
 export const addRemoveSlash = (value, before = false, after = false) => {

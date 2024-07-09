@@ -58,7 +58,9 @@ const BasketBox = () => {
                             return (
                                 <div key={_i} className="flex items-center justify-between gap-2 w-full select-none ">
                                     <Link to={`/category/${_v?.category}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
-                                        <img alt={_v?.title} src={_v?.image} className="object-contain min-w-12 max-w-12 min-h-12 max-h-12 object-center" />
+                                        <div className="h-12 w-12 flex justify-center">
+                                            <img width={48} height={48} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
+                                        </div>
                                     </Link>
                                     <div className="flex flex-col gap-1 flex-1">
                                         <Link to={`/category/${_v?.category}/products/${_v?.id}`}>{_v?.title}</Link>

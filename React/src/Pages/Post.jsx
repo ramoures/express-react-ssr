@@ -147,9 +147,11 @@ const Post = (data) => {
                     </div>
                     <div className={`w-full flex justify-center items-center rounded-2xl p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
 
-                        <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-center">
+                        <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${postData?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
-                                <img alt={postData?.title} src={postData?.image} className="object-contain w-40 h-40 object-center" />
+                                <div className="h-40 w-40 flex justify-center">
+                                    <img width={160} height={160} alt={postData?.title} src={postData?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
+                                </div>
                                 <div className={`${bgColor} p-2`}>{postData?.price}$</div>
                                 <div className="flex items-center gap-2">
                                     <button onClick={() => {
@@ -157,14 +159,14 @@ const Post = (data) => {
                                     }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-start gap-2 p-4">
+                            <div className="flex flex-col items-start gap-2 p-4 flex-1">
                                 <Link to={`/category/${postData?.category}`} className="text-sm text-neutral-500">
                                     {Capitalize(postData?.category)}
                                 </Link>
                                 <h2 className="font-medium text-2xl">
                                     {postData?.title}
                                 </h2>
-                                <h3 className="font-light text-xl">
+                                <h3 className="font-light text-lg text-wrap text-left">
                                     {postData?.description}
                                 </h3>
                                 <h4 className="font-thin flex gap-2 leading-none items-center my-2">

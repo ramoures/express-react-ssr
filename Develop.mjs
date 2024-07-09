@@ -5,9 +5,11 @@ import { fileURLToPath } from 'url';
 import { createServer } from 'vite';
 import { addRemoveSlash, getEnv } from './Express/core/Utils.mjs';
 import Routes from './Express/routes/Router.mjs';
-process.env.NODE_ENV === 'production'
+import compression from 'compression';
+// process.env.NODE_ENV === 'production'
 
 const app = express();
+app.use(compression());
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());

@@ -24,14 +24,30 @@ export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true
       render = (await vite.ssrLoadModule("./React/src/Server.jsx")).render(data, { path: url });
 
     const appHtml = `${render} ${script}`;
-    const helmet = Helmet.renderStatic()
-    // <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    const helmet = Helmet.renderStatic();
+
     const head = `<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <base href="${baseURL}${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/icon.svg" />
+    <link rel="apple-touch-icon" href="assets/img/icon.svg" />
+    <meta name="msapplication-TileColor" content="#CCF7F0" />
+    <meta name="theme-color" content="#CCF7F0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="${getEnv('APP_NAME')}" />
+    <meta name="application-name" content="${getEnv('APP_NAME')}" />
+    <meta name="generator" content="https://github.com/ramoures/express-react-ssr" />
     ${helmet?.title ? helmet?.title?.toString() : ''}
     ${helmet?.link ? helmet?.link?.toString() : ''}
     ${helmet?.meta ? helmet?.meta?.toString() : ''}`
+
+    // For disable scable:
+    // <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    // For insert Manifest file for PWA:
+    // <link rel="manifest" href="assets/manifest.json" />
+
     var html = template.replace(`<!--Head-->`, head);
     html = html.replace(`<!--outlet-->`, appHtml);
     return html;

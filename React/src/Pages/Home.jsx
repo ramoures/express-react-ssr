@@ -43,10 +43,10 @@ const Home = (data) => {
 
         })();
     }, [error]);
-    const category1 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "jewelery").filter((itm, idx) => idx < 4) : [];
-    const category2 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "men's clothing").filter((itm, idx) => idx < 4) : [];
-    const category3 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "women's clothing").filter((itm, idx) => idx < 4) : [];
-    const category4 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "electronics").filter((itm, idx) => idx < 4) : [];
+    const category1 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "jewelery") : [];
+    const category2 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "men's clothing") : [];
+    const category3 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "women's clothing") : [];
+    const category4 = (homeData?.length > 0) ? homeData?.filter((itm, idx) => itm.category === "electronics") : [];
     return (
         <>
             <Helmet>
