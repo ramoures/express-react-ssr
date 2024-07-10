@@ -14,6 +14,7 @@ const Post = (data) => {
     const serverData = data.data.data;
 
     const website = Defined?.website;
+    const developMode = Defined?.developMode;
     const baseTitle = Defined?.title;
     const apiURL = Defined?.apiURL?.products;
     const twitterAccount = Defined?.twitter
@@ -29,8 +30,9 @@ const Post = (data) => {
     const [uri, setUri] = useState(category + slug);
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
-    const [loading, isLoading] = useState(false);
+    const [loading, isLoading] = useState(false); // Default: false. everything must be visible in the first moment of the page load.(for SSR).
     const [error, isError] = useState(false);
+    const [errMsg, setErrMsg] = useState();
     const [postData, setPostData] = useState(serverData?.['post' + '_' + category + '_' + slug] || []);
 
     //Use context
@@ -39,20 +41,20 @@ const Post = (data) => {
 
     data = {}
 
-    //Internal arrow functions (Add to basket Cart, Set background colors, Get data from Api):
     const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
         setPrices([...prices, _v?.price]);
         localStorage.setItem('myshop-basket', JSON.stringify({ items: [...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }], prices: [...prices, _v?.price] }));
-        document.getElementById('togglebasket').classList.add('animate-ping');
-        document.getElementById('togglebasket').classList.remove('bg-white');
-        document.getElementById('togglebasket').classList.add('bg-yellow-200');
-        setTimeout(() => {
-            document.getElementById('togglebasket').classList.remove('animate-ping');
-            document.getElementById('togglebasket').classList.remove('bg-yellow-200');
-            document.getElementById('togglebasket').classList.add('bg-white');
-
-        }, 100);
+        if (typeof window !== 'undefined') {
+            document.getElementById('togglebasket').classList.add('animate-ping');
+            document.getElementById('togglebasket').classList.remove('bg-white');
+            document.getElementById('togglebasket').classList.add('bg-yellow-200');
+            setTimeout(() => {
+                document.getElementById('togglebasket').classList.remove('animate-ping');
+                document.getElementById('togglebasket').classList.remove('bg-yellow-200');
+                document.getElementById('togglebasket').classList.add('bg-white');
+            }, 100);
+        }
     }
     const setColor = (category) => {
         switch (category) {
@@ -75,7 +77,7 @@ const Post = (data) => {
         }
     }
     const getData = async (slug, category) => {
-        //If load or change url by react router dom
+        //If load or change url from react router dom
         await axios.get(apiURL + slug, {
             headers: {
                 "Content-Type": "application/json"
@@ -83,12 +85,23 @@ const Post = (data) => {
             timeout: 60000,
         }).then(async (res) => {
             const result = await res.data;
-            setPostData(result);
+            if (!result) {
+                isError(true);
+                setErrMsg('Data Not Found!');
+            }
+            else {
+                setPostData(result);
+                setUri(category + slug);
+            }
             isLoading(false);
-            setUri(category + slug);
-        }).catch(() => {
-            isLoading(false);
+        }).catch((err) => {
             isError(true);
+            if (developMode)
+                setErrMsg(JSON.stringify(err));
+            else
+                setErrMsg('An error has occurred! Please try agian later.');
+            isLoading(false);
+
         });
     }
 
@@ -118,7 +131,7 @@ const Post = (data) => {
                 isLoading(true);
                 getData(slug, category);
             })();
-    }, [bgColor, viaColor]);
+    }, [bgColor, viaColor, errMsg]);
 
     if (!loading && (serverData?.['post' + '_' + category + '_' + slug]?.length === 0))
         return <NotFound />;
@@ -133,7 +146,7 @@ const Post = (data) => {
                 twitterAccount={postData?.twitter || twitterAccount}
             />
             {loading && <Loading n={0} />}
-            {!loading && error && <div className="w-full text-center text-orange-500">An error has occurred! Please try agian later.</div>}
+            {!loading && error && <div className="w-full text-center text-orange-500">{errMsg}</div>}
             {!loading && !error && (postData?.length !== 0) &&
                 <div className="flex flex-col justify-start items-start py-0 min-h-screen">
                     <div className="flex w-full justify-between items-center">
@@ -146,7 +159,6 @@ const Post = (data) => {
                         </Link>
                     </div>
                     <div className={`w-full flex justify-center items-center rounded-2xl p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
-
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${postData?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
                                 <div className="h-40 w-40 flex justify-center">
@@ -156,7 +168,7 @@ const Post = (data) => {
                                 <div className="flex items-center gap-2">
                                     <button onClick={() => {
                                         addToCart(postData)
-                                    }} className="p-2 bg-rose-500 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
+                                    }} className="p-2 bg-rose-600 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
                                 </div>
                             </div>
                             <div className="flex flex-col items-start gap-2 p-4 flex-1">
@@ -175,9 +187,8 @@ const Post = (data) => {
                                 </h4>
                             </div>
                         </div>
-
                     </div>
-                </div >
+                </div>
             }
 
         </>

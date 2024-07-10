@@ -23,12 +23,8 @@ export const FetchData = async (name, url, sendData = {}) => {
         result[decode(name)] = data;
         return result;
     } catch (err) {
-        if (getEnv('DEVELOP_MODE', 'boolean')) {
-            const errors = err;
-            if (!axios.isAxiosError(errors))
-                return err.toString();
-            return err;
-        }
-        return '500 Internal Server Error!'
+        if (getEnv('DEVELOP_MODE', 'boolean'))
+            return JSON.stringify(err);
+        return 'An error has occurred! Please try agian later.'
     }
 }; 
