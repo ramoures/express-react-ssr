@@ -6,7 +6,6 @@ import { createServer } from 'vite';
 import { addRemoveSlash, getEnv } from './Express/core/Utils.mjs';
 import Routes from './Express/routes/Router.mjs';
 import compression from 'compression';
-// process.env.NODE_ENV === 'production'
 
 const app = express();
 app.use(compression());
@@ -26,4 +25,6 @@ app.use(vite.middlewares);
 app.set('vite', vite);
 app.set('ssr', false);
 app.use(getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), true) : '', Routes)
-app.listen(getEnv('DEVELOP_PORT'));
+app.listen(getEnv('DEVELOP_PORT'), () => {
+    console.log(`Browse: ${addRemoveSlash(getEnv('DEVELOP_BASE_URL')) + addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), true)}`)
+});

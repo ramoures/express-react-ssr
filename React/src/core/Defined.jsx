@@ -1,4 +1,4 @@
-import { addRemoveSlash } from "./Utils";
+import { addRemoveSlash } from "../../Utils";
 const serverUrl = process.env.SERVER_BASE_URL ?? "";
 let apiUrl = process.env.API_BASE_URL ?? "";
 apiUrl = addRemoveSlash(apiUrl, false, true);

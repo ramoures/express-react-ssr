@@ -1,14 +1,16 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { basketContext } from './core/Context';
-import NotFound from "./Pages/NotFound";
-import Layouts from "./Layouts/Layouts";
-import Home from "./Pages/Home";
-import Checkout from "./Pages/Checkout";
-import Basket from "./Pages/Basket";
-import Category from "./Pages/Category";
-import "./assets/css/output.css";
-import Post from "./Pages/Post";
+import { basketContext } from './src/core/Context';
+
+import NotFound from "./src/Pages/NotFound";
+import Layouts from "./src/Layouts/Layouts";
+import Home from "./src/Pages/Home";
+import Checkout from "./src/Pages/Checkout";
+import Basket from "./src/Pages/Basket";
+import Category from "./src/Pages/Category";
+import Post from "./src/Pages/Post";
+
+import "./src/assets/css/output.css";
 export const Router = (data) => {
     const location = useLocation()
 

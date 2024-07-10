@@ -4,7 +4,7 @@ import Loading from "../components/Loading";
 import axios from "axios";
 import { basketContext } from "../core/Context";
 import { decode } from "html-entities";
-import { Capitalize } from "../core/Utils";
+import { Capitalize } from "../../Utils";
 import { Colors } from "../core/Colors";
 import NotFound from "./NotFound";
 import Defined from "../core/Defined";

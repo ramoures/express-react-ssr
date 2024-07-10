@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build:client": "vite build --outDir $npm_package_config_CLIENR_DIRECTORY",
-    "build:server": "vite build --ssr React/src/Server.jsx --outDir $npm_package_config_CLIENR_DIRECTORY",
+    "build:server": "vite build --ssr React/Server.jsx --outDir $npm_package_config_CLIENR_DIRECTORY",
     "build:copy": "cp -rf public/dist/* $npm_package_config_CLIENR_DIRECTORY",
     "build": "npm run build:client && npm run build:server && npm run build:copy",
     "dev": "node Develop.mjs",

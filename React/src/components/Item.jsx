@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { basketContext } from "../core/Context";
 import Loading from "./Loading";
-import { Capitalize } from "../core/Utils";
+import { Capitalize } from "../../Utils";
 import { Colors } from "../core/Colors";
 const Item = ({ color, name, data, loading, error }) => {
     const { setBasket, basket } = useContext(basketContext);

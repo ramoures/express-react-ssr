@@ -1,7 +1,7 @@
 import { hydrateRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Router";
-import { addRemoveSlash } from "./core/Utils";
+import { addRemoveSlash } from "./Utils";
 const appDir = process.env.APP_DIRECTORY_NAME ?? "";
 let data;
 if (typeof window !== "undefined") {

@@ -14,4 +14,6 @@ app.use(express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url))
 app.use(addRemoveSlash(getEnv('UPLOAD_URL'), true), express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), addRemoveSlash(getEnv('UPLOAD_DIRECTORY'))), { index: false }));
 app.set('ssr', true);
 app.use(getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), true) : '', Routes)
-app.listen(getEnv('SERVER_PORT'));
+app.listen(getEnv('SERVER_PORT'), () => {
+    console.log(`Browse: ${addRemoveSlash(getEnv('SERVER_BASE_URL')) + addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), true)}`)
+});

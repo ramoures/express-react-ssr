@@ -21,7 +21,7 @@ export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true
     if (ssr)
       render = (await import(`../../dist/${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}Server.js`)).render(data, { path: url });
     else
-      render = (await vite.ssrLoadModule("./React/src/Server.jsx")).render(data, { path: url });
+      render = (await vite.ssrLoadModule("./React/Server.jsx")).render(data, { path: url });
 
     const appHtml = `${render} ${script}`;
     const helmet = Helmet.renderStatic();
