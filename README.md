@@ -40,9 +40,9 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 
   Inserts stringified data into `window.__data__` for client side hydrator.(`render(data)` parameter`(React/Client.jsx`))
 
-> [!IMPORTANT]
+> [!TIP]
 >
-> **Attention**: If you're using the latest version of NodeJS, check out the following links(High-level API), but if that doesn't work and you're using older versions of NodeJS, you can check out my repository.
+> If you're using the latest version of NodeJS, check out the following links(High-level API), but if that doesn't work and you're using older versions of NodeJS, you can check out my repository.
 >
 > - [Next JS SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering)
 > - [React SSR by Remix](https://remix.run/blog/react-server-components)
@@ -73,48 +73,47 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 4. See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
 5. Add new or edit your required controller in `Express/controllers`.
 
-### Attention!
-
-- **Anything that doesn't come on the first moment the page loads, won't come on the server side either.**
-
-  Avoid anything that prevents the page or part of it from being displayed the first moment the page loads.
-
-  ```
-  Example:
-
-  ✗ const sample = lazy(() => import('./sample.mjs'));
-  ✓ import {sample} from './sample.mjs'
-
-  and
-
-  ✗ const [loading,isLoading] = useState(true);
-  ✓ const [loading,isLoading] = useState(false);
-  useEffect(()=>{
-    isLoading(true);
-    //Other code
-  },[]);
-  return (
-      {loading && <div>Please wait...</div>}
-      {!loading && <div>Hello World!</div>}
-  )
-  ```
-
-You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
-
-- If you are using JavaScript for the DOM control, put it in the following condition:
-
-  ```
-  if (typeof window !== 'undefined'){
-
-      // your code here
-
-      // Example:
-      // window.scrollTo(0, 0);
-      // const u = document.getElementById('u');
-  }
-  ```
-
-  You always try to see the page `console` through the `inspect` to see possible errors.
+> [!IMPORTANT]
+>
+> **Anything that doesn't come on the first moment the page loads, won't come on the server side either.**
+>
+> Avoid anything that prevents the page or part of it from being displayed the first moment the page loads.
+>
+> ```
+> Example:
+>
+> ✗ const sample = lazy(() => import('./sample.mjs'));
+> ✓ import {sample} from './sample.mjs'
+>
+> and
+>
+> ✗ const [loading,isLoading] = useState(true);
+> ✓ const [loading,isLoading] = useState(false);
+> useEffect(()=>{
+>   isLoading(true);
+>   //Other code
+> },[]);
+> return (
+>     {loading && <div>Please wait...</div>}
+>     {!loading && <div>Hello World!</div>}
+> )
+> ```
+>You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
+>
+>**If you are using JavaScript for the DOM control, put it in the following condition:**
+>
+> ```
+> if (typeof window !== 'undefined'){
+>
+>     // your code here
+>
+>     // Example:
+>     // window.scrollTo(0, 0);
+>     // const u = document.getElementById('u');
+> }
+> ```
+>
+> You always try to see the page `console` through the `inspect` to see possible errors.
 
 #### If you want to add and use environment in React jsx/tsx files:
 
