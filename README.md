@@ -58,24 +58,31 @@ I got help from this tutorial:
 
 ### Attention!
 
-- Avoid anything that prevents the page or part of it from being displayed the first moment the page loads. Example:
+- **Anything that doesn't come on the first moment the page loads, won't come on the server side either.**
 
-      ✗ const sample = lazy(() => import('./sample.mjs'));
-      ✓ import {sample} from './sample.mjs'
-      or
-      ✗ const [loading,isLoading] = useState(true);
-      ✓ const [loading,isLoading] = useState(false);
+  Avoid anything that prevents the page or part of it from being displayed the first moment the page loads.
+  Example:
+
+        ✗ const sample = lazy(() => import('./sample.mjs'));
+        ✓ import {sample} from './sample.mjs'
+        or
+        ✗ const [loading,isLoading] = useState(true);
+        ✓ const [loading,isLoading] = useState(false);
+
+  You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
 
 - If you are using JavaScript for the DOM control, put it in the following condition:
 
-        if (typeof window !== 'undefined'){
+      if (typeof window !== 'undefined'){
 
-            // your code here
+          // your code here
 
-            // Example:
-            // window.scrollTo(0, 0);
-            // const u = document.getElementById('u');
-        }
+          // Example:
+          // window.scrollTo(0, 0);
+          // const u = document.getElementById('u');
+      }
+
+  You always try to see the page `console` through the `inspect` to see possible errors.
 
 #### If you want to add and use environment in React jsx/tsx files:
 
