@@ -1,5 +1,7 @@
 # Express React SSR
 
+[فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
+
 #### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
 
 1. `git clone https://github.com/ramoures/express-react-ssr/`
@@ -38,16 +40,20 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 
   Inserts stringified data into `window.__data__` for client side hydrator.(`render(data)` parameter`(React/Client.jsx`))
 
-**Attention**: If you're using the latest version of NodeJS, check out the following links, but if that doesn't work and you're using older versions of NodeJS, you can check out this my repository.
-
-- [Next JS SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering)
-- [React SSR by Remix](https://remix.run/blog/react-server-components)
-- [React Server Components Demo](https://github.com/reactjs/server-components-demo)
-- [SSR in awesome vite](https://github.com/vitejs/awesome-vite#ssr)
-
-I got help from this tutorial:
-
-- [Vite SSR tutorial](https://vitejs.dev/guide/ssr#example-projects)
+> [!IMPORTANT]
+>
+> **Attention**: If you're using the latest version of NodeJS, check out the following links(High-level API), but if that doesn't work and you're using older versions of NodeJS, you can check out my repository.
+>
+> - [Next JS SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering)
+> - [React SSR by Remix](https://remix.run/blog/react-server-components)
+> - [SSR in awesome vite](https://github.com/vitejs/awesome-vite#ssr)
+> - [React Server Components Demo](https://github.com/reactjs/server-components-demo)
+>
+> I got help from this tutorial:
+>
+> - [Vite SSR tutorial](https://vitejs.dev/guide/ssr#example-projects)
+>
+> I tried to make it better by including different routers, adding fetch API data function, bootstrap function and controllers to ExpressJS. I hope succeeded and it is useful for you.
 
 ## I Used
 
@@ -72,34 +78,41 @@ I got help from this tutorial:
 - **Anything that doesn't come on the first moment the page loads, won't come on the server side either.**
 
   Avoid anything that prevents the page or part of it from being displayed the first moment the page loads.
+
+  ```
   Example:
 
-        ✗ const sample = lazy(() => import('./sample.mjs'));
-        ✓ import {sample} from './sample.mjs'
-        and
-        ✗ const [loading,isLoading] = useState(true);
-        ✓ const [loading,isLoading] = useState(false);
-        useEffect(()=>{
-          isLoading(true);
-          //Other code
-        },[]);
-        return (
-            {loading && <div>Please wait...</div>}
-            {!loading && <div>Hello World!</div>}
-        )
+  ✗ const sample = lazy(() => import('./sample.mjs'));
+  ✓ import {sample} from './sample.mjs'
 
-  You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
+  and
+
+  ✗ const [loading,isLoading] = useState(true);
+  ✓ const [loading,isLoading] = useState(false);
+  useEffect(()=>{
+    isLoading(true);
+    //Other code
+  },[]);
+  return (
+      {loading && <div>Please wait...</div>}
+      {!loading && <div>Hello World!</div>}
+  )
+  ```
+
+You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
 
 - If you are using JavaScript for the DOM control, put it in the following condition:
 
-      if (typeof window !== 'undefined'){
+  ```
+  if (typeof window !== 'undefined'){
 
-          // your code here
+      // your code here
 
-          // Example:
-          // window.scrollTo(0, 0);
-          // const u = document.getElementById('u');
-      }
+      // Example:
+      // window.scrollTo(0, 0);
+      // const u = document.getElementById('u');
+  }
+  ```
 
   You always try to see the page `console` through the `inspect` to see possible errors.
 
