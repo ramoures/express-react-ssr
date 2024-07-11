@@ -1,6 +1,6 @@
-# Express React SSR (Demo)
+# Express React SSR
 
-#### Simple Shopping website by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+#### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
 
 1. `git clone https://github.com/ramoures/express-react-ssr/`
 2. `cd express-react-ssr`
@@ -15,17 +15,28 @@
 
           npx tailwindcss -i ./React/src/input.css -o ./React/src assets/css/output.css --watch --minify
 
+      [Tailwind installation docs](https://tailwindcss.com/docs/installation)
+
   2.  `npm run dev` or `node Develop.mjs`
 
       - Browse `http://localhost:4173/shop/`
 
-  - **After development completion**
-    1. Remove older `dist` directory. (If it exists in the project root)
-    2. `npm run build` for build new `dist` directory.
-    3. `npm run serve` or `node Server.mjs`
-    4. Browse `http://localhost:5173/shop/`
+- **After development completion**
+  1. Remove older `dist` directory. (If it exists in the project root)
+  2. `npm run build` for build new `dist` directory.
+  3. `npm run serve` or `node Server.mjs`
+  4. Browse `http://localhost:5173/shop/`
 
 ---
+
+SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
+
+- See `Express/Bootstrap.mjs`:
+  Gets index.html and page loaded html content, Gets data from API And inserts required html(head and body) content into loaded page before any JavaScript loads.
+
+  Inserts API data into `render(data) paramater`(`React/Server.jsx`).
+
+  Inserts stringified data into `window.__data__` for client side hydrator.(`render(data)` parameter`(React/Client.jsx`))
 
 **Attention**: If you're using the latest version of NodeJS, check out the following links, but if that doesn't work and you're using older versions of NodeJS, you can check out this my repository.
 
@@ -65,9 +76,17 @@ I got help from this tutorial:
 
         ✗ const sample = lazy(() => import('./sample.mjs'));
         ✓ import {sample} from './sample.mjs'
-        or
+        and
         ✗ const [loading,isLoading] = useState(true);
         ✓ const [loading,isLoading] = useState(false);
+        useEffect(()=>{
+          isLoading(true);
+          //Other code
+        },[]);
+        return (
+            {loading && <div>Please wait...</div>}
+            {!loading && <div>Hello World!</div>}
+        )
 
   You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
 
@@ -99,7 +118,7 @@ I got help from this tutorial:
 
 #### If you want tailwind css configure your template paths:
 
-1. Edit `tailwindcss.config.js` **_content_** object and add your new path to array. [Docs](https://tailwindcss.com/docs/installation)
+1. Edit `tailwindcss.config.js` **_content_** object and add your new path to array. [Tailwind installation docs](https://tailwindcss.com/docs/installation)
 
 ## LICENSE
 

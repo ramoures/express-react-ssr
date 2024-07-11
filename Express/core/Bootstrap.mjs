@@ -5,7 +5,7 @@ import fs from 'fs';
 export const Bootstrap = async (url, apiName, apiURL, sendData, vite, ssr = true) => {
   try {
     let template, render, script;
-    const baseURL = ssr ? addRemoveSlash(getEnv('SERVER_BASE_URL'), false, true) : addRemoveSlash(getEnv('DEVELOP_BASE_URL'), false, true)
+    const baseURL = ssr ? addRemoveSlash(getEnv('SERVER_BASE_URL'), false, true) : addRemoveSlash(getEnv('DEVELOP_BASE_URL'), false, true);
 
     if (ssr) {
       template = fs.readFileSync(`./dist/${getEnv('APP_DIRECTORY_NAME') ? addRemoveSlash(getEnv('APP_DIRECTORY_NAME'), false, true) : ''}index.html`, 'utf-8');
