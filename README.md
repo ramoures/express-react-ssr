@@ -2,7 +2,9 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-#### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+
+**Installation**
 
 1. `git clone https://github.com/ramoures/express-react-ssr/`
 2. `cd express-react-ssr`
@@ -11,23 +13,24 @@
 5. `npm run serve` or `node Server.mjs`
 6. Browse `http://localhost:5173/shop/`
 
-- Developement:
+**Developement**
 
-  1.  Tailwind CLI build and minify process:
+1.  Tailwind CLI build and minify process:
 
-          npx tailwindcss -i ./React/src/input.css -o ./React/src assets/css/output.css --watch --minify
+        npx tailwindcss -i ./React/src/input.css -o ./React/src assets/css/output.css --watch --minify
 
-      [Tailwind installation docs](https://tailwindcss.com/docs/installation)
+    [Tailwind installation docs](https://tailwindcss.com/docs/installation)
 
-  2.  `npm run dev` or `node Develop.mjs`
+2.  `npm run dev` or `node Develop.mjs`
 
-      - Browse `http://localhost:4173/shop/`
+    - Browse `http://localhost:4173/shop/`
 
-- **After development completion**
-  1. Remove older `dist` directory. (If it exists in the project root)
-  2. `npm run build` for build new `dist` directory.
-  3. `npm run serve` or `node Server.mjs`
-  4. Browse `http://localhost:5173/shop/`
+**After development completion**
+
+1. Remove older `dist` directory. (If it exists in the project root)
+2. `npm run build` for build new `dist` directory.
+3. `npm run serve` or `node Server.mjs`
+4. Browse `http://localhost:5173/shop/`
 
 ---
 
@@ -42,11 +45,11 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 
 > [!TIP]
 >
-> If you're using the latest version of NodeJS, check out the following links(High-level API), but if that doesn't work and you're using older versions of NodeJS, you can check out my repository.
+> If you're using the latest version of NodeJS and npm, check out the following links(High-level API), but if use NextJS or you're using older versions of NodeJS and npm, you can check out my repository.
 >
 > - [Next JS SSR](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering)
+> - [SSR frameworks and libraries in awesome vite](https://github.com/vitejs/awesome-vite#ssr)
 > - [React SSR by Remix](https://remix.run/blog/react-server-components)
-> - [SSR in awesome vite](https://github.com/vitejs/awesome-vite#ssr)
 > - [React Server Components Demo](https://github.com/reactjs/server-components-demo)
 >
 > I got help from this tutorial:
@@ -62,6 +65,7 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 - react helmet
 - Tailwind CSS framework
 - XML Sitemap
+- ...
 
 ## HELP
 
@@ -71,7 +75,7 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 2. Edit the `.env` for your required defined configuration.
 3. Add or edit your required routers in `React/router.jsx`.
 4. See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
-5. Add new or edit your required controller in `Express/controllers`.
+5. Add new or edit your required controller mjs file in `Express/controllers`.
 
 > [!IMPORTANT]
 >
@@ -98,9 +102,10 @@ SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://exp
 >     {!loading && <div>Hello World!</div>}
 > )
 > ```
->You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
 >
->**If you are using JavaScript for the DOM control, put it in the following condition:**
+> You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
+>
+> **If you are using JavaScript for the DOM control, put it in the following condition:**
 >
 > ```
 > if (typeof window !== 'undefined'){
