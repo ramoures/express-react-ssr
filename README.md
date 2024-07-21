@@ -76,7 +76,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
 
 ## HELP
 
-### For replace your react project in this repository:
+### To replace your existing react project:
 
 1.  Remove existing file in `React/src/` directory and copy/paste your react files to `React/src/`.
 2.  Edit the `.env` for your required defined configuration.
