@@ -4,8 +4,6 @@
 
 SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
 
-> SSR, lets you generate HTML before any JavaScript loads. [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
-
 ---
 
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/express-react-ssr)
@@ -99,6 +97,8 @@ Gets API data and inserts required html(head and body) content into loaded page.
 
 > [!IMPORTANT]
 >
+> SSR, lets you generate HTML before any JavaScript loads.
+>
 > **Anything that doesn't come on the first moment the page loads, won't come on the server side either.**
 >
 > Avoid anything that prevents the page or part of it from being displayed the first moment the page loads.
@@ -123,7 +123,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
 > )
 > ```
 >
-> You always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
+> You should always try to see the `page source` through the `view page source` to make sure everything you wanted is in the source.
 >
 > **If you are using JavaScript for the DOM control, put it in the following condition:**
 >
@@ -138,7 +138,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
 > }
 > ```
 >
-> You always try to see the page `console` through the `inspect` to see possible errors.
+> You should always try to see the page `console` through the `inspect` to see possible errors.
 
 #### If you want to add and use environment in React jsx/tsx files:
 
