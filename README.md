@@ -70,12 +70,13 @@ Gets API data and inserts required html(head and body) content into loaded page.
 
 ## I Used
 
-- Axios - _get data from API (fakestoreapi.com)_
-- react router dom
-- react helmet
+- Axios
+- React Router Dom
+- React Helmet
 - Tailwind CSS framework
 - XML Sitemap
-- ...
+
+> Data source: fakestoreapi.com
 
 ## HELP
 
