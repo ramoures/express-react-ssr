@@ -21,7 +21,7 @@
 
 ---
 
-### Develope _(PORT: 4173)_
+### Develope
 
 - Tailwind CLI build and minify process: `npm run tailwind`
 
@@ -29,7 +29,7 @@
 
   Browse `http://localhost:4173/shop/`
 
-### Build _(PORT: 5173)_
+### Build
 
 After development completion:
 
