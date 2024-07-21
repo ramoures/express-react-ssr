@@ -49,9 +49,9 @@ After development completion:
 `Express/Bootstrap.mjs`:
 Gets index.html and page loaded html content, Gets data from API And inserts required html(head and body) content into loaded page before any JavaScript loads.
 
-`React/Server.jsx`: Inserts API data into data parameter `render(data)`.
+`React/Server.jsx`: React rendering for server side, Inserts API data into data parameter `render(data)`.
 
-`React/Client.jsx`: Inserts stringified data into `window.__data__` for client side hydrator and data parameter `render(data)`.
+`React/Client.jsx`: React rendering and hydrating for client side, Inserts stringified data to `window.__data__` and data parameter `render(data)`.
 
 > [!TIP]
 >
