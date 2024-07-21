@@ -12,7 +12,8 @@
     "build:copy": "cp -rf public/dist/* $npm_package_config_CLIENR_DIRECTORY",
     "build": "npm run build:client && npm run build:server && npm run build:copy",
     "dev": "node Develop.mjs",
-    "serve": "node Server.mjs"
+    "serve": "node Server.mjs",
+    "tailwind": "npx tailwindcss -i ./React/src/input.css -o ./React/src/assets/css/output.css --watch --minify"
   },
   "dependencies": {
     "auto-bind": "^5.0.1",
