@@ -140,7 +140,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
 >
 > You should always try to see the page `console` through the `inspect` to see possible errors.
 
-#### If you want to add and use environment in React jsx/tsx files:
+#### Add and use environment in React jsx/tsx files:
 
 1.  Add your environment required defined in `.env` file.
 2.  Edit `vite.config.js` and add your new env defined name to `EnvironmentPlugin` Array.
@@ -153,7 +153,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
         const new_env_1 = process.env.NEW_ENV1;
         const new_env_2 = process.env.NEW_ENV2;
 
-#### If you want tailwind css configure your template paths:
+#### Configure tailwindcss for your template paths:
 
 1. Edit `tailwindcss.config.js` **_content_** object and add your new path to array. [Tailwind installation docs](https://tailwindcss.com/docs/installation)
 
