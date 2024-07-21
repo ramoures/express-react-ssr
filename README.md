@@ -157,6 +157,8 @@ Gets API data and inserts required html(head and body) content into loaded page.
 
 1. Edit `tailwindcss.config.js` **_content_** object and add your new path to array. [Tailwind installation docs](https://tailwindcss.com/docs/installation)
 
-## LICENSE
+---
 
-[Under The MIT License](./LICENSE)
+Licence [Under The MIT License](./LICENSE)
+
+Email: ramoures@gmail.com
