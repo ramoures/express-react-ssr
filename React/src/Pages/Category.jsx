@@ -116,7 +116,7 @@ const Category = (data) => {
             {loading && <div className="block py-3"><Loading n={4} /></div>}
             {!loading && error && <div className="w-full text-center text-orange-500">{errMsg}</div>}
             {!loading && !error && (categoryData?.length !== 0) &&
-                <div className="flex flex-col justify-start items-start py-3 min-h-screen">
+                <div className="flex flex-col justify-start items-start py-3">
                     <div className="flex w-full justify-between items-center">
                         <Link to={`/category/${name}`} className={`text-xl w-auto hover:text-neutral-600 ${bgColor} p-4 rounded-t-lg`}>{Capitalize(name)}</Link>
                         <Link to={`/`} className={`text-lg  flex items-center justify-between w-auto hover:text-neutral-600 `}>

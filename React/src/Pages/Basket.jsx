@@ -39,7 +39,7 @@ const Basket = () => {
                 <title>Basket - {baseTitle}</title>
                 <meta name="robots" content="noindex,nofollow" />
             </Helmet>
-            <div key="main" className="flex flex-col gap-5 w-full min-h-screen ">
+            <div key="main" className="flex flex-col gap-5 w-full">
                 <div className="font-[sans-serif] lg:flex lg:items-center lg:justify-center my-4">
                     <div className="bg-slate-100 p-8 w-full mx-auto rounded-md">
                         <h2 className="text-3xl font-extrabold text-gray-800 text-center">Basket</h2>

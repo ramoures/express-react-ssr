@@ -2,7 +2,9 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-#### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+[<img src="screenshot.png">](https://awaweb.ir/projects/free/express-react-ssr)
+
+#### SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
 
 > SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
 
