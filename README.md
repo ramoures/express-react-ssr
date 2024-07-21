@@ -2,13 +2,15 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
+SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
+
+> SSR, lets you generate HTML before any JavaScript loads. [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
+
+---
+
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/express-react-ssr)
 
 **[View Demo](https://awaweb.ir/projects/free/express-react-ssr)**
-
-**SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.**
-
-> SSR, lets you generate HTML before any JavaScript loads. [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
 
 ---
 
