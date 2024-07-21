@@ -2,7 +2,11 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+#### Simple shopping website example by React - Server Side Rendering by Express with Vite. **_(SEO Friendly)_**
+
+> SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
+
+---
 
 **Installation**
 
@@ -13,35 +17,39 @@
 5. `npm run serve` or `node Server.mjs`
 6. Browse `http://localhost:5173/shop/`
 
+---
+
 **Developement**
 
-1.  Tailwind CLI build and minify process:
+- Tailwind CLI build and minify process:
 
-        npx tailwindcss -i ./React/src/input.css -o ./React/src assets/css/output.css --watch --minify
+  `npm run tailwind`
 
-    [Tailwind installation docs](https://tailwindcss.com/docs/installation)
+  [Tailwind installation docs](https://tailwindcss.com/docs/installation)
 
-2.  `npm run dev` or `node Develop.mjs`
+- `npm run dev` or `node Develop.mjs`
 
-    - Browse `http://localhost:4173/shop/`
+  Browse `http://localhost:4173/shop/`
 
-**After development completion**
+## Build
 
-1. Remove older `dist` directory. (If it exists in the project root)
-2. `npm run build` for build new `dist` directory.
+After development completion:
+
+1. Remove **older** **_dist_** directory. (If it exists in the project root)
+2. `npm run build` for build new _dist_ directory.
 3. `npm run serve` or `node Server.mjs`
 4. Browse `http://localhost:5173/shop/`
 
 ---
 
-SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
+### Explanation
 
-- See `Express/Bootstrap.mjs`:
-  Gets index.html and page loaded html content, Gets data from API And inserts required html(head and body) content into loaded page before any JavaScript loads.
+`Express/Bootstrap.mjs`:
+Gets index.html and page loaded html content, Gets data from API And inserts required html(head and body) content into loaded page before any JavaScript loads.
 
-  Inserts API data into `render(data) paramater`(`React/Server.jsx`).
+`React/Server.jsx`: Inserts API data into data parameter `render(data)`.
 
-  Inserts stringified data into `window.__data__` for client side hydrator.(`render(data)` parameter`(React/Client.jsx`))
+`React/Client.jsx`: Inserts stringified data into `window.__data__` for client side hydrator and data parameter `render(data)`.
 
 > [!TIP]
 >

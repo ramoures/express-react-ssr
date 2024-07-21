@@ -11,9 +11,9 @@
     "build:server": "vite build --ssr React/Server.jsx --outDir $npm_package_config_CLIENR_DIRECTORY",
     "build:copy": "cp -rf public/dist/* $npm_package_config_CLIENR_DIRECTORY",
     "build": "npm run build:client && npm run build:server && npm run build:copy",
+    "tailwind": "npx tailwindcss -i ./React/src/input.css -o ./React/src/assets/css/output.css --watch --minify",
     "dev": "node Develop.mjs",
-    "serve": "node Server.mjs",
-    "tailwind": "npx tailwindcss -i ./React/src/input.css -o ./React/src/assets/css/output.css --watch --minify"
+    "serve": "node Server.mjs"
   },
   "dependencies": {
     "auto-bind": "^5.0.1",
