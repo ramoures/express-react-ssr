@@ -77,13 +77,22 @@ Gets index.html and page loaded html content, Gets data from API And inserts req
 
 ### For replace your react project in this repository:
 
-1. Remove existing file in `React/src/` directory and copy/paste your react files to `React/src/`.
-2. Edit the `.env` for your required defined configuration.
-3. Add or edit your required routers in `React/router.jsx`.
-4. See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
-5. Add new or edit your required controller .mjs file in `Express/controllers/`.
-6. Build by `npm run build`.
-7. Deploy by `npm run serve` or `node Server.mjs`
+1.  Remove existing file in `React/src/` directory and copy/paste your react files to `React/src/`.
+2.  Edit the `.env` for your required defined configuration.
+3.  Add or edit your required routers in `React/router.jsx`.
+4.  See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
+5.  Add new or edit your required controller .mjs file in `Express/controllers/`.
+
+        For develope in two terminal:
+        1.npm run tailwind
+        2.npm run dev
+        3.Browse DEVELOP_BASE_URL (in .env file) to view your project.
+        Ex. http://loclahost:4173/
+
+6.  Build by `npm run build`.
+7.  Deploy by `npm run serve` or `node Server.mjs`
+8.  Browse _SERVER_BASE_URL (in .env file)_ to view your project.
+    > Ex. http://loclahost:5173/
 
 > [!IMPORTANT]
 >
