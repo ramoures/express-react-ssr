@@ -81,7 +81,9 @@ Gets index.html and page loaded html content, Gets data from API And inserts req
 2. Edit the `.env` for your required defined configuration.
 3. Add or edit your required routers in `React/router.jsx`.
 4. See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
-5. Add new or edit your required controller mjs file in `Express/controllers`.
+5. Add new or edit your required controller .mjs file in `Express/controllers/`.
+6. Build by `npm run build`.
+7. Deploy by `npm run serve` or `node Server.mjs`
 
 > [!IMPORTANT]
 >
