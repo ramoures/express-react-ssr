@@ -159,6 +159,6 @@ Gets API data and inserts required html(head and body) content into loaded page.
 
 ---
 
-Licence [Under The MIT License](./LICENSE)
+License [Under The MIT License](./LICENSE)
 
 Email: ramoures@gmail.com
