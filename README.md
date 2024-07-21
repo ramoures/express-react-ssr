@@ -65,8 +65,6 @@ Gets API data and inserts required html(head and body) content into loaded page.
 > I got help from this tutorial:
 >
 > - [Vite SSR tutorial](https://vitejs.dev/guide/ssr#example-projects)
->
-> I tried to make it better by including different routers, adding fetch API data function, bootstrap function and controllers to ExpressJS. I hope succeeded and it is useful for you.
 
 ## I Used
 
