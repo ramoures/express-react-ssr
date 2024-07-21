@@ -87,13 +87,13 @@ Gets API data and inserts required html(head and body) content into loaded page.
         Development:
         1.npm run tailwind
         2.npm run dev
-        3.Browse DEVELOP_BASE_URL (in .env file) to view your project.
-        Ex. http://loclahost:4173/
+        3.Browse DEVELOP_BASE_URL + APP_DIRECTORY_NAME (in .env file) to view your project.
+        Ex. http://loclahost:4173/shop/
 
 6.  Build by `npm run build`.
 7.  Deploy by `npm run serve` or `node Server.mjs`
-8.  Browse _SERVER_BASE_URL (in .env file)_ to view your project.
-    > Ex. `http://loclahost:5173/`
+8.  Browse _SERVER_BASE_URL + APP_DIRECTORY_NAME (in .env file)_ to view your project.
+    > Ex. `http://loclahost:5173/shop/`
 
 > [!IMPORTANT]
 >
