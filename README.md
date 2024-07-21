@@ -83,7 +83,7 @@ Gets index.html and page loaded html content, Gets data from API And inserts req
 4.  See `Express/routes/Router.mjs` and edit similar to `React/router.jsx` routes.
 5.  Add new or edit your required controller .mjs file in `Express/controllers/`.
 
-        For develope in two terminal:
+        Development:
         1.npm run tailwind
         2.npm run dev
         3.Browse DEVELOP_BASE_URL (in .env file) to view your project.
