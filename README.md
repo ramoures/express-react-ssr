@@ -47,7 +47,7 @@ After development completion:
 ### Explanation
 
 `Express/Bootstrap.mjs`:
-Gets index.html and page loaded html content, Gets data from API And inserts required html(head and body) content into loaded page before any JavaScript loads.
+Gets API data and inserts required html(head and body) content into loaded page.
 
 `React/Server.jsx`: React rendering for server side, Inserts API data into data parameter `render(data)`.
 
