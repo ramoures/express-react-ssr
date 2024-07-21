@@ -92,7 +92,7 @@ Gets index.html and page loaded html content, Gets data from API And inserts req
 6.  Build by `npm run build`.
 7.  Deploy by `npm run serve` or `node Server.mjs`
 8.  Browse _SERVER_BASE_URL (in .env file)_ to view your project.
-    > Ex. http://loclahost:5173/
+    > Ex. `http://loclahost:5173/`
 
 > [!IMPORTANT]
 >
