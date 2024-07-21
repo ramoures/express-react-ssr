@@ -6,11 +6,11 @@
 
 #### SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
 
-> SSR, lets you generate HTML before any JavaScript loads, [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
+> SSR, lets you generate HTML before any JavaScript loads. [ExpressJS](https://expressjs.com/) with [Vite](https://vitejs.dev/guide/ssr) does this work for you.
 
 ---
 
-**Installation**
+### Installation
 
 1. `git clone https://github.com/ramoures/express-react-ssr/`
 2. `cd express-react-ssr`
@@ -21,19 +21,15 @@
 
 ---
 
-**Developement**
+### Develope _(PORT: 4173)_
 
-- Tailwind CLI build and minify process:
-
-  `npm run tailwind`
-
-  [Tailwind installation docs](https://tailwindcss.com/docs/installation)
+- Tailwind CLI build and minify process: `npm run tailwind`
 
 - `npm run dev` or `node Develop.mjs`
 
   Browse `http://localhost:4173/shop/`
 
-## Build
+### Build _(PORT: 5173)_
 
 After development completion:
 
