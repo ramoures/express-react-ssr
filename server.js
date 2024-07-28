@@ -17,7 +17,7 @@ import sitemap from './sitemap/route.js';
 import { getEnv, logger } from './core/Utils.mjs';
 
 // Constants
-const isProduction = getEnv('DEVELOP_MODE', 'boolean') ? false : true;
+const isProduction = process.env.NODE_ENV === 'production';
 const port = getEnv('PORT', 'number') || 5173;;
 const base = getEnv('WEBSITE_DIRECTORY_NAME') || '/';
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;

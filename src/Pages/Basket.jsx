@@ -22,8 +22,13 @@ const Basket = () => {
     }
 
     useEffect(() => {
-        if (typeof window !== 'undefined')
+        if (typeof window !== 'undefined') {
+            /*
+              Place your javascript DOM code here.
+            */
+            //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
+        }
         const storage = localStorage.getItem('miniShop-basket');
         const parsStorage = JSON.parse(storage)
         if (!basket.length && parsStorage) {

@@ -18,8 +18,11 @@ const Home = ({ dataFromServer }) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            /*
+              Place your javascript DOM code here.
+            */
+            //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
-
         }
         delete dataFromServer?.firstData;
     }, []);

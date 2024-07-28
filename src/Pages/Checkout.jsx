@@ -12,8 +12,13 @@ const Checkout = () => {
     const { prices } = useContext(basketContext)
     const summary = prices.reduce((a, b) => a + b, 0).toFixed(3);
     useEffect(() => {
-        if (typeof window !== 'undefined')
+        if (typeof window !== 'undefined') {
+            /*
+              Place your javascript DOM code here.
+            */
+            //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
+        }
     }, [])
     return (
         <>

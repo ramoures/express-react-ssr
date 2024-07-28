@@ -2,9 +2,11 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
+Server Side Rendering React JS template (shopping website) with Express JS and Vite.
 
-- Fetch data from RESTful API
+- Data fetching from Restful API
+- Sitemap addon
+- SEO friendly
 
 ---
 
@@ -28,7 +30,7 @@ SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS w
 ### Develope
 
 - Tailwind CLI build and minify process: `npm run tw`
-
+- Set your _.env_ file.
 - `npm run dev` or `node Develop.mjs`
 
   Browse `http://localhost:5173/`

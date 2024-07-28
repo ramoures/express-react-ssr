@@ -33,7 +33,8 @@ const Category = ({ dataFromServer }) => {
             /*
                 Place your javascript DOM code here.
             */
-            //ex: document.getElementById('sample')?.classList?.add('hidden')
+            //ex: document.getElementById('sample')?.classList?.add('hidden');
+            window.scrollTo(0, 0);
             switch (name) {
                 case 'jewelery':
                     setBgColor(Colors('gold')?.[0]);
