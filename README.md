@@ -37,10 +37,9 @@ SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS w
 
 After development completion:
 
-1. Remove **older** **_dist_** directory. (If it exists in the project root)
-2. `npm run build` for build new _dist_ directory.
-3. `npm run serve` or `node Server.mjs`
-4. Browse `http://localhost:5173/`
+1. `npm run build` for build new _dist_ directory.
+2. `npm run serve` or `node server.mjs`
+3. Browse `http://localhost:5173/`
 
 ## I Used
 
