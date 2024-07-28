@@ -5,7 +5,7 @@ import axios from "axios";
     * @param {string} url - RESTful API URL address.
     * @param {string|object} dataForSend - Data for send to API.
     * @param {boolean} serverMode - true or false, set to true to use in `server.js` or false to use in react .jsx file.
-    * @returns {Promise}
+    * @returns {Promise} - Data received from RESTful API.
 */
 
 export const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {
