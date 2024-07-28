@@ -55,6 +55,7 @@ After development completion:
 
 ---
 
+Guide: [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
 License [Under The MIT License](./LICENSE)
 
 Email: ramoures@gmail.com
