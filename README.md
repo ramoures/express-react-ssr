@@ -30,7 +30,6 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 ### Develope
 
 - Tailwind CLI build and minify process: `npm run tw`
-- Set your _.env_ file.
 - `npm run dev`
 
   Browse `http://localhost:5173/`
