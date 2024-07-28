@@ -40,7 +40,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 After development completion:
 
 1. `npm run build` for build new _dist_ directory.
-2. `npm run serve` or `node server.mjs`
+2. `npm run preview` or `node server.mjs`
 3. Browse `http://localhost:5173/`
 
 ## I Used
