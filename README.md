@@ -4,6 +4,8 @@
 
 SEO Friendly demo website by ReactJS - Server Side Rendering(SSR) by ExpressJS with Vite.
 
+- Fetch data from RESTful API
+
 ---
 
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/express-react-ssr)
@@ -70,7 +72,7 @@ Gets API data and inserts required html(head and body) content into loaded page.
 - React Router Dom
 - React Helmet
 - Tailwind CSS framework
-- XML Sitemap
+- **XML Sitemap**
 
 > Data source: fakestoreapi.com
 

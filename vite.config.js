@@ -1,17 +1,15 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import EnvironmentPlugin from 'vite-plugin-environment'
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
-    EnvironmentPlugin(['APP_DIRECTORY_NAME', 'WEB_STATIC_TITLE', 'API_BASE_URL', 'SERVER_BASE_URL', 'DEVELOP_MODE', 'TWITTER_ACCOUNT_NAME']),
+    EnvironmentPlugin(['WEBSITE_DIRECTORY_NAME', 'WEBSITE_STATIC_TITLE', 'WEBSITE_BASE_URL', 'TWITTER_USERNAME']),
   ],
-  base: '',
   build: {
-    emptyOutDir: false,
     minify: true,
-    assetsDir: 'assets'
-  },
-  publicDir: '',
-});
+    cssMinify: true
+  }
+})
