@@ -22,7 +22,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 2. `cd express-react-ssr`
 3. `npm install`
 4. `npm run build`
-5. `npm run preview` or `node server.js`
+5. `npm run preview`
 6. Browse `http://localhost:5173/`
 
 ---
@@ -31,7 +31,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 
 - Tailwind CLI build and minify process: `npm run tw`
 - Set your _.env_ file.
-- `npm run dev` or `node Develop.mjs`
+- `npm run dev`
 
   Browse `http://localhost:5173/`
 
@@ -40,7 +40,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 After development completion:
 
 1. `npm run build` for build new _dist_ directory.
-2. `npm run preview` or `node server.mjs`
+2. `npm run preview`
 3. Browse `http://localhost:5173/`
 
 ## I Used
