@@ -1,10 +1,12 @@
 import axios from "axios";
 /** 
     * Fetch data from API.
-    * @param {string} pathName - Route Path Name
+    * @param {string} method - HTTP methods.
+    * @param {string} url - RESTful API URL address.
+    * @param {string|object} dataForSend - Data for send to API.
+    * @param {boolean} serverMode - true or false, set to true to use in `server.js` or false to use in react .jsx file.
     * @returns {Promise}
 */
-export var isFetch = false;
 
 export const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {
     try {
@@ -23,10 +25,8 @@ export const FetchData = async (method = 'get', url = '', dataForSend = '', serv
             headers: { "Content-Type": "application/json", "X-TOKEN": "", Authorization: "" },
             timeout: 20000,
         }).then(function (res) {
-            isFetch = true;
             response = res.data;
         }).catch((err) => {
-            isFetch = false;
             if (serverMode)
                 response = [];
             else response = err?.response?.status || err?.code;
