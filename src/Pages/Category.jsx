@@ -12,10 +12,10 @@ import MetaTags from "../MetaTags";
 import API from "../../core/API";
 
 const Category = ({ dataFromServer }) => {
-    const [data, setData] = useState(dataFromServer?.firstData || []);
+    const [data, setData] = useState(dataFromServer?.['firstData'] || []);
 
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(dataFromServer?.firstData ? false : true);
+    const [loading, setLoading] = useState((Object.keys(dataFromServer?.['firstData'])?.length !== 0) ? false : true);
 
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
@@ -55,7 +55,7 @@ const Category = ({ dataFromServer }) => {
             }
         }
 
-        if (!data?.length)
+        if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
             (async () => {
                 response = await FetchData(apiInfo?.method, apiInfo?.url, apiInfo?.dfs);
                 if (typeof response === 'object')
@@ -66,9 +66,10 @@ const Category = ({ dataFromServer }) => {
                 else
                     setError(response);
                 setLoading(false);
+
             })()
-        delete dataFromServer?.firstData;
-    }, [bgColor, viaColor, error]);
+        dataFromServer['firstData'] = {}
+    }, []);
 
     const website = Defined?.website;
     const baseTitle = Defined?.title;

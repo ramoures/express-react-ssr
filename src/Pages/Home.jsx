@@ -24,7 +24,7 @@ const Home = ({ dataFromServer }) => {
             //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
         }
-        delete dataFromServer?.firstData;
+        dataFromServer['firstData'] = {}
     }, []);
 
     return (

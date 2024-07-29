@@ -12,9 +12,9 @@ import { FetchData } from "../../core/FetchData";
 import { encode } from "html-entities/lib";
 import { Capitalize } from "../Core/Utils";
 const Post = ({ dataFromServer }) => {
-    const [data, setData] = useState(dataFromServer?.firstData || []);
+    const [data, setData] = useState(dataFromServer?.['firstData'] || []);
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(dataFromServer?.firstData ? false : true);
+    const [loading, setLoading] = useState((Object.keys(dataFromServer?.['firstData'])?.length !== 0) ? false : true);
 
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
@@ -27,7 +27,6 @@ const Post = ({ dataFromServer }) => {
 
     let response;
     useEffect(() => {
-
         if (typeof window !== "undefined") {
             /*
                 Place your javascript DOM code here.
@@ -52,9 +51,10 @@ const Post = ({ dataFromServer }) => {
                     setViaColor(Colors('sky')?.[1]);
                     break;
             }
+
         }
 
-        if (!data?.length)
+        if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
             (async () => {
                 response = await FetchData(apiInfo?.method, apiInfo?.url);
                 if (typeof response === 'object')
@@ -66,8 +66,8 @@ const Post = ({ dataFromServer }) => {
                     setError(response);
                 setLoading(false);
             })()
-        delete dataFromServer?.firstData;
-    }, [bgColor, viaColor, error]);
+        dataFromServer['firstData'] = {}
+    }, []);
 
     const website = Defined?.website;
     const baseTitle = Defined?.title;
