@@ -37,7 +37,7 @@ export const FetchData = async (method = 'get', url = '', dataForSend = '', serv
             result['firstData'] = data;
             return result;
         }
-        return data;
+        else return data;
 
     } catch (err) {
         if (serverMode)

@@ -55,7 +55,7 @@ const Category = ({ dataFromServer }) => {
             }
         }
 
-        if (!dataFromServer?.firstData)
+        if (!data?.length)
             (async () => {
                 response = await FetchData(apiInfo?.method, apiInfo?.url, apiInfo?.dfs);
                 if (typeof response === 'object')

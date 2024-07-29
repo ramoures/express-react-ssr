@@ -54,7 +54,7 @@ const Post = ({ dataFromServer }) => {
             }
         }
 
-        if (!dataFromServer?.firstData)
+        if (!data?.length)
             (async () => {
                 response = await FetchData(apiInfo?.method, apiInfo?.url);
                 if (typeof response === 'object')
