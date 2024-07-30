@@ -22,7 +22,7 @@ ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
 2. `cd express-react-ssr`
 3. `npm install`
 4. `npm run build`
-5. `npm start` or `node server.js`
+5. `npm start` or `node server.mjs`
 6. Browse `http://localhost:5173/shop/`
 
 > Update the `.env` file to edit/remove the _shop_ directory from the URL.
@@ -43,7 +43,7 @@ Always ready fresh template in development.
 After development completion:
 
 1. `npm run build` for build new _dist_ directory.
-2. `npm start` or `node server.js`
+2. `npm start` or `node server.mjs`
 3. Browse `http://localhost:5173/shop/`
 
 ---
