@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
-import { basketContext } from "../Core/Context";
+import { projectContext } from "../Core/Context";
 import { Colors } from "../Core/Colors";
 import { FetchData } from "../../core/FetchData";
 import { decode } from "html-entities/lib";
-import { Capitalize } from "../Core/Utils";
+import { addRemoveSlash, Capitalize } from "../Core/Utils";
 import NotFound from "./NotFound";
 import Defined from "../Core/Defined";
 import MetaTags from "../MetaTags";
@@ -71,13 +71,17 @@ const Category = ({ dataFromServer }) => {
         dataFromServer['firstData'] = {}
     }, []);
 
+    // Constants
     const website = Defined?.website;
+    const directory = Defined?.directory;
+    const { thisPort } = useContext(projectContext)
+    const websiteFullUrl = website + (thisPort ? ':' + thisPort : '') + addRemoveSlash(directory, true);
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter
 
 
-    const { setBasket, basket } = useContext(basketContext);
-    const { prices, setPrices } = useContext(basketContext);
+    const { setBasket, basket } = useContext(projectContext);
+    const { prices, setPrices } = useContext(projectContext);
 
     const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
@@ -100,11 +104,11 @@ const Category = ({ dataFromServer }) => {
     return (
         <>
             <MetaTags
-                url={`${website}/category/${name}`}
+                url={`${websiteFullUrl}/category/${name}`}
                 title={`${Capitalize(decode(name))} - Category - ${baseTitle}`}
                 description={data?.description || `This is home page of ${Capitalize(decode(name))}`}
                 keywords={data?.keywords || 'Shop, E-Commerce, Store'}
-                image={data[0]?.image || `${website}/images/icon.svg`}
+                image={data[0]?.image || `${websiteFullUrl}/images/icon.svg`}
                 twitterAccount={data?.twitter || twitterAccount}
             />
             {loading && <div className="block py-3"><Loading n={4} /></div>}

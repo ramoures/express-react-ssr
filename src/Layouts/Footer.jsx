@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import Defined from "../Core/Defined";
+import { projectContext } from "../Core/Context";
+import { addRemoveSlash } from "../Core/Utils";
 
 const Footer = () => {
-    const website = Defined.website;
+
+    // Constants
+    const website = Defined?.website;
+    const directory = Defined?.directory;
+    const { thisPort } = useContext(projectContext)
+    const websiteFullUrl = website + (thisPort ? ':' + thisPort : '') + addRemoveSlash(directory, true);
+
     return (
         <footer className="w-full flex flex-col gap-2 justify-center items-center">
             <div className="text-xs text-pink-900 opacity-80">[ API: <a target="_blank" href="https://fakestoreapi.com">fakestoreapi.com</a> ]</div>
@@ -20,7 +29,7 @@ const Footer = () => {
                         <span className="hidden md:block text-xs md:text-sm">.</span>
                         <a className="hidden md:block text-blue-700 hover:opacity-75" href="https://github.com/ramoures/express-react-ssr">Github</a>
                     </div>
-                    <a className="text-xs md:text-sm text-sky-700" href={`${website}/sitemap`}>XML Sitemap</a>
+                    <a className="text-xs md:text-sm text-sky-700" href={`${websiteFullUrl}/sitemap`}>XML Sitemap</a>
                 </div>
             </div>
         </footer>

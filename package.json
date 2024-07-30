@@ -4,25 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "tw": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch --minify",
-    "dev": "node server",
+    "build:client": "vite build --outDir dist/shop/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/shop/server",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
-    "preview": "cross-env NODE_ENV=production node server"
+    "tw": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch --minify",
+    "dev": "node dev.mjs",
+    "start": "node server.mjs"
   },
   "dependencies": {
     "axios": "^1.7.2",
     "compression": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
     "express": "^4.19.2",
     "html-entities": "^2.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "^6.24.0",
-    "sirv": "^2.0.4",
-    "dotenv": "^16.4.5",
-    "dotenv-expand": "^11.0.6"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",

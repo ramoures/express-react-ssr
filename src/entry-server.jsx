@@ -1,16 +1,18 @@
 import { renderToPipeableStream } from 'react-dom/server'
 import App from './App'
 import { StaticRouter } from "react-router-dom/server";
+import { addRemoveSlash } from './Core/Utils';
 /**
  * @param {string} url
  * @param {string} [ssrManifest]
  * @param {import('react-dom/server').RenderToPipeableStreamOptions} [options]
  * @param {object} dataFromServer
  */
-export function render(url, dataFromServer, options) {
+const appDir = process.env.WEBSITE_DIRECTORY_NAME ?? "";
+export function render(port, path, dataFromServer, options) {
   return renderToPipeableStream(
-    <StaticRouter location={`/${url}`}>
-      <App dataFromServer={dataFromServer} />
+    <StaticRouter basename={addRemoveSlash(appDir, true)} location={`${addRemoveSlash(appDir, true, true) + path}`}>
+      <App port={port} dataFromServer={dataFromServer} />
     </StaticRouter>,
     options
   )

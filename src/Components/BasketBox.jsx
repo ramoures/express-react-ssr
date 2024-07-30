@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import { basketContext } from "../Core/Context";
+import { projectContext } from "../Core/Context";
 import { Link } from "react-router-dom";
 const BasketBox = () => {
-    let { basket, setBasket } = useContext(basketContext)
-    const { prices, setPrices } = useContext(basketContext)
+    let { basket, setBasket } = useContext(projectContext)
+    const { prices, setPrices } = useContext(projectContext)
     let summary = [];
     let reduce;
     function removeFunc(e) {

@@ -21,7 +21,7 @@ export const getEnv = (key, type = 'string') => {
 export const logger = (err, res) => {
     try {
         // This function is for returning an error message in production or developer mode.
-        if (getEnv('DEVELOP_MODE', 'boolean'))
+        if (getEnv('DEVELOPMENT_MODE', 'boolean'))
             if (res)
                 return res.status(500).send(err?.stack || err.toString());
             else return console.log(err);
@@ -36,6 +36,7 @@ export const logger = (err, res) => {
 export const addRemoveSlash = (value, before = false, after = false) => {
     // It doesn't matter if you slash before or after anything. This function returns your new request.
 
+    value = value + ''; //cast to string
     let result;
     if (before) {
         if (value.slice(0, 1) === '/')

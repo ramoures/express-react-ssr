@@ -1,2 +1,2 @@
 import { createContext } from 'react';
-export const basketContext = createContext([]);
+export const projectContext = createContext([]);

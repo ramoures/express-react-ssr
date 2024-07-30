@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
-import { basketContext } from "../Core/Context";
+import { projectContext } from "../Core/Context";
 import Rate from "../Components/Rate";
 import { Colors } from "../Core/Colors";
 import NotFound from "./NotFound";
@@ -9,8 +9,9 @@ import Defined from "../Core/Defined";
 import MetaTags from "../MetaTags";
 import API from "../../core/API";
 import { FetchData } from "../../core/FetchData";
-import { encode } from "html-entities/lib";
-import { Capitalize } from "../Core/Utils";
+import { decode, encode } from "html-entities";
+import { addRemoveSlash, Capitalize } from "../Core/Utils";
+
 const Post = ({ dataFromServer }) => {
     const [data, setData] = useState(dataFromServer?.['firstData'] || []);
     const [error, setError] = useState(false);
@@ -69,12 +70,16 @@ const Post = ({ dataFromServer }) => {
         dataFromServer['firstData'] = {}
     }, []);
 
+    // Constants
     const website = Defined?.website;
+    const directory = Defined?.directory;
+    const { thisPort } = useContext(projectContext)
+    const websiteFullUrl = website + (thisPort ? ':' + thisPort : '') + addRemoveSlash(directory, true);
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter;
 
-    const { setBasket, basket } = useContext(basketContext);
-    const { prices, setPrices } = useContext(basketContext);
+    const { setBasket, basket } = useContext(projectContext);
+    const { prices, setPrices } = useContext(projectContext);
 
     const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
@@ -100,11 +105,11 @@ const Post = ({ dataFromServer }) => {
     return (
         <>
             <MetaTags
-                url={`${website}/category/${encodeURI(encode(name))}/products/${data?.id}`}
-                title={`${data?.title} - ${name} - Category - ${baseTitle}`}
+                url={`${websiteFullUrl}/category/${encodeURI(encode(name))}/products/${data?.id}`}
+                title={`${data.title ? data?.title + ' - ' : ''}${name ? Capitalize(decode(decode(name))) + ' - ' : ''}Category - ${baseTitle}`}
                 description={data?.description || 'This is home page of my shopping website'}
                 keywords={data?.keywords || 'Shop, E-Commerce, Store'}
-                image={data?.image || `${website}/assets/img/icon.svg`}
+                image={data?.image || `${websiteFullUrl}/assets/img/icon.svg`}
                 twitterAccount={data?.twitter || twitterAccount}
             />
             {loading && <Loading n={0} />}

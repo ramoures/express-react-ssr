@@ -1,13 +1,19 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Defined from "../Core/Defined";
 import Item from "../Components/Item";
 import MetaTags from "../MetaTags";
+import { projectContext } from "../Core/Context";
+import { addRemoveSlash } from "../Core/Utils";
 
 const Home = ({ dataFromServer }) => {
 
     const data = dataFromServer?.firstData || [];
 
+    // Constants
     const website = Defined?.website;
+    const directory = Defined?.directory;
+    const { thisPort } = useContext(projectContext)
+    const websiteFullUrl = website + (thisPort ? ':' + thisPort : '') + addRemoveSlash(directory, true);
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter;
 
@@ -30,11 +36,11 @@ const Home = ({ dataFromServer }) => {
     return (
         <>
             <MetaTags
-                url={`${website}`}
+                url={`${websiteFullUrl}`}
                 title={`Home - ${baseTitle}`}
                 description={data?.description || 'This is home page of my shopping website'}
                 keywords={data?.keywords || 'Shop, E-Commerce, Store'}
-                image={data?.image || `${website}/assets/img/icon.svg`}
+                image={data?.image || `${websiteFullUrl}/assets/img/icon.svg`}
                 twitterAccount={data?.twitter || twitterAccount}
             />
             <div key="main" className="flex flex-col gap-5 w-full justify-between py-3">

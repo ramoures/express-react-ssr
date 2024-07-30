@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { basketContext } from "../Core/Context";
+import { projectContext } from "../Core/Context";
 import Defined from "../Core/Defined";
 const Basket = () => {
     const baseTitle = Defined?.title;
 
-    let { basket, setBasket } = useContext(basketContext)
-    const { prices, setPrices } = useContext(basketContext)
+    let { basket, setBasket } = useContext(projectContext)
+    const { prices, setPrices } = useContext(projectContext)
     let summary = [];
     let reduce;
     function removeFunc(e) {

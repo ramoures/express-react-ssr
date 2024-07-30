@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
-import { basketContext } from "../Core/Context";
+import { projectContext } from "../Core/Context";
 import Login from "../Components/Login";
 import Register from "../Components/Register";
 import Defined from "../Core/Defined";
@@ -9,7 +9,7 @@ import Defined from "../Core/Defined";
 const Checkout = () => {
     const baseTitle = Defined?.title;
 
-    const { prices } = useContext(basketContext)
+    const { prices } = useContext(projectContext)
     const summary = prices.reduce((a, b) => a + b, 0).toFixed(3);
     useEffect(() => {
         if (typeof window !== 'undefined') {

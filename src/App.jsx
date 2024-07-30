@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom'
 import './output.css'
-import { basketContext } from './Core/Context';
+import { projectContext } from './Core/Context';
 import Layouts from './Layouts/Layouts'
 import Home from './Pages/Home'
 import NotFound from './Pages/NotFound'
@@ -10,11 +10,12 @@ import Basket from './Pages/Basket';
 import Checkout from './Pages/Checkout';
 import Post from './Pages/Post';
 
-function App({ dataFromServer }) {
+function App({ port, dataFromServer }) {
+  const [thisPort] = useState(port);
   const [basket, setBasket] = useState([]);
   const [prices, setPrices] = useState([]);
   return (
-    <basketContext.Provider value={{ basket, setBasket, prices, setPrices }}>
+    <projectContext.Provider value={{ thisPort, basket, setBasket, prices, setPrices }}>
       <Routes>
         <Route path="/" element={<Layouts />}>
           <Route index element={<Home dataFromServer={dataFromServer} />} />
@@ -25,7 +26,7 @@ function App({ dataFromServer }) {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </basketContext.Provider>
+    </projectContext.Provider>
   )
 }
 

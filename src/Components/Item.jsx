@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FetchData } from "../../core/FetchData.js";
 import { Colors } from "../Core/Colors.jsx";
-import { basketContext } from "../Core/Context.jsx";
+import { projectContext } from "../Core/Context.jsx";
 import Loading from "./Loading.jsx";
 import { encode } from "html-entities/lib/index.js";
 import { Capitalize } from "../Core/Utils.jsx";
@@ -47,8 +47,8 @@ const Item = ({ color, name, dataFromServer }) => {
         dataFromServer = [];
     }, []);
 
-    const { setBasket, basket } = useContext(basketContext);
-    const { prices, setPrices } = useContext(basketContext);
+    const { setBasket, basket } = useContext(projectContext);
+    const { prices, setPrices } = useContext(projectContext);
     const addToCart = (_v) => {
         setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
         setPrices([...prices, _v?.price]);
