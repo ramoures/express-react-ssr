@@ -104,7 +104,7 @@ route.get('*', async (req, res) => {
             callback();
           }
         })
-        template = template.replace('<!--app-head-->', Head(urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), false, true)));
+        template = template.replace('<!--app-head-->', Head(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true) : '/'));
         const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
         res.write(htmlStart)
