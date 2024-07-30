@@ -7,8 +7,8 @@ import { Colors } from "../Core/Colors";
 import NotFound from "./NotFound";
 import Defined from "../Core/Defined";
 import MetaTags from "../MetaTags";
-import API from "../../core/API";
-import { FetchData } from "../../core/FetchData";
+import API from "../../core/API.mjs";
+import { FetchData } from "../../core/FetchData.mjs";
 import { decode, encode } from "html-entities";
 import { addRemoveSlash, Capitalize } from "../Core/Utils";
 

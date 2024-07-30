@@ -1,7 +1,7 @@
-import API from "../../core/API.js";
+import API from "../../core/API.mjs";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FetchData } from "../../core/FetchData.js";
+import { FetchData } from "../../core/FetchData.mjs";
 import { Colors } from "../Core/Colors.jsx";
 import { projectContext } from "../Core/Context.jsx";
 import Loading from "./Loading.jsx";

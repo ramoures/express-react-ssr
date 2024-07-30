@@ -23,7 +23,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 3. `npm install`
 4. `npm run build`
 5. `npm start` or `node server.js`
-6. Browse `http://localhost:5173/`
+6. Browse `http://localhost:5173/shop/`
 
 ---
 
@@ -32,7 +32,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 - Tailwind CLI build and minify process: `npm run tw`
 - `npm run dev`
 
-  Browse `http://localhost:4173/`
+  Browse `http://localhost:4173/shop/`
 
 Always ready fresh template in development.
 
@@ -42,7 +42,7 @@ After development completion:
 
 1. `npm run build` for build new _dist_ directory.
 2. `npm start` or `node server.js`
-3. Browse `http://localhost:5173/`
+3. Browse `http://localhost:5173/shop/`
 
 ## I Used
 

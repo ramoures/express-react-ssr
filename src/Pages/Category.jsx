@@ -3,13 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
 import { projectContext } from "../Core/Context";
 import { Colors } from "../Core/Colors";
-import { FetchData } from "../../core/FetchData";
+import { FetchData } from "../../core/FetchData.mjs";
 import { decode } from "html-entities/lib";
 import { addRemoveSlash, Capitalize } from "../Core/Utils";
 import NotFound from "./NotFound";
 import Defined from "../Core/Defined";
 import MetaTags from "../MetaTags";
-import API from "../../core/API";
+import API from "../../core/API.mjs";
 
 const Category = ({ dataFromServer }) => {
     const [data, setData] = useState(dataFromServer?.['firstData'] || []);
