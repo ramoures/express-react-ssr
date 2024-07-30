@@ -34,6 +34,8 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 
   Browse `http://localhost:4173/`
 
+Always ready fresh template in development.
+
 ### Build
 
 After development completion:
