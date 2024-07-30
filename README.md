@@ -60,9 +60,7 @@ After development completion:
 
 ---
 
-to remove shop from url address update .env file
-
-Guide: [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
+With the help of : [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
 
 License [Under The MIT License](./LICENSE)
 
