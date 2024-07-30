@@ -18,7 +18,7 @@ ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
 
 ### Installation
 
-1. `git clone https://github.com/ramoures/express-react-ssr/`
+1. `git clone git@github.com:ramoures/express-react-ssr.git
 2. `cd express-react-ssr`
 3. `npm install`
 4. `npm run build`
