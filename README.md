@@ -25,6 +25,8 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 5. `npm start` or `node server.js`
 6. Browse `http://localhost:5173/shop/`
 
+> Update the `.env` file to remove the _shop_ directory from the URL.
+
 ---
 
 ### Develope
@@ -44,7 +46,9 @@ After development completion:
 2. `npm start` or `node server.js`
 3. Browse `http://localhost:5173/shop/`
 
-## I Used
+---
+
+### I Used
 
 - Axios
 - React Router Dom
@@ -55,6 +59,8 @@ After development completion:
 > Data source: fakestoreapi.com
 
 ---
+
+to remove shop from url address update .env file
 
 Guide: [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
 
