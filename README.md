@@ -25,7 +25,7 @@ Server Side Rendering React JS template (shopping website) with Express JS and V
 5. `npm start` or `node server.js`
 6. Browse `http://localhost:5173/shop/`
 
-> Update the `.env` file to remove the _shop_ directory from the URL.
+> Update the `.env` file to edit/remove the _shop_ directory from the URL.
 
 ---
 
