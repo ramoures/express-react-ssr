@@ -29,7 +29,7 @@ ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
 
 ---
 
-### Develope
+### Develop
 
 - Tailwind CLI build and minify process: `npm run tw`
 - `npm run dev`
