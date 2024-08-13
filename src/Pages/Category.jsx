@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
 import { projectContext } from "../Core/Context";
 import { Colors } from "../Core/Colors";
-import { FetchData } from "../../core/FetchData.mjs";
+import FetchData from "../../core/FetchData.mjs";
 import { decode } from "html-entities/lib";
 import { addRemoveSlash, Capitalize } from "../Core/Utils";
 import NotFound from "./NotFound";

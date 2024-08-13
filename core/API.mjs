@@ -21,22 +21,19 @@ const API = (route, urlSuffix = "") => {
     /**
       * @description 
       * API information object.
-      * - Token - Your API token name
       * - your_route_name - This route name - (App.jsx)
       *   - method - This route API method
       *   - url - This route API url
       * > Set `Index` for home index page. `Index:{method:'',url:''}`.
-      * @type {{Token:string,your_route_name:{method:string,url:string}}}
+      * @type {{your_route_name:{method:string,url:string}}}
     */
     const APIInfo = {
-      //API Token key:
-      Token: "",
+
       //Home page:
-      Index: {
+      "Index": {
         method: 'get',
         url: baseUrl + '/products'
       },
-      //Route path names: {method: API http method, url: API url address}
       "products": {
         method: 'get',
         url: baseUrl + '/products'

@@ -13,7 +13,7 @@ import { Transform } from 'node:stream';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express, { Router } from 'express';
-import { FetchData } from './core/FetchData.mjs';
+import FetchData from './core/FetchData.mjs';
 import API from './core/API.mjs';
 import Head from './core/Head.mjs';
 import sitemap from './sitemap/sitemap.mjs';

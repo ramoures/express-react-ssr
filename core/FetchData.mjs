@@ -8,7 +8,7 @@ import axios from "axios";
     * @returns {Promise} - Data received from RESTful API.
 */
 
-export const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {
+const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {
     try {
         method = method?.toLowerCase();
         let result = {};
@@ -45,3 +45,4 @@ export const FetchData = async (method = 'get', url = '', dataForSend = '', serv
         return err.toString();
     }
 };
+export default FetchData;
