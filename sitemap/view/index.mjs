@@ -9,6 +9,7 @@ export const indexXml = async (obj = {}) => {
                 `${obj.apiUrl}products`,
                 {
                     headers: { "Content-Type": "application/json" },
+                    proxy: false,
                     timeout: 20000,
                 }
             )
@@ -29,7 +30,7 @@ export const indexXml = async (obj = {}) => {
         xml += `</sitemapindex>`
         return xml;
     } catch (err) {
-        return `<?xml version="1.0" encoding="UTF-8"?>`
+        return `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${obj.url}style.xsl"?>`
     }
 
 }
