@@ -22,7 +22,7 @@ const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode 
             method: method,
             url: url + ((method === 'get') ? (typeof dataForSend === 'object') ? str : `?${dataForSend}` : ''),
             data: (method === 'post' || method === 'put' || method === 'patch') ? dataForSend : {},
-            headers: { "Content-Type": "application/json", "X-TOKEN": "", Authorization: "" },
+            headers: { "Content-type": "application/json; charset=UTF-8" },
             timeout: 20000,
         }).then(function (res) {
             response = res.data;
