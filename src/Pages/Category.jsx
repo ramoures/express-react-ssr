@@ -23,7 +23,7 @@ const Category = ({ dataFromServer }) => {
     const params = useParams();
     let name = params?.name;
 
-    const apiInfo = API('category/' + encodeURI(name));
+    const apiInfo = API(`category/${encodeURI(name)}`);
 
     let response;
 
@@ -57,7 +57,7 @@ const Category = ({ dataFromServer }) => {
 
         if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
             (async () => {
-                response = await FetchData(apiInfo?.method, apiInfo?.url, apiInfo?.dfs);
+                response = await FetchData(apiInfo?.method, apiInfo?.url);
                 if (typeof response === 'object')
                     if (Object.keys(response)?.length)
                         setData(response);
