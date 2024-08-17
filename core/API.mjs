@@ -1,17 +1,17 @@
 /** 
  * Call API information
- * @param {string} route - Your route path name (App.jsx)
- * @param {string} urlSuffix - Your API URL Suffix.
+ * @param {string} path- Route path name (App.jsx)
+ * @param {string} urlSuffix - API URL Suffix.
  * @return {object} API Data of selected array (for FetchData.js).
 */
-const API = (route, urlSuffix = "") => {
+const API = (path, urlSuffix = "") => {
   try {
 
-    //Make whatever shape you want according to your restful API:
+    //Make whatever shape you want according to restful API:
 
-    if (route.split('/')[route.split('/').length - 2] === 'products') {
-      urlSuffix = route.split('/')[route.split('/').length - 1]
-      route = 'single_products'
+    if (path.split('/')[path.split('/').length - 2] === 'products') {
+      urlSuffix = path.split('/')[path.split('/').length - 1]
+      path = 'single_products'
     }
     /**
      * base of api url.
@@ -21,11 +21,11 @@ const API = (route, urlSuffix = "") => {
     /**
       * @description 
       * API information object.
-      * - your_route_name - This route name - (App.jsx)
+      * - route_path_name - This route path name - (App.jsx)
       *   - method - This route API method
       *   - url - This route API url
       * > Set `Index` for home index page. `Index:{method:'',url:''}`.
-      * @type {{your_route_name:{method:string,url:string}}}
+      * @type {{route_path_name:{method:string,url:string}}}
     */
     const APIInfo = {
 
@@ -59,7 +59,7 @@ const API = (route, urlSuffix = "") => {
         url: baseUrl + '/products/category/' + "women's clothing"
       }
     }
-    return APIInfo?.[route] || { method: '', url: '' };
+    return APIInfo?.[path] || { method: '', url: '' };
 
   } catch (err) {
     return {
