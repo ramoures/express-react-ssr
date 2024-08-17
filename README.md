@@ -64,7 +64,7 @@ After development completion:
 
 ---
 
-With the help of : [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
+With the help of : [template-ssr-react-streaming](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react-streaming)
 
 License [Under The MIT License](./LICENSE)
 
