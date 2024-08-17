@@ -60,6 +60,10 @@ After development completion:
 
 ---
 
+<img src="api-connection.webp">
+
+---
+
 With the help of : [template-ssr-react](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react)
 
 License [Under The MIT License](./LICENSE)
