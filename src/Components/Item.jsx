@@ -74,7 +74,7 @@ const Item = ({ color, name, dataFromServer }) => {
             {!loading && !error && (data?.length !== 0) &&
                 <div className="flex flex-col justify-end items-start">
                     <Link to={`/category/${encodeURI(encode(name))}`} className={`text-xl w-auto hover:text-neutral-600 ${bgColor} p-4 rounded-t-lg`}>{Capitalize(name)}</Link>
-                    <div className={`flex flex-col w-full gap-4 rounded-lg rounded-tl-none p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
+                    <div className={`flex flex-col w-full gap-4 rounded-lg rounded-tl-none p-2 lg:p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
                         <div className={`w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 justify-center items-center `}>
                             {data?.filter((itm, idx) => idx < 4)?.map((_v, _i) => {
                                 return (

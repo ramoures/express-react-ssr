@@ -138,7 +138,7 @@ const Post = ({ dataFromServer }) => {
                             </svg>
                         </Link>
                     </div>
-                    <div className={`w-full flex justify-center items-center rounded-2xl p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
+                    <div className={`w-full flex justify-center items-center rounded-2xl p-2 lg:p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${data?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
                                 <div className="h-40 w-40 flex justify-center">
@@ -151,14 +151,14 @@ const Post = ({ dataFromServer }) => {
                                     }} className="p-2 bg-rose-600 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-start gap-2 p-4 flex-1">
+                            <div className="flex flex-col items-start gap-2 p-0 lg:p-4 flex-1">
                                 <Link to={`/category/${encodeURI(encode(data?.category))}`} className="text-sm text-neutral-500">
                                     {Capitalize(data?.category)}
                                 </Link>
                                 <h2 className="font-medium text-2xl">
                                     {data?.title}
                                 </h2>
-                                <h3 className="font-light text-lg text-wrap text-left">
+                                <h3 className="font-light text-lg text-wrap w-full max-w-full break-words overflow-hidden text-left">
                                     {data?.description}
                                 </h3>
                                 <h4 className="font-thin flex gap-2 leading-none items-center my-2">
