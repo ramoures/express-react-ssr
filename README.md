@@ -4,8 +4,8 @@
 
 ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
 
-- Data fetching from Restful API
-- Sitemap addon
+- Data fetching from Rest API
+- Sitemap add-on
 - SEO friendly
 
 ---
