@@ -141,7 +141,7 @@ route.get('*', async (req, res) => {
 
 // 404 Error page - (Outside of React Routes)
 app.get('*', async (req, res) => {
-    res.status(404).send('404, Data not found!')
+    res.status(404).send(`<h1>404, Data not found!</h1><p><a href="${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}"><h2>Got to Home Page</h2></a></p>`)
 });
 
 // Start http server
