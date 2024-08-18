@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build:client": "vite build --outDir dist/shop/client",
-    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/shop/server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "build": "npm run build:client && npm run build:server",
     "tw": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch --minify",
     "dev": "node dev.mjs",
