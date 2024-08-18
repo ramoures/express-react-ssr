@@ -1,7 +1,8 @@
 import ReactDOM from 'react-dom/client'
-import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import { addRemoveSlash } from './Core/Utils';
+import App from './App'
+
 const appDir = process.env.WEBSITE_DIRECTORY_NAME ?? "";
 
 let dataFromServer;
