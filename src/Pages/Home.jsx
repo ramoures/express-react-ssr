@@ -12,8 +12,7 @@ const Home = ({ dataFromServer }) => {
     // Constants
     const website = Defined?.website;
     const directory = Defined?.directory;
-    const { thisPort } = useContext(projectContext)
-    const websiteFullUrl = website + (thisPort ? ':' + thisPort : '') + addRemoveSlash(directory, true);
+    const websiteFullUrl = website + addRemoveSlash(directory, true);
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter;
 
