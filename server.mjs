@@ -45,7 +45,8 @@ app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(p
 // Create route to add website directory name
 const route = Router();
 // Use route
-app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route)
+app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route);
+
 
 //Sitemap, use middleware and controller. controller: sitemap/sitemap.js
 route.use('/sitemap', sitemap);
@@ -126,7 +127,12 @@ route.get('*', async (req, res) => {
   } catch (e) {
     logger(e?.stack, res);
   }
-})
+});
+
+// 404 Error page - (Outside of React Routes)
+app.get('*', async (req, res) => {
+  res.status(404).send('404, Data not found!')
+});
 
 // Start http server
 app.listen(port, () => {

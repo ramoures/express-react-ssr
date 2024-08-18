@@ -50,9 +50,10 @@ app.use(vite.middlewares);
 // Set static directory.
 app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client`), { index: false }));
 
+// Create route to add website directory name
 const route = Router();
-
-app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route)
+// Use route
+app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route);
 
 //Sitemap, use middleware and controller. controller: sitemap/sitemap.js
 route.use('/sitemap', sitemap);
@@ -136,7 +137,12 @@ route.get('*', async (req, res) => {
         vite?.ssrFixStacktrace(e);
         logger(e.stack, res);
     }
-})
+});
+
+// 404 Error page - (Outside of React Routes)
+app.get('*', async (req, res) => {
+    res.status(404).send('404, Data not found!')
+});
 
 // Start http server
 app.listen(port, () => {
