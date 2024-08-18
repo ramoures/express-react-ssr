@@ -10,12 +10,11 @@ import Basket from './Pages/Basket';
 import Checkout from './Pages/Checkout';
 import Post from './Pages/Post';
 
-function App({ port, dataFromServer }) {
-  const [thisPort] = useState(port);
+function App({ dataFromServer }) {
   const [basket, setBasket] = useState([]);
   const [prices, setPrices] = useState([]);
   return (
-    <projectContext.Provider value={{ thisPort, basket, setBasket, prices, setPrices }}>
+    <projectContext.Provider value={{ basket, setBasket, prices, setPrices }}>
       <Routes>
         <Route path="/" element={<Layouts />}>
           <Route index element={<Home dataFromServer={dataFromServer} />} />

@@ -9,10 +9,10 @@ import { addRemoveSlash } from './Core/Utils';
  * @param {object} dataFromServer
  */
 const appDir = process.env.WEBSITE_DIRECTORY_NAME ?? "";
-export function render(port, path, dataFromServer, options) {
+export function render(path, dataFromServer, options) {
   return renderToPipeableStream(
     <StaticRouter basename={addRemoveSlash(appDir, true)} location={`${addRemoveSlash(appDir, true, true) + path}`}>
-      <App port={port} dataFromServer={dataFromServer} />
+      <App dataFromServer={dataFromServer} />
     </StaticRouter>,
     options
   )

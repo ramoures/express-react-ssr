@@ -21,9 +21,9 @@ import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
 
 
 // Constants
-const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? ':' + addRemoveSlash(getEnv('SERVER_PORT'), false, true) : '');
 const port = getEnv('SERVER_PORT', 'number') || 5173;
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
+const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? ':' + addRemoveSlash(getEnv('SERVER_PORT'), false, true) : '');
 
 // Cached production assets
 const templateHtml = await fs.readFile(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client/index.html`, 'utf-8');
@@ -48,7 +48,7 @@ const route = Router();
 app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route)
 
 //Sitemap, use middleware and controller. controller: sitemap/sitemap.js
-route.use('/sitemap', async (req, res, next) => { req.app.set('port', getEnv('SERVER_PORT')); next(); }, sitemap);
+route.use('/sitemap', sitemap);
 
 // Serve HTML
 route.get('*', async (req, res) => {
@@ -79,7 +79,7 @@ route.get('*', async (req, res) => {
      * Inserting stringify object of API data in `<script>window.__data__`. For calling from client side (entry-client.jsx).
      * @type {string}
     */
-    const apiDataInScript = `<script>window.__data__=[${port},${JSON.stringify(dataFromServer)}]</script>`;
+    const apiDataInScript = `<script>window.__data__=${JSON.stringify(dataFromServer)}</script>`;
 
 
     let template, render;
@@ -88,7 +88,7 @@ route.get('*', async (req, res) => {
 
 
     let didError = false;
-    const { pipe, abort } = render(port, path, dataFromServer, {
+    const { pipe, abort } = render(path, dataFromServer, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });
