@@ -22,7 +22,7 @@ import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
 
 // Constants
 const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? ':' + addRemoveSlash(getEnv('SERVER_PORT'), false, true) : '');
-const port = getEnv('SERVER_PORT', 'number') || 5173;
+const port = getEnv('SERVER_PORT', 'number');
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
 
 // Cached production assets
