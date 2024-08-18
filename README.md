@@ -12,7 +12,7 @@ ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
 
 [<img src="screenshot.png">](https://awaweb.ir/projects/free/express-react-ssr)
 
-**[View Demo](https://awaweb.ir/projects/free/express-react-ssr)**
+**[View Demo](https://awaweb.ir/projects/free/express-react-ssr)** - *[(Mirror Link)](https://awaweb.ir/projects/free/express-react-ssr-mirror)*
 
 ---
 
