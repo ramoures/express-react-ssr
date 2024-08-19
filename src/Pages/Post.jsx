@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../Components/Loading";
 import { projectContext } from "../Core/Context";
@@ -13,21 +13,57 @@ import { decode, encode } from "html-entities";
 import { addRemoveSlash, Capitalize } from "../Core/Utils";
 
 const Post = ({ dataFromServer }) => {
-    const [data, setData] = useState(dataFromServer?.['firstData'] || []);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState((Object.keys(dataFromServer?.['firstData'])?.length !== 0) ? false : true);
-
-    const [bgColor, setBgColor] = useState('bg-neutral-100');
-    const [viaColor, setViaColor] = useState('via-neutral-100');
 
     const params = useParams();
     let name = params?.name;
     let slug = params?.slug;
-
     const apiInfo = API('single_products', slug);
+    const [pageId, setPageId] = useState(name + slug);
 
-    let response;
+    const [data, setData] = useState(dataFromServer?.['firstData'] || []);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState((Object.keys(dataFromServer?.['firstData'])?.length !== 0) ? false : true);
+    const [bgColor, setBgColor] = useState('bg-neutral-100');
+    const [viaColor, setViaColor] = useState('via-neutral-100');
+
+    /**
+     * Get data from the API and Set to the data state.
+     * @param {string} method 
+     * @param {string} url
+     * @returns {Promise<void>} 1.set data or error state. 2.set pageId state. 3.set loading to false.
+     */
+    const pageData = async (method = 'get', url) => {
+        let response;
+        response = await FetchData(method, url);
+        if (typeof response === 'object')
+            if (Object.keys(response)?.length)
+                setData(response);
+            else
+                setError(`Error! '${name}' data not found!`);
+        else
+            setError(response);
+        setPageId(name + slug);
+        setLoading(false);
+    }
+    //---
+
+    // If the Post route changes to another Post route (When selecting basket items):
+    const initialize = useRef(true);
+    const routeChanged = (pageId !== (name + slug)) ? true : false;
+    if (routeChanged && initialize.current) {
+        setLoading(true);
+        pageData(apiInfo?.method, apiInfo?.url);
+        initialize.current = false;
+    }
+    else initialize.current = true;
+    //---
+
     useEffect(() => {
+
+        if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
+            pageData(apiInfo?.method, apiInfo?.url);
+        dataFromServer['firstData'] = {};
+
         if (typeof window !== "undefined") {
             /*
                 Place your javascript DOM code here.
@@ -52,22 +88,7 @@ const Post = ({ dataFromServer }) => {
                     setViaColor(Colors('sky')?.[1]);
                     break;
             }
-
         }
-
-        if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
-            (async () => {
-                response = await FetchData(apiInfo?.method, apiInfo?.url);
-                if (typeof response === 'object')
-                    if (Object.keys(response)?.length)
-                        setData(response);
-                    else
-                        setError(`Error! '${name}' data not found!`);
-                else
-                    setError(response);
-                setLoading(false);
-            })()
-        dataFromServer['firstData'] = {}
     }, []);
 
     // Constants
