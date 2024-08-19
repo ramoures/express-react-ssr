@@ -50,8 +50,8 @@ const Post = ({ dataFromServer }) => {
     /* If the Post Route changes to another Post Route.
      * When selecting basket items, in this same Route. */
     const initialize = useRef(true);
-    const routeChanged = (pageId !== (name + slug)) ? true : false;
-    if (routeChanged && initialize.current) {
+    const routeChangeChecker = (pageId !== (name + slug)) ? true : false;
+    if (routeChangeChecker && initialize.current) {
         setLoading(true);
         pageData(apiInfo?.method, apiInfo?.url);
         initialize.current = false;
@@ -188,7 +188,6 @@ const Post = ({ dataFromServer }) => {
                     </div>
                 </div>
             }
-
         </>
     )
 }
