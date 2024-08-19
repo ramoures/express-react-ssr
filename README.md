@@ -62,10 +62,6 @@ After development completion:
 
 ---
 
-<img src="api-connection.webp">
-
----
-
 With the help of : [template-ssr-react-streaming](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react-streaming)
 
 License [Under The MIT License](./LICENSE)
