@@ -82,11 +82,9 @@ route.get('*', async (req, res) => {
     */
     const apiDataInScript = `<script>window.__data__=${JSON.stringify(dataFromServer)}</script>`;
 
-
     let template, render;
     template = templateHtml;
     render = (await import(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/server/entry-server.js`)).render;
-
 
     let didError = false;
     const { pipe, abort } = render(path, dataFromServer, {
@@ -104,14 +102,17 @@ route.get('*', async (req, res) => {
             res.write(chunk, encoding);
             callback();
           }
-        })
+        });
+
         template = template.replace('<!--app-head-->', Head(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true) : '/'));
+        template = template.replace('<!--client-script-->', apiDataInScript);
+
         const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
-        res.write(htmlStart)
+        res.write(htmlStart);
 
         transformStream.on('finish', () => {
-          res.end(apiDataInScript + htmlEnd);
+          res.end(htmlEnd);
         });
 
         pipe(transformStream);
