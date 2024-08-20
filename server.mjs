@@ -23,10 +23,10 @@ import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
 // Constants
 const port = getEnv('SERVER_PORT', 'number') || 5173;
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
-const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? ':' + addRemoveSlash(getEnv('SERVER_PORT'), false, true) : '');
+const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? ':' + addRemoveSlash(getEnv('SERVER_PORT')) : '');
 
-// Cached production assets
-const templateHtml = await fs.readFile(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client/index.html`, 'utf-8');
+// Read index file
+const templateIndex = await fs.readFile(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client/index.html`, 'utf-8');
 
 // Create http server
 const app = express();
@@ -46,7 +46,6 @@ app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(p
 const route = Router();
 // Use route
 app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route);
-
 
 //Sitemap, use middleware and controller. controller: sitemap/sitemap.js
 route.use('/sitemap', sitemap);
@@ -81,10 +80,8 @@ route.get('*', async (req, res) => {
      * @type {string}
     */
     const apiDataInScript = `<script>window.__data__=${JSON.stringify(dataFromServer)}</script>`;
-
-    let template, render;
-    template = templateHtml;
-    render = (await import(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/server/entry-server.js`)).render;
+    let template = templateIndex;
+    const render = (await import(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/server/entry-server.js`)).render;
 
     let didError = false;
     const { pipe, abort } = render(path, dataFromServer, {
@@ -137,5 +134,5 @@ app.get('*', async (req, res) => {
 
 // Start http server
 app.listen(port, () => {
-  console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`);
+  console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}`);
 })

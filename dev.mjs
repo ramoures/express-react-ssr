@@ -22,7 +22,7 @@ import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
 // Constants
 const port = getEnv('DEV_PORT', 'number') || 4173;;
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
-const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('DEV_PORT') ? ':' + addRemoveSlash(getEnv('DEV_PORT'), false, true) : '');
+const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('DEV_PORT') ? ':' + addRemoveSlash(getEnv('DEV_PORT')) : '');
 
 // Create http server
 const app = express();
@@ -68,14 +68,14 @@ route.get('*', async (req, res) => {
         //Split url and params:
         url = url.split('?');
         //Get full pathName
-        let pathName = url[0];
+        let path = url[0];
         //Get params:
         const dataForSend = url[1];
         /**
            * Get API information for this path name.
            * @type {{method:string,url:string}}
            */
-        const apiInfo = API(pathName ? pathName : 'Index');
+        const apiInfo = API(path ? path : 'Index');
         /**
          * Get API object data.
          * @type {{firstData:object}}
@@ -88,17 +88,14 @@ route.get('*', async (req, res) => {
         */
         const apiDataInScript = `<script>window.__data__=${JSON.stringify(dataFromServer)}</script>`;
 
-
-        let template, render;
-
         // Always read fresh template in development
-        template = await fs.readFile('./index.html', 'utf-8');
-        template = await vite.transformIndexHtml(pathName, template);
-        render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
+        const templateIndex = await fs.readFile('./index.html', 'utf-8');
+        let template = await vite.transformIndexHtml(path, templateIndex);
+        const render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
 
 
         let didError = false;
-        const { pipe, abort } = render(pathName, dataFromServer, {
+        const { pipe, abort } = render(path, dataFromServer, {
             onShellError() {
                 res.status(500);
                 res.set({ 'Content-Type': 'text/html' });
@@ -113,14 +110,17 @@ route.get('*', async (req, res) => {
                         res.write(chunk, encoding);
                         callback();
                     }
-                })
+                });
+
                 template = template.replace('<!--app-head-->', Head(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true) : '/'));
+                template = template.replace('<!--client-script-->', apiDataInScript);
+
                 const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
 
                 res.write(htmlStart)
 
                 transformStream.on('finish', () => {
-                    res.end(apiDataInScript + htmlEnd);
+                    res.end(htmlEnd);
                 });
 
                 pipe(transformStream);
@@ -146,5 +146,5 @@ app.get('*', async (req, res) => {
 
 // Start http server
 app.listen(port, () => {
-    console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`);
+    console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}`);
 })
