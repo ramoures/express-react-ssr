@@ -1,24 +1,21 @@
 /**
     @name: Express React SSR
-    @description: Server Side Rendering React JS template (shopping website) with Express JS and Vite. Data fetching from Restful API, Sitemap addon, SEO friendly.
-    @version: 0.1
+    @description: Server Side Rendering React JS template (shopping website) with Express JS and Vite. Data fetching from Restful API, Sitemap add-on, SEO friendly.
+    @version: 1.0
     @author: github.com/ramoures
     Repository: github.com/ramoures/express-react-ssr/
     Helper: github.com/bluwy/create-vite-extra/tree/master/template-ssr-react
     @copyright: 2024, Under MIT License - github.com/ramoures/express-react-ssr/blob/main/LICENSE
 */
-
 import fs from 'node:fs/promises';
-import { Transform } from 'node:stream';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express, { Router } from 'express';
 import FetchData from './core/FetchData.mjs';
 import API from './core/API.mjs';
-import Head from './core/Head.mjs';
+import Transformer from './core/Transformer.mjs';
 import sitemap from './sitemap/sitemap.mjs';
-import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
-
+import { addRemoveSlash, botDetector, getEnv, logger } from './core/Utils.mjs';
 
 // Constants
 const port = process.env.PORT || getEnv('SERVER_PORT', 'number') || 5173;
@@ -83,36 +80,28 @@ route.get('*', async (req, res) => {
     let template = templateIndex;
     const render = (await import(`./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/server/entry-server.js`)).render;
 
+    // Bot detection
+    const isCrawler = botDetector(req.get("user-agent"));
+
+    //Rendering
     let didError = false;
     const { pipe, abort } = render(path, dataFromServer, {
       onShellError() {
         res.status(500);
         res.set({ 'Content-Type': 'text/html' });
-        res.send('<h1>Something went wrong</h1>');
+        return res.send('<h1>Something went wrong</h1>');
       },
       onShellReady() {
-        res.status(didError ? 500 : 200);
-        res.set({ 'Content-Type': 'text/html' });
-
-        const transformStream = new Transform({
-          transform(chunk, encoding, callback) {
-            res.write(chunk, encoding);
-            callback();
-          }
-        });
-
-        template = template.replace('<!--app-head-->', Head(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true) : '/'));
-        template = template.replace('<!--client-script-->', apiDataInScript);
-
-        const [htmlStart, htmlEnd] = template.split(`<!--app-html-->`);
-
-        res.write(htmlStart);
-
-        transformStream.on('finish', () => {
-          res.end(htmlEnd);
-        });
-
-        pipe(transformStream);
+        if (!isCrawler) {
+          const transformStream = Transformer(res, didError, template, apiDataInScript);
+          pipe(transformStream);
+        }
+      },
+      onAllReady() {
+        if (isCrawler) {
+          const transformStream = Transformer(res, didError, template, apiDataInScript);
+          pipe(transformStream);
+        }
       },
       onError(error) {
         didError = true;
@@ -129,7 +118,7 @@ route.get('*', async (req, res) => {
 
 // 404 Error page - (Outside of React Routes)
 app.get('*', async (req, res) => {
-  res.status(404).send(`<h1>404, Data not found!</h1><p><a href="${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}"><h2>Got to Home Page</h2></a></p>`)
+  return res.status(404).send(`<h1>404, Data not found!</h1><p><a href="${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}"><h2>Got to Home Page</h2></a></p>`)
 });
 
 // Start http server

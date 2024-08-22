@@ -1,9 +1,22 @@
 import dotenv from "dotenv";
 import dotenvExpand from "dotenv-expand";
+import { isbot } from "isbot";
 import process from 'process';
+
+//User agent detection
+export const botDetector = (userAgent) => {
+    try {
+        const bot = isbot(userAgent);
+        if (bot)
+            return true;
+        return false;
+    } catch (error) {
+        return false;
+    }
+}
+// Env values returner
 export const getEnv = (key, type = 'string') => {
     try {
-        // This function is for returning the keys defined in the .env file.
         const env = dotenv.config();
         dotenvExpand.expand(env);
         if (type == 'number')
@@ -18,24 +31,27 @@ export const getEnv = (key, type = 'string') => {
         logger(err)
     }
 }
+// Error messages returner
 export const logger = (err, res) => {
     try {
-        // This function is for returning an error message in production or developer mode.
         if (getEnv('DEVELOPMENT_MODE', 'boolean'))
-            if (res)
+            if (res) {
+                console.log(err);
                 return res.status(500).send(err?.stack || err.toString());
+            }
             else return console.log(err);
         else
-            if (res)
+            if (res) {
+                console.log('500 Internal Server Error!');
                 return res.status(500).send('500 Internal Server Error!');
+            }
             else console.log('500 Internal Server Error!');
     } catch (err) {
         console.log('500 Internal Server Error!')
     }
 }
+// Slash adds or/and removes before or/and after strings
 export const addRemoveSlash = (value, before = false, after = false) => {
-    // It doesn't matter if you slash before or after anything. This function returns your new request.
-
     value = value + ''; //cast to string
     let result;
     if (before) {
