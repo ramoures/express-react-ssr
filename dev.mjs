@@ -20,7 +20,7 @@ import { addRemoveSlash, getEnv, logger } from './core/Utils.mjs';
 
 
 // Constants
-const port = getEnv('DEV_PORT', 'number') || 4173;;
+const port = process.env.PORT || getEnv('DEV_PORT', 'number') || 4173;;
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
 const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('DEV_PORT') ? ':' + addRemoveSlash(getEnv('DEV_PORT')) : '');
 
