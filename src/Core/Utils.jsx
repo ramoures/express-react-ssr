@@ -1,13 +1,13 @@
+// Strings capitalize
 export const Capitalize = (str) => {
     try {
         return str[0].toUpperCase() + str.substring(1)
     } catch (err) {
         return "";
     }
-
 }
+// Slash adds or/and removes before or/and after strings
 export const addRemoveSlash = (value, before = false, after = false) => {
-    // It doesn't matter if you slash before or after anything. This function returns your new request.
     value = value + ''; // cast to string
     let result;
     if (before) {
