@@ -1,36 +1,35 @@
-import axios from "axios";
+import API from "../../core/API.mjs";
+import FetchData from "../../core/FetchData.mjs";
 
-export const indexXml = async (obj = {}) => {
+export const indexXml = async (url) => {
     try {
         const now = new Date();
+        const apiInfo = API('products');
+        const data = await FetchData('get', apiInfo.url);
 
-        const response = await axios
-            .get(
-                `${obj.apiUrl}products`,
-                {
-                    headers: { "Content-Type": "application/json" },
-                    proxy: false,
-                    timeout: 20000,
-                }
-            )
-        const data = await response.data;
-        var xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${obj.url}style.xsl"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+        var xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${url}style.xsl"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+
         xml += `<sitemap>
-<loc>${obj.url}sitemap/pages</loc>
+<loc>${url}sitemap/pages</loc>
 <lastmod>${data?.updatedAt || now}</lastmod>
 </sitemap>`;
+
         xml += `<sitemap>
-<loc>${obj.url}sitemap/categories</loc>
+<loc>${url}sitemap/categories</loc>
 <lastmod>${data?.updatedAt || now}</lastmod>
 </sitemap>`;
+
         xml += `<sitemap>
-<loc>${obj.url}sitemap/products</loc>
+<loc>${url}sitemap/products</loc>
 <lastmod>${data?.updatedAt || now}</lastmod>
 </sitemap>`;
-        xml += `</sitemapindex>`
+
+        xml += `</sitemapindex>`;
+
         return xml;
+
     } catch (err) {
-        return `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${obj.url}style.xsl"?>`
+        return `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${url}style.xsl"?>`;
     }
 
 }
