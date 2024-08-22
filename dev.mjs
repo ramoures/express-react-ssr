@@ -13,23 +13,21 @@ import { fileURLToPath } from 'node:url';
 import express, { Router } from 'express';
 import FetchData from './core/FetchData.mjs';
 import API from './core/API.mjs';
-import Bootstrap from './core/Transformer.mjs';
+import Transformer from './core/Transformer.mjs';
 import sitemap from './sitemap/sitemap.mjs';
 import { addRemoveSlash, botDetector, getEnv, logger } from './core/Utils.mjs';
 
 // Constants
-const port = process.env.PORT || getEnv('DEV_PORT', 'number') || 4173;;
+const port = getEnv('DEV_PORT', 'number') || 4173;;
 const ABORT_DELAY = getEnv('ABORT_DELAY', 'number') || 10000;
 const urlWithPort = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('DEV_PORT') ? ':' + addRemoveSlash(getEnv('DEV_PORT')) : '');
 
 // Create http server
 const app = express();
 
-
 // Express optional setting
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(express.json({ limit: '10mb' }));
-
 
 const compression = (await import('compression')).default;
 app.use(compression());
@@ -102,13 +100,13 @@ route.get('*', async (req, res) => {
             },
             onShellReady() {
                 if (!isCrawler) {
-                    const transformStream = Bootstrap(res, didError, template, apiDataInScript);
+                    const transformStream = Transformer(res, didError, template, apiDataInScript);
                     pipe(transformStream);
                 }
             },
             onAllReady() {
                 if (isCrawler) {
-                    const transformStream = Bootstrap(res, didError, template, apiDataInScript);
+                    const transformStream = Transformer(res, didError, template, apiDataInScript);
                     pipe(transformStream);
                 }
             },
@@ -132,6 +130,6 @@ app.get('*', async (req, res) => {
 });
 
 // Start http server
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
     console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}`);
 })
