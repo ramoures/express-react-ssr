@@ -133,6 +133,6 @@ app.get('*', async (req, res) => {
 });
 
 // Start http server
-app.listen(port, () => {
+app.listen(port, "0.0.0.0", () => {
   console.log(`Server started at ${urlWithPort + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}`);
 })
