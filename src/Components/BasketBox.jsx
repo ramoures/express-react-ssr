@@ -56,7 +56,7 @@ const BasketBox = () => {
                 </svg>
                 <div>Basket({basket?.length})</div>
             </div>
-            <div id="basketBox" className="absolute hidden flex-col gap-2 items-center top-0 right-0 mt-10 bg-white h-auto w-96 shadow-xl rounded-xl rounded-tr-none">
+            <div id="basketBox" className="absolute hidden flex-col gap-2 items-center top-0 right-0 mt-10 bg-white h-auto w-screen mr-[-16px] lg:w-96 lg:mr-0 shadow-xl rounded-xl lg:rounded-tr-none">
                 {!basket?.length && <div className=" p-4">Item not found!</div>}
                 {basket?.length > 0 &&
                     <div className="overflow-y-auto w-full flex flex-col gap-4 p-4  h-96">
