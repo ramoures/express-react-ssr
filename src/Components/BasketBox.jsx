@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { projectContext } from "../Core/Context";
 import { Link } from "react-router-dom";
+import { encode } from "html-entities";
 const BasketBox = () => {
     let { basket, setBasket } = useContext(projectContext)
     const { prices, setPrices } = useContext(projectContext)
@@ -65,13 +66,13 @@ const BasketBox = () => {
                             reduce = summary.reduce((a, b) => a + b, 0).toFixed(3)
                             return (
                                 <div key={_i} className="flex items-center justify-between gap-2 w-full select-none ">
-                                    <Link onClick={hideBasketBox} to={`/category/${_v?.category}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
+                                    <Link onClick={hideBasketBox} to={`/category/${encodeURI(encode(_v?.category))}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
                                         <div className="h-12 w-12 flex justify-center">
                                             <img width={48} height={48} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
                                         </div>
                                     </Link>
                                     <div className="flex flex-col gap-1 flex-1">
-                                        <Link onClick={hideBasketBox} to={`/category/${_v?.category}/products/${_v?.id}`}>{_v?.title}</Link>
+                                        <Link onClick={hideBasketBox} to={`/category/${encodeURI(encode(_v?.category))}/products/${_v?.id}`}>{_v?.title}</Link>
                                         <div className="text-blue-600">{_v?.price}$</div>
                                     </div>
                                     <button data-id={_i} onClick={removeFunc} className="flex text-slate-600 hover:text-red-500">

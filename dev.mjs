@@ -1,7 +1,6 @@
 /**
     @name: Express React SSR
     @description: Server Side Rendering React JS template (shopping website) with Express JS and Vite. Data fetching from Restful API, Sitemap add-on, SEO friendly.
-    @version: 1.0
     @author: github.com/ramoures
     Repository: github.com/ramoures/express-react-ssr/
     Helper: github.com/bluwy/create-vite-extra/tree/master/template-ssr-react
@@ -43,6 +42,17 @@ app.use(vite.middlewares);
 
 // Set static directory.
 app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client`), { index: false }));
+
+//Param decoding checker - URIError
+app.use(function (req, res, next) {
+    try {
+        decodeURIComponent(req.path);
+        next();
+    }
+    catch (e) {
+        return res.redirect(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`);
+    }
+});
 
 // Create route to add website directory name
 const route = Router();

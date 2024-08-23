@@ -4,7 +4,7 @@ import Loading from "../Components/Loading";
 import { projectContext } from "../Core/Context";
 import { Colors } from "../Core/Colors";
 import FetchData from "../../core/FetchData.mjs";
-import { decode } from "html-entities/lib";
+import { decode } from "html-entities";
 import { addRemoveSlash, Capitalize } from "../Core/Utils";
 import NotFound from "./NotFound";
 import Defined from "../Core/Defined";
@@ -62,7 +62,7 @@ const Category = ({ dataFromServer }) => {
                     if (Object.keys(response)?.length)
                         setData(response);
                     else
-                        setError(`Error! '${name}' data not found!`);
+                        setData([])
                 else
                     setError(response);
                 setLoading(false);
@@ -98,7 +98,8 @@ const Category = ({ dataFromServer }) => {
         }
     }
 
-    if (!loading && (!data))
+
+    if (!loading && (data?.length === 0))
         return <NotFound />;
     return (
         <>

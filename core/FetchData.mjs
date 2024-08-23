@@ -10,27 +10,29 @@ import axios from "axios";
 
 const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {
     try {
+
         method = method?.toLowerCase();
         let result = {};
-        let response;
-        if (!url || url === null)
-            return {};
-        let str = "";
-        if (dataForSend && typeof dataForSend === 'object') for (let item in dataForSend) str += `${item}=${dataForSend[item]}&`;
-        str = str.slice(0, -1); //last & remover
-        await axios({
-            method: method,
-            url: url + ((method === 'get') ? (typeof dataForSend === 'object') ? str : `?${dataForSend}` : ''),
-            data: (method === 'post' || method === 'put' || method === 'patch') ? dataForSend : {},
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-            timeout: 20000,
-        }).then(function (res) {
-            response = res.data;
-        }).catch((err) => {
-            if (serverMode)
-                response = [];
-            else response = err?.response?.status || err?.code;
-        });
+        let response = {};
+        let str = dataForSend;
+        if (dataForSend && typeof dataForSend === 'object') {
+            for (let item in dataForSend)
+                str += `${item}=${dataForSend[item]}&`;
+            str = str.slice(0, -1); //last & remover
+        } if (method && url)
+            await axios({
+                method: method,
+                url: url + (method === 'get' ? `?${str}` : ''),
+                data: (method === 'post' || method === 'put' || method === 'patch') ? dataForSend : {},
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                timeout: 20000,
+            }).then(function (res) {
+                response = res.data;
+            }).catch((err) => {
+                if (serverMode)
+                    response = {};
+                else response = err?.response?.status || err?.code;
+            });
 
         const data = response;
         if (serverMode) {
@@ -41,7 +43,7 @@ const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode 
 
     } catch (err) {
         if (serverMode)
-            return [];
+            return {};
         return err.toString();
     }
 };

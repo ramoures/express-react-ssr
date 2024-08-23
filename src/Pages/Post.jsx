@@ -15,9 +15,15 @@ import { addRemoveSlash, Capitalize } from "../Core/Utils";
 const Post = ({ dataFromServer }) => {
 
     const params = useParams();
-    let name = params?.name;
-    let slug = params?.slug;
+    const name = params?.name;
+    const slug = params?.slug;
+
+    const categoryChecker = API(`category/${encodeURI(name)}`);
+    if (!categoryChecker.url)
+        return <NotFound />
+
     const apiInfo = API('single_products', slug);
+
     const [pageId, setPageId] = useState(name + slug);
 
     const [data, setData] = useState(dataFromServer?.['firstData'] || []);
@@ -27,19 +33,19 @@ const Post = ({ dataFromServer }) => {
     const [viaColor, setViaColor] = useState('via-neutral-100');
 
     /**
-     * Get data from the API and Set to the data state.
-     * @param {string} method 
-     * @param {string} url
-     * @returns {Promise<void>} 1.set data or error state. 2.set pageId state. 3.set loading to false.
-     */
-    const pageData = async (method = 'get', url) => {
+        * Get data from the API and Set to the data state.
+        * @param {string} method
+        * @param {string} url
+        * @returns {Promise < void>} 1.set data or error state. 2.set pageId state. 3.set loading to false.
+    */
+    const pageData = async (method, url) => {
         let response;
         response = await FetchData(method, url);
         if (typeof response === 'object')
             if (Object.keys(response)?.length)
                 setData(response);
             else
-                setError(`Error! '${name}' data not found!`);
+                setData([])
         else
             setError(response);
         setPageId(name + slug);
@@ -47,13 +53,37 @@ const Post = ({ dataFromServer }) => {
     }
     //---
 
+
+    const setColors = (name) => {
+        switch (name) {
+            case 'jewelery':
+                setBgColor(Colors('gold')?.[0]);
+                setViaColor(Colors('gold')?.[1]);
+                break;
+            case "men&apos;s clothing":
+                setBgColor(Colors('neutral')?.[0]);
+                setViaColor(Colors('neutral')?.[1]);
+                break;
+            case "women&apos;s clothing":
+                setBgColor(Colors('fuchsia')?.[0]);
+                setViaColor(Colors('fuchsia')?.[1]);
+                break;
+            case "electronics":
+                setBgColor(Colors('sky')?.[0]);
+                setViaColor(Colors('sky')?.[1]);
+                break;
+        }
+    }
+
     /* If the Post Route changes to another Post Route.
      * When selecting basket items, in this same Route. */
     const initialize = useRef(true);
     const routeChangeChecker = (pageId !== (name + slug)) ? true : false;
     if (routeChangeChecker && initialize.current) {
+        setColors(name);
         setLoading(true);
         pageData(apiInfo?.method, apiInfo?.url);
+
         initialize.current = false;
     }
     else initialize.current = true;
@@ -71,24 +101,7 @@ const Post = ({ dataFromServer }) => {
             */
             //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
-            switch (name) {
-                case 'jewelery':
-                    setBgColor(Colors('gold')?.[0]);
-                    setViaColor(Colors('gold')?.[1]);
-                    break;
-                case "men&apos;s clothing":
-                    setBgColor(Colors('neutral')?.[0]);
-                    setViaColor(Colors('neutral')?.[1]);
-                    break;
-                case "women&apos;s clothing":
-                    setBgColor(Colors('fuchsia')?.[0]);
-                    setViaColor(Colors('fuchsia')?.[1]);
-                    break;
-                case "electronics":
-                    setBgColor(Colors('sky')?.[0]);
-                    setViaColor(Colors('sky')?.[1]);
-                    break;
-            }
+            setColors(name);
         }
     }, []);
 
@@ -120,6 +133,8 @@ const Post = ({ dataFromServer }) => {
 
     if (!loading && (data?.length === 0))
         return <NotFound />;
+    if (!loading && !error && (data?.length !== 0) && encode(data?.category) !== name)
+        return <NotFound />;
     return (
         <>
             <MetaTags
@@ -132,6 +147,7 @@ const Post = ({ dataFromServer }) => {
             />
             {loading && <Loading n={0} />}
             {error !== false && !loading && <p>{error}</p>}
+
             {!loading && !error && (data?.length !== 0) &&
                 <div className="flex flex-col justify-start items-start py-0 ">
                     <div className="flex w-full justify-between items-center py-5">
