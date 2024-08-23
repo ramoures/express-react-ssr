@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import Defined from "../Core/Defined";
 import Item from "../Components/Item";
 import MetaTags from "../MetaTags";
-import { projectContext } from "../Core/Context";
 import { addRemoveSlash } from "../Core/Utils";
 
 const Home = ({ dataFromServer }) => {
