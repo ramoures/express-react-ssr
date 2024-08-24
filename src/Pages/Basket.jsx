@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { projectContext } from "../Core/Context";
@@ -6,16 +6,19 @@ import Defined from "../Core/Defined";
 const Basket = () => {
     const baseTitle = Defined?.title;
 
-    let { basket, setBasket } = useContext(projectContext)
-    const { prices, setPrices } = useContext(projectContext)
+    let { basket, setBasket } = useContext(projectContext);
+    const { prices, setPrices } = useContext(projectContext);
+
+    const [loading, setLoading] = useState(true);
+
     let summary = [];
     let reduce;
     function removeFunc(e) {
         const id = e.target.getAttribute('data-id')
         delete basket[id];
         delete prices[id];
-        let newArr = basket.filter(n => n)
-        let newPrices = prices.filter(n => n)
+        let newArr = basket.filter(n => n);
+        let newPrices = prices.filter(n => n);
         setBasket([...newArr]);
         setPrices([...newPrices]);
         localStorage.setItem('miniShop-basket', JSON.stringify({ items: [...newArr], prices: [...newPrices] }));
@@ -30,7 +33,9 @@ const Basket = () => {
             window.scrollTo(0, 0);
         }
         const storage = localStorage.getItem('miniShop-basket');
-        const parsStorage = JSON.parse(storage)
+        const parsStorage = JSON.parse(storage);
+        if (parsStorage)
+            setLoading(false);
         if (!basket.length && parsStorage) {
             const items = parsStorage?.items
             const itemPrices = parsStorage?.prices
@@ -49,8 +54,9 @@ const Basket = () => {
                     <div className="bg-slate-100 p-8 w-full mx-auto rounded-md">
                         <h2 className="text-3xl font-extrabold text-gray-800 text-center">Basket</h2>
                         <div className="flex flex-col gap-4 mt-10">
-                            {!basket?.length && <div className=" p-4 w-full text-center">Item not found!</div>}
-                            {basket && basket.map((_v, _i) => {
+                            {loading && <div className=" p-4 w-full text-center">Loading...</div>}
+                            {!loading && !basket?.length && <div className=" p-4 w-full text-center">Item not found!</div>}
+                            {!loading && basket && basket.map((_v, _i) => {
                                 summary.push(Number(_v?.price))
                                 reduce = summary.reduce((a, b) => a + b, 0).toFixed(3)
                                 return (
