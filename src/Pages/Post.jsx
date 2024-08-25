@@ -56,8 +56,8 @@ const Post = ({ dataFromServer }) => {
                 setViaColor(Colors('sky')?.[1]);
                 break;
             case "jewelery":
-                setBgColor(Colors('pink')?.[0]);
-                setViaColor(Colors('pink')?.[1]);
+                setBgColor(Colors('gold')?.[0]);
+                setViaColor(Colors('gold')?.[1]);
                 break;
             case "men":
                 setBgColor(Colors('green')?.[0]);
@@ -182,7 +182,7 @@ const Post = ({ dataFromServer }) => {
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${data?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
                                 <div className="max-h-48 max-w-48 sm:max-h-64 sm:max-w-64 lg:max-h-96 lg:max-w-96 flex justify-center p-0 md:p-4">
-                                    <img width={384} height={384} alt={data?.title} src={data?.image} className="w-full h-full object-contain bg-center bg-no-repeat rounded-sm" />
+                                    <img width={384} height={384} alt={data?.title} src={data?.image} className="w-full  object-contain bg-center bg-no-repeat rounded-sm" />
                                 </div>
                                 <div className={`${bgColor} p-2`}>{data?.price}$</div>
                                 <div className="flex items-center gap-2">

@@ -38,8 +38,8 @@ const Category = ({ dataFromServer }) => {
                     setViaColor(Colors('sky')?.[1]);
                     break;
                 case "jewelery":
-                    setBgColor(Colors('pink')?.[0]);
-                    setViaColor(Colors('pink')?.[1]);
+                    setBgColor(Colors('gold')?.[0]);
+                    setViaColor(Colors('gold')?.[1]);
                     break;
                 case "men":
                     setBgColor(Colors('green')?.[0]);
