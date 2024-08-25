@@ -13,9 +13,9 @@ export const productsXml = async (url) => {
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
         for (let i in data) {
             xml += `<url>
-            <loc>${url}category/${Lowercase(data?.[i]?.category?.name)}/products/${data?.[i]?.id}</loc>
+            <loc>${url}category/${Lowercase(data?.[i]?.category.split("'")[0])}/products/${data?.[i]?.id}</loc>
             <image:image>
-                <image:loc>${data?.[i]?.images?.[0]}</image:loc>
+                <image:loc>${data?.[i]?.image}</image:loc>
             </image:image>
             <lastmod>${data?.[i]?.updatedAt || now}</lastmod>
             <changefreq>weekly</changefreq>

@@ -1,3 +1,4 @@
+// available colors: neutral,sky,green,pink,fuchsia,gold,purple
 export const Colors = (color) => {
     try {
         let bgColor;
@@ -30,6 +31,10 @@ export const Colors = (color) => {
             case 'rose':
                 bgColor = 'bg-rose-100';
                 viaColor = 'via-rose-100';
+                break;
+            case 'purple':
+                bgColor = 'bg-purple-100';
+                viaColor = 'via-purple-100';
                 break;
         }
         return [bgColor, viaColor]

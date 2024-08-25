@@ -17,7 +17,7 @@ const API = (path, urlSuffix = "") => {
      * base of api url.
      * @type {string}
    */
-    const baseUrl = 'https://api.escuelajs.co/api/v1';
+    const baseUrl = 'https://fakestoreapi.com';
     /**
       * @description 
       * API information object.
@@ -34,50 +34,49 @@ const API = (path, urlSuffix = "") => {
         method: 'get',
         url: baseUrl + '/products',
         //data for send
-        dfs: { limit: 100, offset: 0 }
+        dfs: {}
       },
       "products": {
         method: 'get',
-        url: baseUrl + '/products'
+        url: baseUrl + '/products',
+        //data for send
+        dfs: {}
       },
       "categories": {
         method: 'get',
-        url: baseUrl + '/categories',
-        dfs: { limit: 5 }
+        url: baseUrl + '/products/categories',
+        //data for send
+        dfs: {}
       },
       "single_products": {
         method: 'get',
-        url: baseUrl + '/products/' + urlSuffix
-      },
-      "category/clothes": {
-        method: 'get',
-        url: baseUrl + '/categories/1/products',
+        url: baseUrl + '/products/' + urlSuffix,
         //data for send
-        dfs: { limit: 20, offset: 0 }
+        dfs: {}
+      },
+      "category/jewelery": {
+        method: 'get',
+        url: baseUrl + '/products/category/jewelery',
+        //data for send
+        dfs: {}
       },
       "category/electronics": {
         method: 'get',
-        url: baseUrl + '/categories/2/products',
+        url: baseUrl + '/products/category/electronics',
         //data for send
-        dfs: { limit: 20, offset: 0 }
+        dfs: {}
       },
-      "category/furniture": {
+      "category/men": {
         method: 'get',
-        url: baseUrl + '/categories/3/products',
+        url: baseUrl + "/products/category/men's clothing",
         //data for send
-        dfs: { limit: 20, offset: 0 }
+        dfs: {}
       },
-      "category/shoes": {
+      "category/women": {
         method: 'get',
-        url: baseUrl + '/categories/4/products',
+        url: baseUrl + "/products/category/women's clothing",
         //data for send
-        dfs: { limit: 20, offset: 0 }
-      },
-      "category/miscellaneous": {
-        method: 'get',
-        url: baseUrl + '/categories/5/products',
-        //data for send
-        dfs: { limit: 20, offset: 0 }
+        dfs: {}
       }
     }
     return APIInfo?.[path] || { method: '', url: '' };

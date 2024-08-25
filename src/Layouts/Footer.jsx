@@ -9,7 +9,7 @@ const Footer = () => {
 
     return (
         <footer className="w-full flex flex-col gap-2 justify-center items-center z-0">
-            <div className="text-xs text-pink-900 opacity-80">[ API: <a target="_blank" href="https://fakeapi.platzi.com/">fakeapi.platzi.com</a> ]</div>
+            <div className="text-xs text-pink-900 opacity-80">[ API: <a target="_blank" href="https://fakestoreapi.com/">fakestoreapi.com</a> ]</div>
             <div className="w-full flex gap-2 justify-center items-center p-4 bg-gradient-to-r from-slate-200 from-60% via-80% to-100% via-teal-100 to-slate-200  border-t-[6px] border-neutral-200">
                 <div className="w-full  xl:w-10/12 2xl:w-8/12 flex justify-between items-center gap-2">
                     <div className="flex gap-2">

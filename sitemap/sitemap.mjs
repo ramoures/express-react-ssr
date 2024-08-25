@@ -10,6 +10,14 @@ import { categoriesXml } from "./view/categories.mjs";
 import { productsXml } from "./view/products.mjs";
 const sitemap = Router();
 
+
+// In Production, with PORT
+// const url = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + (getEnv('SERVER_PORT') ? (':' + addRemoveSlash(getEnv('SERVER_PORT'))) : '') + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true);
+
+// In Production, without PORT
+// const url = addRemoveSlash(getEnv('WEBSITE_BASE_URL')) + addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true);
+
+// In Development
 const url = addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true);
 
 sitemap.get('/', async (req, res) => {

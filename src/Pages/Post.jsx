@@ -51,25 +51,21 @@ const Post = ({ dataFromServer }) => {
 
     const setColors = (name) => {
         switch (name) {
-            case 'furniture':
-                setBgColor(Colors('green')?.[0]);
-                setViaColor(Colors('green')?.[1]);
-                break;
-            case "clothes":
-                setBgColor(Colors('pink')?.[0]);
-                setViaColor(Colors('pink')?.[1]);
-                break;
-            case "shoes":
-                setBgColor(Colors('rose')?.[0]);
-                setViaColor(Colors('rose')?.[1]);
-                break;
             case "electronics":
                 setBgColor(Colors('sky')?.[0]);
                 setViaColor(Colors('sky')?.[1]);
                 break;
-            case "miscellaneous":
-                setBgColor(Colors('gold')?.[0]);
-                setViaColor(Colors('gold')?.[1]);
+            case "jewelery":
+                setBgColor(Colors('pink')?.[0]);
+                setViaColor(Colors('pink')?.[1]);
+                break;
+            case "men":
+                setBgColor(Colors('green')?.[0]);
+                setViaColor(Colors('green')?.[1]);
+                break;
+            case "women":
+                setBgColor(Colors('purple')?.[0]);
+                setViaColor(Colors('purple')?.[1]);
                 break;
         }
     }
@@ -119,9 +115,9 @@ const Post = ({ dataFromServer }) => {
     const { prices, setPrices } = useContext(projectContext);
 
     const addToCart = (_v) => {
-        setCart([...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.images?.[0], category: Lowercase(_v?.category?.name) }]);
+        setCart([...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: Lowercase(_v?.category) }]);
         setPrices([...prices, _v?.price]);
-        localStorage.setItem('erSSR-shop-cart', JSON.stringify({ items: [...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.images?.[0], category: Lowercase(_v?.category?.name) }], prices: [...prices, _v?.price] }));
+        localStorage.setItem('erSSR-shop-cart', JSON.stringify({ items: [...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: Lowercase(_v?.category) }], prices: [...prices, _v?.price] }));
         if (typeof window !== 'undefined') {
             document.getElementById('toggleCart').classList.add('animate-ping');
             document.getElementById('toggleCart').classList.remove('bg-white');
@@ -135,7 +131,7 @@ const Post = ({ dataFromServer }) => {
     }
 
     //if category is not defined:
-    if (!loading && !error && checkData(data) && ((data?.category?.name) !== Capitalize(name)))
+    if (!loading && !error && checkData(data) && (data?.category !== postFixer(name)))
         return <NotFound />;
 
     if (!loading && !error && !checkData(data))
@@ -167,8 +163,8 @@ const Post = ({ dataFromServer }) => {
                                 <li><Link className="p-1 rounded hover:bg-neutral-100" to={`/`}>Home</Link></li>
                                 <li className="text-neutral-400">|</li>
                                 <li>
-                                    <Link className="p-1 rounded hover:bg-neutral-100" to={`/category/${Lowercase(data?.category?.name)}`}>
-                                        {Capitalize(data?.category?.name)}
+                                    <Link className="p-1 rounded hover:bg-neutral-100" to={`/category/${name}`}>
+                                        {Capitalize(data?.category)}
                                     </Link>
                                 </li>
                                 <li className="hidden lg:block text-neutral-400">|</li>
@@ -186,7 +182,7 @@ const Post = ({ dataFromServer }) => {
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${data?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
                                 <div className="max-h-48 max-w-48 sm:max-h-64 sm:max-w-64 lg:max-h-96 lg:max-w-96 flex justify-center p-0 md:p-4">
-                                    <img width={384} height={384} alt={data?.title} src={data?.images?.[0]} className="w-full h-full object-contain bg-center bg-no-repeat rounded-sm" />
+                                    <img width={384} height={384} alt={data?.title} src={data?.image} className="w-full h-full object-contain bg-center bg-no-repeat rounded-sm" />
                                 </div>
                                 <div className={`${bgColor} p-2`}>{data?.price}$</div>
                                 <div className="flex items-center gap-2">
@@ -196,7 +192,7 @@ const Post = ({ dataFromServer }) => {
                                 </div>
                             </div>
                             <div className="flex flex-col items-start gap-2 p-0 lg:p-4 flex-1">
-                                <Link to={`/category/${Lowercase(data?.category)}`} className="text-sm text-neutral-500">
+                                <Link to={`/category/${name}`} className="text-sm text-neutral-500">
                                     {Capitalize(data?.category)}
                                 </Link>
                                 <h2 className="font-medium text-2xl">
@@ -216,5 +212,12 @@ const Post = ({ dataFromServer }) => {
             }
         </>
     )
+}
+function postFixer(str) {
+    if (str === 'men')
+        return "Men's Clothing";
+    else if (str === 'women')
+        return "Women's Clothing";
+    else return str;
 }
 export default Post;

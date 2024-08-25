@@ -58,7 +58,7 @@ After development completion:
 - Tailwind CSS framework
 - **XML Sitemap**
 
-> Data source: https://fakeapi.platzi.com
+> Data source: [fakestoreapi.com](https://fakestoreapi.com)
 
 ---
 
