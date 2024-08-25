@@ -131,7 +131,7 @@ const Post = ({ dataFromServer }) => {
     }
 
     //if category is not defined:
-    if (!loading && !error && checkData(data) && (data?.category !== postFixer(name)))
+    if (!loading && !error && checkData(data) && (data?.category !== Lowercase(postFixer(name))))
         return <NotFound />;
 
     if (!loading && !error && !checkData(data))
