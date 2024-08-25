@@ -12,7 +12,7 @@ export const categoriesXml = async (url) => {
         var xml = `<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="${url}style.xsl"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
         for (let i in data) {
             xml += `<url>
-            <loc>${url}category/${Lowercase(data?.[i].split("'")[0])}</loc>
+            <loc>${url}category/${Lowercase(data?.[i]?.split("'")[0])}</loc>
             <lastmod>${data?.[i]?.updatedAt || now}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.8</priority>
