@@ -9,7 +9,7 @@ const Defined = {
   website: addRemoveSlash(websiteUrl),
   directory: addRemoveSlash(websiteDir),
   title: webStaticTitle,
-  twitter: twitterAccount,
+  twitter: twitterAccount
 };
 
 export default Defined;

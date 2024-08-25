@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import BasketBox from "../Components/BasketBox";
+import CartBox from "../Components/CartBox";
 import Defined from "../Core/Defined";
 const Header = () => {
     const baseTitle = Defined?.title;
@@ -20,7 +20,7 @@ const Header = () => {
                         </svg>
                     </a>
                 </div>
-                <BasketBox />
+                <CartBox />
             </div>
         </header>
     );

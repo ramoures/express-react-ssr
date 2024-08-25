@@ -69,11 +69,11 @@ route.get('*', async (req, res) => {
         if (getEnv('WEBSITE_DIRECTORY_NAME'))
             url = url.replace(addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true), '');
         else url = url.replace('/', '');
-        //Split url and params:
+        //Split url and Query-strings:
         url = url.split('?');
         //Get full pathName
         let path = url[0];
-        //Get params:
+        //Get Query-strings:
         const dataForSend = url[1];
         /**
            * Get API information for this path name.
@@ -84,7 +84,7 @@ route.get('*', async (req, res) => {
          * Get API object data.
          * @type {{firstData:object}}
         */
-        const dataFromServer = await FetchData(apiInfo?.method, apiInfo?.url, dataForSend, true);
+        const dataFromServer = await FetchData(apiInfo?.method, apiInfo?.url, dataForSend || apiInfo?.dfs, true);
 
         /**
          * Inserting stringify object of API data in `<script>window.__data__`. For calling from client side (entry-client.jsx).

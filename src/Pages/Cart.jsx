@@ -3,10 +3,10 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { projectContext } from "../Core/Context";
 import Defined from "../Core/Defined";
-const Basket = () => {
+const Cart = () => {
     const baseTitle = Defined?.title;
 
-    let { basket, setBasket } = useContext(projectContext);
+    let { cart, setCart } = useContext(projectContext);
     const { prices, setPrices } = useContext(projectContext);
 
     const [loading, setLoading] = useState(true);
@@ -15,13 +15,13 @@ const Basket = () => {
     let reduce;
     function removeFunc(e) {
         const id = e.target.getAttribute('data-id')
-        delete basket[id];
+        delete cart[id];
         delete prices[id];
-        let newArr = basket.filter(n => n);
+        let newArr = cart.filter(n => n);
         let newPrices = prices.filter(n => n);
-        setBasket([...newArr]);
+        setCart([...newArr]);
         setPrices([...newPrices]);
-        localStorage.setItem('miniShop-basket', JSON.stringify({ items: [...newArr], prices: [...newPrices] }));
+        localStorage.setItem('erSSR-shop-cart', JSON.stringify({ items: [...newArr], prices: [...newPrices] }));
     }
 
     useEffect(() => {
@@ -32,31 +32,31 @@ const Basket = () => {
             //ex: document.getElementById('sample')?.classList?.add('hidden');
             window.scrollTo(0, 0);
         }
-        const storage = localStorage.getItem('miniShop-basket');
+        const storage = localStorage.getItem('erSSR-shop-cart');
         const parsStorage = JSON.parse(storage);
         if (parsStorage)
             setLoading(false);
-        if (!basket.length && parsStorage) {
+        if (!cart.length && parsStorage) {
             const items = parsStorage?.items
             const itemPrices = parsStorage?.prices
-            setBasket([...items])
+            setCart([...items])
             setPrices([...itemPrices])
         }
     }, [])
     return (
         <>
             <Helmet>
-                <title>Basket - {baseTitle}</title>
+                <title>Cart - {baseTitle}</title>
                 <meta name="robots" content="noindex,nofollow" />
             </Helmet>
             <div key="main" className="flex flex-col gap-5 w-full">
                 <div className="font-[sans-serif] lg:flex lg:items-center lg:justify-center my-4">
                     <div className="bg-slate-100 p-8 w-full mx-auto rounded-md">
-                        <h2 className="text-3xl font-extrabold text-gray-800 text-center">Basket</h2>
+                        <h2 className="text-3xl font-extrabold text-gray-800 text-center">Cart</h2>
                         <div className="flex flex-col gap-4 mt-10">
                             {loading && <div className=" p-4 w-full text-center">Loading...</div>}
-                            {!loading && !basket?.length && <div className=" p-4 w-full text-center">Item not found!</div>}
-                            {!loading && basket && basket.map((_v, _i) => {
+                            {!loading && !cart?.length && <div className=" p-4 w-full text-center">Item not found!</div>}
+                            {!loading && cart && cart.map((_v, _i) => {
                                 summary.push(Number(_v?.price))
                                 reduce = summary.reduce((a, b) => a + b, 0).toFixed(3)
                                 return (
@@ -93,4 +93,4 @@ const Basket = () => {
             </div>
         </>)
 }
-export default Basket;
+export default Cart;

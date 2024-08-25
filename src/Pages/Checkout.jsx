@@ -101,7 +101,7 @@ const Checkout = () => {
                                         <li className="flex flex-wrap gap-4 text-base font-bold">Total <span className="ml-auto">${summary}</span></li>
                                     </ul>
                                 </div>
-                                <Link className="p-2 bg-amber-600 hover:bg-opacity-90 text-white rounded-md" to={`/basket`}>Basket details</Link>
+                                <Link className="p-2 bg-amber-600 hover:bg-opacity-90 text-white rounded-md" to={`/cart`}>Cart details</Link>
 
                             </div>
                         </div>

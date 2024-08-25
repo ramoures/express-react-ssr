@@ -1,34 +1,28 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Loading from "../Components/Loading";
+import { addRemoveSlash, Capitalize, checkData, logger, Lowercase } from "../Core/Utils";
 import { projectContext } from "../Core/Context";
-import Rate from "../Components/Rate";
-import { Colors } from "../Core/Colors";
-import NotFound from "./NotFound";
-import Defined from "../Core/Defined";
-import MetaTags from "../MetaTags";
 import API from "../../core/API.mjs";
 import FetchData from "../../core/FetchData.mjs";
-import { decode, encode } from "html-entities";
-import { addRemoveSlash, Capitalize } from "../Core/Utils";
+import { Colors } from "../Core/Colors";
+import Defined from "../Core/Defined";
+import Loading from "../Components/Loading";
+import Rate from "../Components/Rate";
+import NotFound from "./NotFound";
+import MetaTags from "../MetaTags";
 
 const Post = ({ dataFromServer }) => {
-
     const params = useParams();
     const name = params?.name;
     const slug = params?.slug;
-
-    const categoryChecker = API(`category/${encodeURI(name)}`);
-    if (!categoryChecker.url)
-        return <NotFound />
 
     const apiInfo = API('single_products', slug);
 
     const [pageId, setPageId] = useState(name + slug);
 
-    const [data, setData] = useState(dataFromServer?.['firstData'] || []);
+    const [data, setData] = useState(checkData(dataFromServer['firstData']) ? dataFromServer['firstData'] : []);
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState((Object.keys(dataFromServer?.['firstData'])?.length !== 0) ? false : true);
+    const [loading, setLoading] = useState(checkData(dataFromServer['firstData']) ? false : true);
     const [bgColor, setBgColor] = useState('bg-neutral-100');
     const [viaColor, setViaColor] = useState('via-neutral-100');
 
@@ -41,13 +35,14 @@ const Post = ({ dataFromServer }) => {
     const pageData = async (method, url) => {
         let response;
         response = await FetchData(method, url);
-        if (typeof response === 'object')
-            if (Object.keys(response)?.length)
+        if (response instanceof Error)
+            setError(logger(response))
+        else {
+            if (checkData(response))
                 setData(response);
             else
                 setData([])
-        else
-            setError(response);
+        }
         setPageId(name + slug);
         setLoading(false);
     }
@@ -56,27 +51,31 @@ const Post = ({ dataFromServer }) => {
 
     const setColors = (name) => {
         switch (name) {
-            case 'jewelery':
-                setBgColor(Colors('gold')?.[0]);
-                setViaColor(Colors('gold')?.[1]);
+            case 'furniture':
+                setBgColor(Colors('green')?.[0]);
+                setViaColor(Colors('green')?.[1]);
                 break;
-            case "men&apos;s clothing":
-                setBgColor(Colors('neutral')?.[0]);
-                setViaColor(Colors('neutral')?.[1]);
+            case "clothes":
+                setBgColor(Colors('pink')?.[0]);
+                setViaColor(Colors('pink')?.[1]);
                 break;
-            case "women&apos;s clothing":
-                setBgColor(Colors('fuchsia')?.[0]);
-                setViaColor(Colors('fuchsia')?.[1]);
+            case "shoes":
+                setBgColor(Colors('rose')?.[0]);
+                setViaColor(Colors('rose')?.[1]);
                 break;
             case "electronics":
                 setBgColor(Colors('sky')?.[0]);
                 setViaColor(Colors('sky')?.[1]);
                 break;
+            case "miscellaneous":
+                setBgColor(Colors('gold')?.[0]);
+                setViaColor(Colors('gold')?.[1]);
+                break;
         }
     }
 
     /* If the Post Route changes to another Post Route.
-     * When selecting basket items, in this same Route. */
+     * When selecting cart items, in this same Route. */
     const initialize = useRef(true);
     const routeChangeChecker = (pageId !== (name + slug)) ? true : false;
     if (routeChangeChecker && initialize.current) {
@@ -90,11 +89,6 @@ const Post = ({ dataFromServer }) => {
     //---
 
     useEffect(() => {
-
-        if (Object.keys(dataFromServer?.['firstData'])?.length === 0)
-            pageData(apiInfo?.method, apiInfo?.url);
-        dataFromServer['firstData'] = {};
-
         if (typeof window !== "undefined") {
             /*
                 Place your javascript DOM code here.
@@ -103,6 +97,15 @@ const Post = ({ dataFromServer }) => {
             window.scrollTo(0, 0);
             setColors(name);
         }
+
+        //Set new API data if is empty first API Data (dataFromServer)
+        if (!checkData(dataFromServer['firstData']))
+            pageData(apiInfo?.method, apiInfo?.url);
+
+        //Clear First API data (dataFromServer)
+        dataFromServer['firstData'] = {}
+
+
     }, []);
 
     // Constants
@@ -112,43 +115,46 @@ const Post = ({ dataFromServer }) => {
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter;
 
-    const { setBasket, basket } = useContext(projectContext);
+    const { setCart, cart } = useContext(projectContext);
     const { prices, setPrices } = useContext(projectContext);
 
     const addToCart = (_v) => {
-        setBasket([...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }]);
+        setCart([...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.images?.[0], category: Lowercase(_v?.category?.name) }]);
         setPrices([...prices, _v?.price]);
-        localStorage.setItem('miniShop-basket', JSON.stringify({ items: [...basket, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.image, category: _v?.category }], prices: [...prices, _v?.price] }));
+        localStorage.setItem('erSSR-shop-cart', JSON.stringify({ items: [...cart, { id: _v?.id, title: _v?.title, price: _v?.price, image: _v?.images?.[0], category: Lowercase(_v?.category?.name) }], prices: [...prices, _v?.price] }));
         if (typeof window !== 'undefined') {
-            document.getElementById('toggleBasket').classList.add('animate-ping');
-            document.getElementById('toggleBasket').classList.remove('bg-white');
-            document.getElementById('toggleBasket').classList.add('bg-yellow-200');
+            document.getElementById('toggleCart').classList.add('animate-ping');
+            document.getElementById('toggleCart').classList.remove('bg-white');
+            document.getElementById('toggleCart').classList.add('bg-yellow-200');
             setTimeout(() => {
-                document.getElementById('toggleBasket').classList.remove('animate-ping');
-                document.getElementById('toggleBasket').classList.remove('bg-yellow-200');
-                document.getElementById('toggleBasket').classList.add('bg-white');
+                document.getElementById('toggleCart').classList.remove('animate-ping');
+                document.getElementById('toggleCart').classList.remove('bg-yellow-200');
+                document.getElementById('toggleCart').classList.add('bg-white');
             }, 100);
         }
     }
 
-    if (!loading && (data?.length === 0))
+    //if category is not defined:
+    if (!loading && !error && checkData(data) && ((data?.category?.name) !== Capitalize(name)))
         return <NotFound />;
-    if (!loading && !error && (data?.length !== 0) && encode(data?.category) !== name)
+
+    if (!loading && !error && !checkData(data))
         return <NotFound />;
+    if (!loading && (error !== false))
+        return <p>{error}</p>;
+
     return (
         <>
             <MetaTags
-                url={`${websiteFullUrl}/category/${encodeURI(encode(name))}/products/${data?.id}`}
-                title={`${data.title ? data?.title + ' - ' : ''}${name ? Capitalize(decode(decode(name))) + ' - ' : ''}Category - ${baseTitle}`}
+                url={`${websiteFullUrl}/category/${name}/products/${data?.id}`}
+                title={`${data.title ? data?.title + ' - ' : ''}${name ? Capitalize(name) + ' - ' : ''}Category - ${baseTitle}`}
                 description={data?.description || 'This is home page of my shopping website'}
                 keywords={data?.keywords || 'Shop, E-Commerce, Store'}
                 image={data?.image || `${websiteFullUrl}/assets/img/icon.svg`}
                 twitterAccount={data?.twitter || twitterAccount}
             />
             {loading && <Loading n={0} />}
-            {error !== false && !loading && <p>{error}</p>}
-
-            {!loading && !error && (data?.length !== 0) &&
+            {!loading && !error && checkData(data) &&
                 <div className="flex flex-col justify-start items-start py-0 ">
                     <div className="flex w-full justify-between items-center py-5">
                         <nav className="px-4">
@@ -160,7 +166,11 @@ const Post = ({ dataFromServer }) => {
                                 </li>
                                 <li><Link className="p-1 rounded hover:bg-neutral-100" to={`/`}>Home</Link></li>
                                 <li className="text-neutral-400">|</li>
-                                <li><Link className="p-1 rounded hover:bg-neutral-100" to={`/category/${encodeURI(encode(data?.category))}`}>{Capitalize(data?.category)}</Link></li>
+                                <li>
+                                    <Link className="p-1 rounded hover:bg-neutral-100" to={`/category/${Lowercase(data?.category?.name)}`}>
+                                        {Capitalize(data?.category?.name)}
+                                    </Link>
+                                </li>
                                 <li className="hidden lg:block text-neutral-400">|</li>
                                 <li className="hidden lg:block text-neutral-600">{data?.title}</li>
                             </ul>
@@ -175,18 +185,18 @@ const Post = ({ dataFromServer }) => {
                     <div className={`w-full flex justify-center items-center rounded-2xl p-2 lg:p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
                         <div className="p-4 border-2 bg-white rounded-3xl w-full flex flex-col md:flex-row gap-4 justify-start">
                             <div key={`post${data?.id}`} className="flex md:min-w-72 flex-col gap-4 items-center justify-center">
-                                <div className="h-40 w-40 flex justify-center">
-                                    <img width={160} height={160} alt={data?.title} src={data?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
+                                <div className="max-h-48 max-w-48 sm:max-h-64 sm:max-w-64 lg:max-h-96 lg:max-w-96 flex justify-center p-0 md:p-4">
+                                    <img width={384} height={384} alt={data?.title} src={data?.images?.[0]} className="w-full h-full object-contain bg-center bg-no-repeat rounded-sm" />
                                 </div>
                                 <div className={`${bgColor} p-2`}>{data?.price}$</div>
                                 <div className="flex items-center gap-2">
                                     <button onClick={() => {
                                         addToCart(data)
-                                    }} className="p-2 bg-rose-600 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to basket</button>
+                                    }} className="p-2 bg-rose-600 hover:bg-blue-400 text-white rounded text-nowrap select-none">Add to cart</button>
                                 </div>
                             </div>
                             <div className="flex flex-col items-start gap-2 p-0 lg:p-4 flex-1">
-                                <Link to={`/category/${encodeURI(encode(data?.category))}`} className="text-sm text-neutral-500">
+                                <Link to={`/category/${Lowercase(data?.category)}`} className="text-sm text-neutral-500">
                                     {Capitalize(data?.category)}
                                 </Link>
                                 <h2 className="font-medium text-2xl">
@@ -196,8 +206,8 @@ const Post = ({ dataFromServer }) => {
                                     {data?.description}
                                 </h3>
                                 <h4 className="font-thin flex gap-2 leading-none items-center my-2">
-                                    <Rate n={data?.rating?.rate} />
-                                    <div className="text-sm leading-none">({data?.rating?.count} rate)</div>
+                                    <Rate n={data?.rating?.rate || 3.5} />
+                                    <div className="text-sm leading-none">({data?.rating?.count || 1200} Rate)</div>
                                 </h4>
                             </div>
                         </div>

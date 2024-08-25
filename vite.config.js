@@ -6,7 +6,7 @@ import EnvironmentPlugin from 'vite-plugin-environment'
 export default defineConfig({
   plugins: [
     react(),
-    EnvironmentPlugin(['WEBSITE_BASE_URL', 'WEBSITE_DIRECTORY_NAME', 'WEBSITE_STATIC_TITLE', 'TWITTER_USERNAME']),
+    EnvironmentPlugin(['WEBSITE_BASE_URL', 'WEBSITE_DIRECTORY_NAME', 'DEVELOPMENT_MODE', 'WEBSITE_STATIC_TITLE', 'TWITTER_USERNAME']),
   ],
   base: '',
   build: {

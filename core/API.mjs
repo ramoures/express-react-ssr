@@ -17,7 +17,7 @@ const API = (path, urlSuffix = "") => {
      * base of api url.
      * @type {string}
    */
-    const baseUrl = 'https://fakestoreapi.com';
+    const baseUrl = 'https://api.escuelajs.co/api/v1';
     /**
       * @description 
       * API information object.
@@ -32,7 +32,9 @@ const API = (path, urlSuffix = "") => {
       //Home page:
       "Index": {
         method: 'get',
-        url: baseUrl + '/products'
+        url: baseUrl + '/products',
+        //data for send
+        dfs: { limit: 100, offset: 0 }
       },
       "products": {
         method: 'get',
@@ -42,21 +44,35 @@ const API = (path, urlSuffix = "") => {
         method: 'get',
         url: baseUrl + '/products/' + urlSuffix
       },
-      "category/men&apos;s%20clothing": {
+      "category/clothes": {
         method: 'get',
-        url: baseUrl + '/products/category/' + "men's clothing"
+        url: baseUrl + '/categories/1/products',
+        //data for send
+        dfs: { limit: 20, offset: 0 }
       },
       "category/electronics": {
         method: 'get',
-        url: baseUrl + '/products/category/' + "electronics"
+        url: baseUrl + '/categories/2/products',
+        //data for send
+        dfs: { limit: 20, offset: 0 }
       },
-      "category/jewelery": {
+      "category/furniture": {
         method: 'get',
-        url: baseUrl + '/products/category/' + "jewelery"
+        url: baseUrl + '/categories/3/products',
+        //data for send
+        dfs: { limit: 20, offset: 0 }
       },
-      "category/women&apos;s%20clothing": {
+      "category/shoes": {
         method: 'get',
-        url: baseUrl + '/products/category/' + "women's clothing"
+        url: baseUrl + '/categories/4/products',
+        //data for send
+        dfs: { limit: 20, offset: 0 }
+      },
+      "category/miscellaneous": {
+        method: 'get',
+        url: baseUrl + '/categories/5/products',
+        //data for send
+        dfs: { limit: 20, offset: 0 }
       }
     }
     return APIInfo?.[path] || { method: '', url: '' };

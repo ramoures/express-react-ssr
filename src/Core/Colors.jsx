@@ -27,6 +27,10 @@ export const Colors = (color) => {
                 bgColor = 'bg-amber-100';
                 viaColor = 'via-amber-100';
                 break;
+            case 'rose':
+                bgColor = 'bg-rose-100';
+                viaColor = 'via-rose-100';
+                break;
         }
         return [bgColor, viaColor]
     } catch (err) {

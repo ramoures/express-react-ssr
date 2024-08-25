@@ -6,9 +6,9 @@ import Footer from "./Footer";
 const Layouts = () => {
     useEffect(() => {
         //Get or set the new localStorage item.
-        const storage = localStorage.getItem('miniShop-basket');
+        const storage = localStorage.getItem('erSSR-shop-cart');
         if (!storage)
-            localStorage.setItem('miniShop-basket', JSON.stringify({ items: [], prices: [] }));
+            localStorage.setItem('erSSR-shop-cart', JSON.stringify({ items: [], prices: [] }));
     }, [])
     return (<>
         <div key="layouts" className="flex flex-col min-h-svh justify-between items-center place-content-stretch place-items-stretch">
