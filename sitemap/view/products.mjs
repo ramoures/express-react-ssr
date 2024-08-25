@@ -1,6 +1,6 @@
-import { encode } from "html-entities";
 import API from "../../core/API.mjs";
 import FetchData from "../../core/FetchData.mjs";
+import { Lowercase } from "../../core/Utils.mjs";
 
 export const productsXml = async (url) => {
     try {
@@ -13,9 +13,9 @@ export const productsXml = async (url) => {
     xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
         for (let i in data) {
             xml += `<url>
-            <loc>${url}category/${encodeURI(encode(encode(data?.[i]?.category)))}/products/${data?.[i]?.id}</loc>
+            <loc>${url}category/${Lowercase(data?.[i]?.category?.name)}/products/${data?.[i]?.id}</loc>
             <image:image>
-                <image:loc>${data?.[i]?.image}</image:loc>
+                <image:loc>${data?.[i]?.images?.[0]}</image:loc>
             </image:image>
             <lastmod>${data?.[i]?.updatedAt || now}</lastmod>
             <changefreq>weekly</changefreq>

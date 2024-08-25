@@ -40,6 +40,11 @@ const API = (path, urlSuffix = "") => {
         method: 'get',
         url: baseUrl + '/products'
       },
+      "categories": {
+        method: 'get',
+        url: baseUrl + '/categories',
+        dfs: { limit: 5 }
+      },
       "single_products": {
         method: 'get',
         url: baseUrl + '/products/' + urlSuffix

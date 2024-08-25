@@ -76,3 +76,11 @@ export const addRemoveSlash = (value, before = false, after = false) => {
     }
     return result;
 }
+// Strings to lowercase
+export const Lowercase = (str) => {
+    try {
+        return str.toLowerCase()
+    } catch (err) {
+        return "";
+    }
+}
