@@ -18,7 +18,7 @@ export const logger = (err) => {
                 const errorMsg = JSON.parse(JSON.stringify(err.toJSON()));
                 console.log(errorMsg);
                 return (<>
-                    <span className="text-lg font-bold block my-5">Error details: <a>(in develope mode)</a></span>
+                    <span className="text-lg font-bold block my-5">Error details: <a>(in developer mode)</a></span>
                     <span className="text-wrap"> <b className="text-sky-800">Code:</b> {errorMsg?.code}</span><br />
                     <span className="text-wrap"> <b className="text-sky-800">Message:</b> {errorMsg?.message}</span><br />
                     <span className="text-wrap"> <b className="text-sky-800">Name:</b> {errorMsg?.name}</span><br />
