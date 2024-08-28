@@ -2,10 +2,10 @@ import axios from "axios";
 /** 
     * Fetch data from API.
     * @param {string} method - HTTP methods.
-    * @param {string} url - RESTful API URL address.
+    * @param {string} url - Rest API URL address.
     * @param {string|object} dataForSend - Data for send to API.
     * @param {boolean} serverMode - true or false, set to true to use in `server.js` or false to use in react .jsx file.
-    * @returns {Promise} - Data received from RESTful API.
+    * @returns {object} - Data received from Rest API.
 */
 
 const FetchData = async (method = 'get', url = '', dataForSend = '', serverMode = false) => {

@@ -2,9 +2,9 @@
  * Call API information
  * @param {string} path- Route path name (App.jsx)
  * @param {string} urlSuffix - API URL Suffix.
- * @return {object} API Data of selected array (for FetchData.js).
+ * @return {{method:string,url:string,dfs:object|string}} API Data of selected array (for FetchData.js).
 */
-const API = (path, urlSuffix = "") => {
+const API = (path = "", urlSuffix = "") => {
   try {
 
     //Make whatever shape you want according to restful API:

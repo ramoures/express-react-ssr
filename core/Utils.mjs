@@ -14,7 +14,8 @@ export const botDetector = (userAgent) => {
         return false;
     }
 }
-// Env values returner
+
+// Returns env values
 export const getEnv = (key, type = 'string') => {
     try {
         const env = dotenv.config();
@@ -31,15 +32,18 @@ export const getEnv = (key, type = 'string') => {
         logger(err)
     }
 }
-// Error messages returner
+
+// Returns error messages
 export const logger = (err, res) => {
     try {
+        //In development mode:
         if (getEnv('DEVELOPMENT_MODE', 'boolean'))
             if (res) {
                 console.log(err);
                 return res.status(500).send(err?.stack || err.toString());
             }
             else return console.log(err);
+        //In production mode:
         else
             if (res) {
                 console.log('500 Internal Server Error!');
@@ -50,6 +54,7 @@ export const logger = (err, res) => {
         console.log('500 Internal Server Error!')
     }
 }
+
 // Slash adds or/and removes before or/and after strings
 export const addRemoveSlash = (value, before = false, after = false) => {
     value = value + ''; //cast to string
@@ -76,7 +81,8 @@ export const addRemoveSlash = (value, before = false, after = false) => {
     }
     return result;
 }
-// Strings to lowercase
+
+// Convert string to lowercase
 export const Lowercase = (str) => {
     try {
         return str.toLowerCase()

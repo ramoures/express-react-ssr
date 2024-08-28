@@ -1,19 +1,22 @@
-export const checkData = (data) => {
+// Checks whether an object is empty or not.
+export const checkData = (obj) => {
     try {
-        if (Array.isArray(data) && data.length)
+        if (Array.isArray(obj) && obj.length)
             return true;
-        else if (typeof data === 'object' && Object.keys(data).length)
+        else if (typeof obj === 'object' && Object.keys(obj).length)
             return true;
         return false;
     } catch (error) {
         return false
     }
 }
-// error handling
+
+// Returns error messages
 export const logger = (err) => {
     try {
         const projectDevelopMode = process.env.DEVELOPMENT_MODE === 'true' ? true : false;
         if (err instanceof Error) {
+            //In development mode:
             if (projectDevelopMode) {
                 const errorMsg = JSON.parse(JSON.stringify(err.toJSON()));
                 console.log(errorMsg);
@@ -26,8 +29,8 @@ export const logger = (err) => {
                     <span className="text-wrap break-words inline-block max-w-full"> <b className="text-sky-800">Stack:</b> {errorMsg?.stack}</span>
                     <span className="text-wrap break-words inline-block max-w-full"> <b className="text-sky-800">Config:</b> {JSON.stringify(errorMsg?.config)}</span>
                 </>)
-
             }
+            //In production mode:
             else {
                 if (err.response)
                     if (err.response.status === 404)
@@ -41,28 +44,12 @@ export const logger = (err) => {
             }
         }
         else
-            return '500 Internal Server Error!'
+            return '500 Internal Server Error!';
     } catch (error) {
-        return '500 Internal Server Error!'
+        return '500 Internal Server Error!';
     }
 }
 
-// Strings capitalize
-export const Capitalize = (str) => {
-    try {
-        return str[0].toUpperCase() + str.substring(1)
-    } catch (err) {
-        return "";
-    }
-}
-// Strings to lowercase
-export const Lowercase = (str) => {
-    try {
-        return str.toLowerCase()
-    } catch (err) {
-        return "";
-    }
-}
 // Slash adds or/and removes before or/and after strings
 export const addRemoveSlash = (value, before = false, after = false) => {
     value = value + ''; // cast to string
@@ -88,4 +75,22 @@ export const addRemoveSlash = (value, before = false, after = false) => {
         else result = result + '';
     }
     return result;
+}
+
+// Convert the first letter of a string to uppercase
+export const Capitalize = (str) => {
+    try {
+        return str[0].toUpperCase() + str.substring(1)
+    } catch (err) {
+        return "";
+    }
+}
+
+// Convert string to lowercase
+export const Lowercase = (str) => {
+    try {
+        return str.toLowerCase()
+    } catch (err) {
+        return "";
+    }
 }

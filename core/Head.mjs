@@ -12,10 +12,6 @@ const Head = (baseUrl = '/') => {
     ${helmet?.title ? helmet?.title?.toString().replace(regExp, '') : ''}
     ${helmet?.meta ? helmet?.meta?.toString().replace(regExp, '') : ''}
     ${helmet?.link ? helmet?.link?.toString().replace(regExp, '') : ''}`
-        // For disable scalable:
-        // <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-        // For insert Manifest file for PWA: (create manifest.json in public directory first)
-        // <link rel="manifest" href="manifest.json" />
         return meta;
     } catch (err) {
         return ''

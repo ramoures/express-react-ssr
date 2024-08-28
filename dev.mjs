@@ -1,9 +1,9 @@
 /**
     @name: Express React SSR
-    @description: Server Side Rendering React JS template (shopping website) with Express JS and Vite. Data fetching from Restful API, Sitemap add-on, SEO friendly.
-    @author: github.com/ramoures
+    @description: Shopping website template by React.js, server side rendered with Express.js and Vite. 
+    Data fetching from Rest API. Sitemap add-on. SEO friendly.
     Repository: github.com/ramoures/express-react-ssr/
-    Helper: github.com/bluwy/create-vite-extra/tree/master/template-ssr-react
+    @author: github.com/ramoures
     @copyright: 2024, Under MIT License - github.com/ramoures/express-react-ssr/blob/main/LICENSE
 */
 import fs from 'node:fs/promises';
@@ -43,23 +43,12 @@ app.use(vite.middlewares);
 // Set static directory.
 app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client`), { index: false }));
 
-//Param decoding checker - URIError
-app.use(function (req, res, next) {
-    try {
-        decodeURIComponent(req.path);
-        next();
-    }
-    catch (e) {
-        return res.redirect(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`);
-    }
-});
-
-// Create route to add website directory name
+// Create route
 const route = Router();
 // Use route
 app.use(getEnv('WEBSITE_DIRECTORY_NAME') ? addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true) : '', route);
 
-//Sitemap, use middleware and controller. controller: sitemap/sitemap.js
+// Use Sitemap route
 route.use('/sitemap', sitemap);
 
 // Serve HTML
@@ -69,32 +58,38 @@ route.get('*', async (req, res) => {
         if (getEnv('WEBSITE_DIRECTORY_NAME'))
             url = url.replace(addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true, true), '');
         else url = url.replace('/', '');
-        //Split url and Query-strings:
+        //Split url and query-strings:
         url = url.split('?');
         //Get full pathName
         let path = url[0];
-        //Get Query-strings:
+        //Get query-strings:
         const dataForSend = url[1];
+
         /**
-           * Get API information for this path name.
-           * @type {{method:string,url:string}}
-           */
+        * API required information gets the current path name.
+        * @type {{method:string,url:string,dfs:object|string}}
+        */
         const apiInfo = API(path ? path : 'Index');
+
         /**
-         * Get API object data.
-         * @type {{firstData:object}}
+        * Receives API data as an object.
+        * @type {{firstData:object}}
         */
         const dataFromServer = await FetchData(apiInfo?.method, apiInfo?.url, dataForSend || apiInfo?.dfs, true);
 
         /**
-         * Inserting stringify object of API data in `<script>window.__data__`. For calling from client side (entry-client.jsx).
-         * @type {string}
+        * The object inserts a string of API data into the `<script>window.__data__=`. 
+        * For use on the client side. entry-client.jsx
+        * @type {string}
         */
         const apiDataInScript = `<script>window.__data__=${JSON.stringify(dataFromServer)}</script>`;
 
         // Always read fresh template in development
         const templateIndex = await fs.readFile('./index.html', 'utf-8');
+        // Use index.html file
         let template = await vite.transformIndexHtml(path, templateIndex);
+
+        //Import and uses the enter-server.jsx render function
         const render = (await vite.ssrLoadModule('/src/entry-server.jsx')).render;
 
         // Bot detection
@@ -103,29 +98,43 @@ route.get('*', async (req, res) => {
         //Rendering
         let didError = false;
         const { pipe, abort } = render(path, dataFromServer, {
+            //React RenderToPipeableStream Options:
+
+            //A callback that fires if there was an error rendering the initial shell.
             onShellError() {
                 res.status(500);
                 res.set({ 'Content-Type': 'text/html' });
                 return res.send('<h1>Something went wrong</h1>');
             },
+            // A callback that fires right after the initial shell has been rendered
             onShellReady() {
+                //For Regular visitors
                 if (!isCrawler) {
                     const transformStream = Transformer(res, didError, template, apiDataInScript);
+                    // Pipe outputs the HTML into the provided Writable Node.js Stream.
+                    // React RenderToPipeableStream return.
                     pipe(transformStream);
                 }
             },
+            // A callback that fires when all rendering is complete, including both the shell and all additional content.
             onAllReady() {
+                //For Web crawlers
                 if (isCrawler) {
                     const transformStream = Transformer(res, didError, template, apiDataInScript);
+                    // Pipe outputs the HTML into the provided Writable Node.js Stream.
+                    // React RenderToPipeableStream return.
                     pipe(transformStream);
                 }
             },
+            // A callback that fires whenever there is a server error, whether recoverable or not.
             onError(error) {
                 didError = true;
                 logger(error, res);
             }
         });
         setTimeout(() => {
+            // Lets you abort server rendering and render the rest on the client.
+            // React RenderToPipeableStream return
             abort();
         }, ABORT_DELAY);
     } catch (e) {
@@ -136,7 +145,7 @@ route.get('*', async (req, res) => {
 
 // 404 Error page - (Outside of React Routes)
 app.get('*', async (req, res) => {
-    return res.status(404).send(`<h1>404, Data not found!</h1><p><a href="${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}"><h2>Got to Home Page</h2></a></p>`)
+    return res.status(404).send(`<h1>404, Data not found!</h1><p><a href="${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}"><h2>Go to Home Page</h2></a></p>`)
 });
 
 // Start http server

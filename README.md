@@ -52,17 +52,18 @@ After development completion:
 
 ### I Used
 
-- Axios
-- React Router Dom
-- React Helmet
-- Tailwind CSS framework
-- **XML Sitemap**
+- [Node.js Stream](https://nodejs.org/api/stream.html)
+- [isbot](https://github.com/omrilotan/isbot)
+- [Axios](https://github.com/axios/axios)
+- [React Router](https://reactrouter.com/en/main)
+- [React Helmet](https://github.com/nfl/react-helmet)
+- [Tailwind CSS framework](https://github.com/tailwindlabs/tailwindcss)
+- [XML Sitemap](https://www.sitemaps.org/)
+- ...
 
 > Data source: [fakestoreapi.com](https://fakestoreapi.com)
 
 ---
-
-With the help of : [template-ssr-react-streaming](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react-streaming)
 
 License [Under The MIT License](./LICENSE)
 
