@@ -1,7 +1,14 @@
 {
-  "name": "vite",
-  "private": true,
-  "version": "0.0.0",
+  "name": "express-react-ssr",
+  "version": "1.0.0",
+  "description": "React.js Server-Side-Rendering template (shopping website) by Express.js and Vite.",
+  "author": "ramoures - github.com/ramoures",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ramoures/express-react-ssr.git"
+  },
+  "license": "MIT",
+  "main": "server.mjs",
   "type": "module",
   "scripts": {
     "build:client": "vite build --outDir dist/shop/client",
@@ -17,7 +24,6 @@
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "express": "^4.19.2",
-    "html-entities": "^2.5.2",
     "isbot": "^5.1.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

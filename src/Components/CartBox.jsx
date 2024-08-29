@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { projectContext } from "../Core/Context";
 import { Link } from "react-router-dom";
-import { encode } from "html-entities";
 const CartBox = () => {
     let { cart, setCart } = useContext(projectContext)
     const { prices, setPrices } = useContext(projectContext)
