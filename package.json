@@ -1,7 +1,7 @@
 {
   "name": "express-react-ssr",
   "version": "1.0.0",
-  "description": "React.js Server-Side-Rendering template (shopping website) by Express.js and Vite.",
+  "description": "React.js Server-Side-Rendering template (shopping website) with Express.js and Vite.",
   "author": "ramoures - github.com/ramoures",
   "repository": {
     "type": "git",

@@ -2,7 +2,7 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-ReactJS Server Side Rendering template (shopping website) by ExpressJS and Vite.
+React Server Side Rendering template (shopping website) with Express and Vite.
 
 - Data fetching from Rest API
 - Sitemap add-on
@@ -64,6 +64,7 @@ After development completion:
 > Data source: [fakestoreapi.com](https://fakestoreapi.com)
 
 ---
+
 With the help of [template-ssr-react-streaming](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react-streaming)
 
 License [Under The MIT License](./LICENSE)
