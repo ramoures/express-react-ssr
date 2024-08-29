@@ -64,6 +64,7 @@ After development completion:
 > Data source: [fakestoreapi.com](https://fakestoreapi.com)
 
 ---
+With the help of [template-ssr-react-streaming](https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react-streaming)
 
 License [Under The MIT License](./LICENSE)
 
