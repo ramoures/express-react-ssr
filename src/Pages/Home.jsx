@@ -15,10 +15,10 @@ const Home = ({ dataFromServer }) => {
     const baseTitle = Defined?.title;
     const twitterAccount = Defined?.twitter;
 
-    const category1 = (data?.length > 0) ? data?.filter((itm, idx) => itm.category === 'electronics') : [];
-    const category2 = (data?.length > 0) ? data?.filter((itm, idx) => itm.category === 'jewelery') : [];
-    const category3 = (data?.length > 0) ? data?.filter((itm, idx) => itm.category === "men's clothing") : [];
-    const category4 = (data?.length > 0) ? data?.filter((itm, idx) => itm.category === "women's clothing") : [];
+    const category1 = (data?.length > 0) ? data?.filter((itm) => itm.category === 'electronics') : [];
+    const category2 = (data?.length > 0) ? data?.filter((itm) => itm.category === 'jewelery') : [];
+    const category3 = (data?.length > 0) ? data?.filter((itm) => itm.category === "men's clothing") : [];
+    const category4 = (data?.length > 0) ? data?.filter((itm) => itm.category === "women's clothing") : [];
 
     useEffect(() => {
         if (typeof window !== 'undefined') {

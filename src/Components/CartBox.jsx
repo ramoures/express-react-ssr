@@ -34,7 +34,7 @@ const CartBox = () => {
         document.getElementById('toggleCart').classList.remove('rounded-lg');
         document.getElementById('toggleCart').classList.add('rounded-t-xl');
     }
-    const hideCartBox = (e) => {
+    const hideCartBox = () => {
         document.getElementById('cartBox').classList.remove('flex');
         document.getElementById('cartBox').classList.add('hidden');
         document.getElementById('toggleCart').classList.remove('rounded-t-xl');
