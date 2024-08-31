@@ -9,7 +9,7 @@ const CartBox = () => {
     function removeFunc(e) {
         const id = e.target.getAttribute('data-id')
         delete cart[id];
-        delete cart[id];
+        delete prices[id];
         let newArr = cart.filter(n => n)
         let newPrices = prices.filter(n => n)
         setCart([...newArr]);
@@ -82,7 +82,6 @@ const CartBox = () => {
                                 </div>
                             )
                         })}
-
                     </div>
                 }
                 {reduce &&

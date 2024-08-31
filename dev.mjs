@@ -40,8 +40,8 @@ vite = await createServer({
 });
 app.use(vite.middlewares);
 
-// Set static directory.
-app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `./dist${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'), true)}/client`), { index: false }));
+// Set static directory
+app.use(`/${addRemoveSlash(getEnv('WEBSITE_DIRECTORY_NAME'))}`, express.static(path.resolve(path.dirname(fileURLToPath(import.meta.url)), `./public`), { index: false }));
 
 // Create route
 const route = Router();
