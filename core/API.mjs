@@ -13,6 +13,11 @@ const API = (path = "", urlSuffix = "") => {
       urlSuffix = path.split('/')[path.split('/').length - 1]
       path = 'single_products'
     }
+
+    if (path === 'signin') {
+      path = 'products';
+    }
+
     /**
      * base of api url.
      * @type {string}
