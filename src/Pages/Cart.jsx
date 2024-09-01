@@ -30,6 +30,8 @@ const Cart = () => {
               Place your javascript DOM code here.
             */
             //ex: document.getElementById('sample')?.classList?.add('hidden');
+            if (document.getElementById('headerSingIn')?.classList.contains('hidden'))
+                document.getElementById('headerSingIn')?.classList.remove('hidden');
             window.scrollTo(0, 0);
         }
         const storage = localStorage.getItem('erSSR-shop-cart');

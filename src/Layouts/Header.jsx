@@ -18,6 +18,7 @@ const Header = () => {
     }
     let { sign, setSign } = useContext(projectContext)
     useEffect(() => {
+
         setSign(getToken())
     }, [])
 

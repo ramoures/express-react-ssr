@@ -31,7 +31,10 @@ const Category = ({ dataFromServer }) => {
                 Place your javascript DOM code here.
             */
             //ex: document.getElementById('sample')?.classList?.add('hidden');
+            if (document.getElementById('headerSingIn')?.classList.contains('hidden'))
+                document.getElementById('headerSingIn')?.classList.remove('hidden');
             window.scrollTo(0, 0);
+
             switch (name) {
                 case "electronics":
                     setBgColor(Colors('sky')?.[0]);
