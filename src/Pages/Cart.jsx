@@ -63,13 +63,13 @@ const Cart = () => {
                                 reduce = summary.reduce((a, b) => a + b, 0).toFixed(3)
                                 return (
                                     <div key={_i} className="flex bg-white p-2 items-center justify-between gap-2 w-full select-none ">
-                                        <Link to={`/category/${_v?.category}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
+                                        <Link to={`/category/${_v?.category?.split("'")[0]}/products/${_v?.id}`} className="min-w-14 max-w-14 min-h-14 max-h-14 h-auto flex flex-col justify-center items-center border-2 ">
                                             <div className="h-12 w-12">
                                                 <img width={48} height={48} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
                                             </div>
                                         </Link>
                                         <div className="flex flex-col justify-start items-start gap-1 flex-1">
-                                            <Link to={`/category/${_v?.category}/products/${_v?.id}`}>{_v?.title}</Link>
+                                            <Link to={`/category/${_v?.category?.split("'")[0]}/products/${_v?.id}`}>{_v?.title}</Link>
                                             <div className="text-blue-600">{_v?.price}$</div>
                                         </div>
                                         <button data-id={_i} onClick={removeFunc} className="flex text-slate-600 hover:text-red-500">
