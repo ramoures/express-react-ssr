@@ -132,12 +132,12 @@ const Category = ({ dataFromServer }) => {
                     <div className={`w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 justify-center items-center rounded-lg rounded-tl-none p-2 lg:p-6 from-slate-200 ${viaColor} to-slate-200 from-10% via-35% to-100%  xl:from-20% xl:via-50% xl:to-80% bg-gradient-to-bl`}>
                         {checkData(data) && data?.map((_v, _i) => {
                             return (
-                                <div to={`/products/${_v.id}`} key={`p_${_i}`} className="flex flex-col gap-4 items-center p-4 border-2 bg-white hover:scale-95 transition-all duration-500 rounded-3xl">
+                                <div to={`/products/${_v.id}`} key={`p_${_i}`} className="flex flex-col gap-4 items-center p-4 border-2 bg-white hover:scale-95 transition-all duration-500 rounded-3xl sm:h-96">
                                     <Link to={`/category/${Lowercase(name)}/products/${_v?.id}`} className="h-36 w-36 flex justify-center mt-4">
                                         <img width={160} height={160} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
                                     </Link>
                                     <div className={`text-xs text-wrap text-center`}>{_v?.title}</div>
-                                    <div className={`${bgColor} p-2`}>{_v?.price}$</div>
+                                    <div className={`${bgColor} p-2 sm:my-auto`}>{_v?.price}$</div>
                                     <div className="flex items-center gap-2">
                                         <Link to={`/category/${name}/products/${_v?.id}`} className="p-2 bg-slate-200 text-slate-600 hover:bg-opacity-80 rounded">Details</Link>
                                         <button onClick={() => {
