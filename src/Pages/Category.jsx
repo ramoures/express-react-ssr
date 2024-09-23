@@ -134,7 +134,7 @@ const Category = ({ dataFromServer }) => {
                             return (
                                 <div to={`/products/${_v.id}`} key={`p_${_i}`} className="flex flex-col gap-4 items-center p-4 border-2 bg-white hover:scale-95 transition-all duration-500 rounded-3xl">
                                     <Link to={`/category/${Lowercase(name)}/products/${_v?.id}`} className="h-36 w-36 flex justify-center mt-4">
-                                        <img width={160} height={160} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat rounded-full" />
+                                        <img width={160} height={160} alt={_v?.title} src={_v?.image} className="w-full h-full object-contain bg-center bg-no-repeat" />
                                     </Link>
                                     <div className={`text-xs text-wrap text-center`}>{_v?.title}</div>
                                     <div className={`${bgColor} p-2`}>{_v?.price}$</div>
