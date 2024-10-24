@@ -1,7 +1,7 @@
 /**
     @name: Express React SSR
     @description: Shopping website template by React.js, server side rendered with Express.js and Vite. 
-    Fetching data from Rest API. Sitemap add-on. SEO friendly.
+    Fetching data from RESTFul API. Sitemap add-on. SEO friendly.
     Repository: github.com/ramoures/express-react-ssr/
     @author: github.com/ramoures
     @copyright: 2024, Under MIT License - github.com/ramoures/express-react-ssr/blob/main/LICENSE
