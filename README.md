@@ -2,9 +2,9 @@
 
 [فارسی](https://awaweb.ir/blog/posts/express-react-ssr) | English
 
-React Server Side Rendering template (shopping website) with Express and Vite.
+ReactJS server side rendering template (simple shopping website) with ExpressJS and ViteJS.
 
-- Data fetching from Rest API
+- Data fetching from RESTful API
 - Sitemap add-on
 - SEO friendly
 
@@ -61,7 +61,7 @@ After development completion:
 - [XML Sitemap](https://www.sitemaps.org/)
 - ...
 
-> Data source: [fakestoreapi.com](https://fakestoreapi.com)
+> API source: [fakestoreapi.com](https://fakestoreapi.com)
 
 ---
 
