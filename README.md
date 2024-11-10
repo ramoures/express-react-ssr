@@ -34,7 +34,7 @@ React Server Side Rendering template (shopping website) with Express and Vite.
 ### Develop
 
 - Tailwind CLI build and minify process: `npm run tw`
-- In other command line: `npm run dev`
+- `npm run dev` (In another command line)
 
   Browse `http://localhost:4173/shop/`
 
