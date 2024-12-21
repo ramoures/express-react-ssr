@@ -10,7 +10,7 @@ ReactJS server side rendering template (simple shopping website) with ExpressJS 
 
 ---
 
-<img src="screenshot.png">
+![express-react-ssr screenshot](screenshot.png)
 
 ---
 
@@ -18,7 +18,7 @@ ReactJS server side rendering template (simple shopping website) with ExpressJS 
 
 ---
 
-### Installation
+## Installation
 
 1. `git clone https://github.com/ramoures/express-react-ssr.git`
 2. `cd express-react-ssr`
@@ -69,4 +69,4 @@ With the help of [template-ssr-react-streaming](https://github.com/bluwy/create-
 
 License [Under The MIT License](./LICENSE)
 
-Email: ramoures@gmail.com
+Email: <ramoures@gmail.com>
